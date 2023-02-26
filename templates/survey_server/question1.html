@@ -1,24 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Question 1 - Survey Server</title>
-</head>
-<body>
-    <h1>Question 1</h1>
-    <form method="post" action="{% url 'survey_server:question1' %}">
+{% extends 'survey_server/questionBase.html' %}
+{% load static %}
+
+{% block title_block %}
+question1
+
+{% endblock %}
+{% block index_block %}
+1</br>
+
+
+
+{% endblock %}
+{% block question_block %}
+<p>Did you order a starter?</p>
+<p>Ordered Starter: {{ ordered_starter }}</p>
+{% endblock %}
+
+{% block choices_block %}
+<form method="post" action="{% url 'survey_server:question2' %}">
         {% csrf_token %}
-        <div>
-            <p>Did you order a starter?</p>
-            <p>Ordered Starter: {{ ordered_starter }}</p>
-        </div>
-        <div>
+    <div>
             <input type="radio" id="starter-yes" name="ordered_starter" value="yes">
             <label for="starter-yes">Yes</label><br>
             <input type="radio" id="starter-no" name="ordered_starter" value="no">
             <label for="starter-no">No</label><br>
-        </div>
-        <button type="submit" style="color: black;">Next</button>
-    </form>
-</body>
-</html>
+    </div>
+
+{% endblock %}
