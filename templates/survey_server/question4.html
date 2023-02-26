@@ -1,0 +1,20 @@
+{% extends 'survey_server/questionBase.html' %}
+{% load static %}
+{% block title_block %}
+question4
+{% endblock %}
+{% block index_block %}
+4</br>
+{% endblock %}
+{% block question_block %}
+<!--type question title at here-->
+
+{% endblock %}
+
+{% block choices_block %}
+<form method="post" action="{% url 'survey_server:question5' %}">
+        {% csrf_token %}
+    <div>
+<!--        type choices at here-->
+    </div>
+{% endblock %}

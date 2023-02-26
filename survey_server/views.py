@@ -34,7 +34,15 @@ def question2(request):
     return render(request, 'survey_server/question2.html')
 
 
+def question3(request):
+    return render(request, 'survey_server/question3.html')
+
+def question4(request):
+    return render(request, 'survey_server/question4.html')
+
+
+
 def question5(request):
     return render(request, 'survey_server/question5.html')
 
-# Create your views here.
+
