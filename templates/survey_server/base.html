@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+
+			background-color: #33665d;
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+		.down {
+            position:fixed;
+          float: left;
+          bottom:0;
+          left:500px;
+          background-color: #88a5a0;
+          padding: 5px;
+          border-radius: 5px;
+          color: black;
+
+         }
+         .down2{
+         position:fixed;
+          float: left;
+          bottom:0;
+          left:1000px;
+          background-color: #88a5a0;
+          padding: 5px;
+          border-radius: 5px;
+          color: black;
+         }
+         #hello{
+         color:#88a5a0;
+          font-size: 90px;
+         }
+         #text1{
+         color: #88a5a0;
+          font-size: 60px;
+         }
+         .top #login{
+         position:fixed;
+          float: left;
+          top:0;
+          right:100px;
+          background-color: #ccc;
+          padding: 5px;
+          border-radius: 5px;
+          color: black;
+         }
+         .top #profile{
+         position:fixed;
+          float: left;
+          top:0;
+          right:200px;
+          background-color: #ccc;
+          padding: 5px;
+          border-radius: 5px;
+          color: black;
+         }
+
+    </style>
+</head>
+<body>
+<div id="hello">
+    Hello
+    {% block hello_block %}
+    {% endblock %}
+</div>
+
+<!--login/log out/profile-->
+<div class="top">
+    <p id="login"><a href="/survey_server/home/">LOG OUT</a><br /></p>
+    <p id="profile"><a href="/survey_server/profile/">PROFILE</a><br /></p>
+    {% block top_block %}
+    {% endblock %}
+</div>
+<div id="text1">
+    {% block body_block %}
+    {% endblock %}
+</div>
+
+
+</body>
+</div>
+<div class="down">
+    <a href="/survey_server/about/">About us</a><br />
+
+</div>
+<div class="down2">
+<a href="/survey_server/about/">Contact us</a><br />
+</div>
+</html>

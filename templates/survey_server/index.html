@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+<title>survey server</title>
+    <style>
+        body{
+
+			background-color: #ccc;
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+        h1 {
+          color: grey;
+          font-size: 100px;
+           }
+         .down {
+            position:fixed;
+          float: left;
+          bottom:0;
+          left:500px;
+          background-color: #ccc;
+          padding: 5px;
+          border-radius: 5px;
+          color: black;
+
+         }
+         .down2{
+         position:fixed;
+          float: left;
+          bottom:0;
+          left:1000px;
+          background-color: #ccc;
+          padding: 5px;
+          border-radius: 5px;
+          color: black;
+         }
+         #text{
+          color: pink;
+          font-size: 50px;
+         }
+         #login{
+          position:fixed;
+          float: left;
+          top:0;
+          right:100px;
+          background-color: #ccc;
+          padding: 5px;
+          border-radius: 5px;
+          color: black;
+
+         }
+         #register{
+         position:fixed;
+          float: left;
+          top:0;
+          right:200px;
+          background-color: #ccc;
+          padding: 5px;
+          border-radius: 5px;
+          color: black;
+         }
+
+
+    </style>
+</head>
+<body >
+<h1>SURVEY SERVER</h1>
+<div>
+    <p id="text">Know what your customers love. <br /></p>
+
+</div>
+<div class="down">
+    <a href="/survey_server/about/">About us</a><br />
+
+</div>
+<div class="down2">
+<a href="/survey_server/about/">Contact us</a><br />
+</div>
+
+<div>
+    <p id="login"><a href="/survey_server/login/">LOG IN</a><br /></p>
+    <p id="register"><a href="/survey_server/register/">REGISTER</a><br /></p>
+
+</div>
+<img src="{% static "images/home.jpg" %}" alt="Picture of Rango" />
+
+</body>
+</html>
