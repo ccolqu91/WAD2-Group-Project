@@ -504,6 +504,24 @@ class RestaurantServiceStaffForm(forms.ModelForm):
         model = Survey
         fields = ('service_staff',)
 
+class UserRegistrationForm(forms.ModelForm):
+
+    # This form asks if the user is registering as a customer or owner and asks for their details
+
+    USER_REG_CHOICES = [
+        ('customer','customer'),
+        ('owner','owner'),
+    ]
+    profile_type = forms.ChoiceField(
+        label='Would you like to register as a customer or an owner?',
+        choices=USER_REG_CHOICES,
+        widget=forms.RadioSelect
+    )
+
+    class Meta:
+        model = User
+        fields = '__all__' 
+
 
 
 
