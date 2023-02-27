@@ -1,25 +1,21 @@
-{% extends 'survey_server/questionBase.html' %}
-{% load static %}
-{% block title_block %}
-question2
-{% endblock %}
-{% block index_block %}
-2</br>
-{% endblock %}
-{% block question_block %}
-<p>Roughly how Long did it take for your starter to come once you had placed the order?</p>
-
-{% endblock %}
-
-{% block choices_block %}
-<form method="post" action="{% url 'survey_server:question5' %}">
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Question 2 - Survey Server</title>
+</head>
+<body>
+    <h1>Question 2</h1>
+    <form method="post" action="{% url 'survey_server:question2' %}">
         {% csrf_token %}
-    <div>
-        <input type="radio" id="variety-starter-excellent" name="starter - variety" value="fast">
-        <label for="Excellent">7-11 minutes or less</label><br>
-        <input type="radio" id="variety-starter-okay" name="starter - variety" value="normal">
-        <label for="okay">11-16 minutes</label><br>
-        <input type="radio" id="variety-starter-okay" name="starter - variety" value="slow">
-        <label for="limited">17 minutes or more</label><br>
-    </div>
-{% endblock %}
+        
+        {{ form.as_p }}
+        <p>Food Quality Points: {{ food_quality_points }}</p>
+        <p>Customer Service Points: {{ customer_service_points }}</p>
+        <p>Hygiene Points: {{ hygiene_points }}</p>
+        <p>Value for Money Points: {{ value_for_money_points }}</p>
+        <p>Menu Variety Points: {{ menu_variety_points }}</p>
+        <button type="submit" style="color: black;">Next</button>
+    </form>
+</body>
+</html>
