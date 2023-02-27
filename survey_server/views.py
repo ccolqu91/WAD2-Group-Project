@@ -149,3 +149,8 @@ def question5(request):
 def question6(request):
 
     return render(request, 'survey_server/question6.html')
+
+def login(request):
+    return render(request, 'survey_server/login.html')
+def register(request):
+    return render(request, 'survey_server/register.html')
