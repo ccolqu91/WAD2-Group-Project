@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% block title %}
+        <title>{% block title_block %}{% endblock %}</title>
+    {% endblock %}
+
+    <style>
+        body{
+
+			background-color: #33665d;
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+
+
+         #index{
+         color:#88a5a0;
+          font-size: 90px;
+         }
+
+
+        #button{
+
+          position:fixed;
+          float: left;
+          bottom:100px;
+          left:700px;
+          background-color: #ccc;
+          padding: 10px;
+          border-radius: 5px;
+          color: black;
+        }
+        #form{
+          background-color: #ccc;
+          padding: 10px;
+          border-radius: 5px;
+          width: 300px;
+          text-align: center;
+          margin: auto; /* 设置 div 的左右 margin 为自动 */
+          display: flex; /* 让子元素垂直居中 */
+          justify-content: center; /* 让子元素水平居中 */
+          align-items: center; /* 让子元素垂直居中 */
+        }
+        .down {
+            position:fixed;
+          float: left;
+          bottom:0;
+          left:500px;
+          background-color: #88a5a0;
+          padding: 5px;
+          border-radius: 5px;
+          color: black;
+
+         }
+         .down2{
+         position:fixed;
+          float: left;
+          bottom:0;
+          left:1000px;
+          background-color: #88a5a0;
+          padding: 5px;
+          border-radius: 5px;
+          color: black;
+         }
+         .top{
+         position:fixed;
+          float: left;
+          top:0;
+          right:100px;
+          background-color: #ccc;
+          padding: 5px;
+          border-radius: 5px;
+          color: black;
+         }
+
+    </style>
+</head>
+
+<body>
+<div id="index">
+    SURVEY SERVER
+    {% block index_block %}
+    {% endblock %}
+</div>
+
+<!--login/log out/profile-->
+<div class="top">
+<!--    <p id="login"><a href="/survey_server/home/">LOG OUT</a><br /></p>-->
+<!--    <p id="profile"><a href="/survey_server/profile/">PROFILE</a><br /></p>-->
+    <p id="profile"><a href="/survey_server/home/">HOME</a><br /></p>
+    {% block top_block %}
+    {% endblock %}
+</div>
+
+<div id="form">
+<!--    <form>-->
+    {% block form_block %}
+<!--    go to different dashboard-->
+    {% endblock %}
+
+
+
+      <input type="text" id="username" name="username" placeholder="username" style="height: 20px;"></br>
+
+
+      <input type="password" id="password" name="password" placeholder="password" style="height: 20px;"></br>
+     <br></br>
+      <input type="submit" value="submit" style="height: 40px;">
+    </form>
+
+</div>
+
+
+<!--if have account, go to login, or register-->
+<div id="button">
+    {% block button_block %}
+    {% endblock %}
+
+</div>
+
+<div class="down">
+    <a href="/survey_server/about/">About us</a><br />
+
+</div>
+<div class="down2">
+<a href="/survey_server/about/">Contact us</a><br />
+</div>
+
+</body>
+
+
+
+</html>

@@ -1,0 +1,20 @@
+{% extends 'survey_server/login&registerBase.html' %}
+{% load static %}
+{% block title_block %}
+login
+{% endblock %}
+{% block index_block %}
+</br>log in
+{% endblock %}
+
+{% block form_block %}
+<form method="post" action="{% url 'survey_server:manager' %}">
+{% endblock %}
+
+ {% block button_block %}
+    <button type="submit" style="color: black;">Go to register</button>
+
+    {% endblock %}
+
+
+
