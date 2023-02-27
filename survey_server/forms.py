@@ -1,6 +1,7 @@
 from django import forms
+from .models import *
 
-class Question1Form(forms.Form):
+class Question1Form(forms.ModelForm):
     ordered_starter_choices = [
         ('yes','yes'),
         ('no','no'),
@@ -11,7 +12,11 @@ class Question1Form(forms.Form):
         widget=forms.RadioSelect
     )
 
-class Question2Form(forms.Form):
+    class Meta:
+        model = Survey
+        fields = ('ordered_starter',)
+
+class Question2Form(forms.ModelForm):
     STARTER_TIME_CHOICES = [
         ('fast', '7-11 minutes or less'),
         ('normal', '11-16 minutes'),
@@ -23,8 +28,12 @@ class Question2Form(forms.Form):
         widget=forms.RadioSelect
     )
 
+    class Meta:
+        model = Survey
+        fields = ('starter_time',)
 
-class Question3Form(forms.Form):
+
+class Question3Form(forms.ModelForm):
     SIZE_STARTER_CHOICES = [
         ('Great', 'Great'),
         ('Somewhat', 'Somewhat'),
@@ -36,7 +45,11 @@ class Question3Form(forms.Form):
         widget=forms.RadioSelect
     )
 
-class Question4Form(forms.Form):
+    class Meta:
+        model = Survey
+        fields = ('size_starter',)
+
+class Question4Form(forms.ModelForm):
     presentation_starter_choices = [
         ('Excellent','Excellent'),
         ('Great', 'Great'),
@@ -49,7 +62,11 @@ class Question4Form(forms.Form):
         widget=forms.RadioSelect
     )
 
-class Question5Form(forms.Form):
+    class Meta:
+        model = Survey
+        fields = ('presentation_starter',)
+
+class Question5Form(forms.ModelForm):
     variety_starter_choices = [
         ('Excellent','Excellent variety'),
         ('Great', 'Great variety'),
@@ -61,6 +78,10 @@ class Question5Form(forms.Form):
         choices=variety_starter_choices,
         widget=forms.RadioSelect
     )
+
+    class Meta:
+        model = Survey
+        fields = ('variety_starter',)
 
 
 
