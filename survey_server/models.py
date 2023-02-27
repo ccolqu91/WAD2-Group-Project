@@ -49,11 +49,49 @@ class Survey(models.Model):
     max_score = models.IntegerField(default  = 0)
     final_score = models.IntegerField(default = 0)
 
+    # Starter Variables
     ordered_starter = models.CharField(max_length=128,default = 0)
-    starter_time = models.CharField(max_length=128,default = 0 )
+    time_starter = models.CharField(max_length=128,default = 0 )
     size_starter = models.CharField(max_length=128, default = 0)
     presentation_starter = models.CharField(max_length=128,default = 0)
     variety_starter = models.CharField(max_length=128,default = 0 )
+
+    # MainCourse Variables
+    ordered_maincourse = models.CharField(max_length=128,default = 0)
+    time_maincourse = models.CharField(max_length=128,default = 0 )
+    size_maincourse = models.CharField(max_length=128, default = 0)
+    presentation_maincourse = models.CharField(max_length=128,default = 0)
+    variety_maincourse = models.CharField(max_length=128,default = 0 )
+
+    # Dessert Variables
+    ordered_dessert = models.CharField(max_length=128,default = 0)
+    time_dessert = models.CharField(max_length=128,default = 0 )
+    size_dessert = models.CharField(max_length=128, default = 0)
+    presentation_dessert = models.CharField(max_length=128,default = 0)
+    variety_dessert = models.CharField(max_length=128,default = 0 )
+
+    # Drinks Variables
+    ordered_drink = models.CharField(max_length=128,default = 0)
+    time_drink = models.CharField(max_length=128,default = 0 )
+    size_drink = models.CharField(max_length=128, default = 0)
+    presentation_drink = models.CharField(max_length=128,default = 0)
+    variety_drink = models.CharField(max_length=128,default = 0 )
+
+    # Greeting Variables
+    greeting_entry = models.CharField(max_length=128,default = 0 )
+    greeting_waiting = models.CharField(max_length=128,default = 0 )
+    greeting_clean = models.CharField(max_length=128,default = 0 )
+    greeting_order = models.CharField(max_length=128,default = 0 )
+
+    # Restroom Variables
+    use_restroom = models.CharField(max_length=128,default = 0 )
+    restroom_clean = models.CharField(max_length=128,default = 0 )
+    missing_restroom = models.CharField(max_length=128,default = 0 )
+
+    # Other Variables
+    clean_restaurant = models.CharField(max_length=128,default = 0 )
+    pay_bill_restaurant = models.CharField(max_length=128,default = 0 )
+    service_staff = models.CharField(max_length=128,default = 0 )
 
 
     def __str__(self):
