@@ -23,15 +23,23 @@ def question1(request):
             request.session['hygiene_points'] = 0
             request.session['value_for_money_points'] = 0
             request.session['menu_variety_points'] = 0
+
             if ordered_starter == "yes":
                 request.session['customer_service_points'] = request.session.get('customer_service_points', 0) + 1
                 return redirect('survey_server:question2')
-            else:
+            elif ordered_starter == "no":
                 return redirect('survey_server:question5')
     else:
         form = Question1Form()
 
-    context = {'form': form}
+    context = {
+    'form': form,
+    'food_quality_points': request.session.get('food_quality_points', 0),
+    'customer_service_points': request.session.get('customer_service_points', 0),
+    'hygiene_points': request.session.get('hygiene_points', 0),
+    'value_for_money_points': request.session.get('value_for_money_points', 0),
+    'menu_variety_points': request.session.get('menu_variety_points', 0),
+}
 
     return render(request, 'survey_server/question1.html', context)
 

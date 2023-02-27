@@ -1,7 +1,15 @@
 from django import forms
 
 class Question1Form(forms.Form):
-    ordered_starter = forms.BooleanField(label='Did you order a starter?', required=True)
+    ordered_starter_choices = [
+        ('yes','yes'),
+        ('no','no'),
+    ]
+    ordered_starter = forms.ChoiceField(
+        label='Did you order a starter?',
+        choices=ordered_starter_choices,
+        widget=forms.RadioSelect
+    )
 
 class Question2Form(forms.Form):
     STARTER_TIME_CHOICES = [
