@@ -52,7 +52,7 @@
           border-radius: 5px;
           color: black;
          }
-         .top #profile{
+         .top #home{
          position:fixed;
           float: left;
           top:0;
@@ -62,6 +62,17 @@
           border-radius: 5px;
           color: black;
          }
+         .top #profile{
+         position:fixed;
+          float: left;
+          top:0;
+          right:300px;
+          background-color: #ccc;
+          padding: 5px;
+          border-radius: 5px;
+          color: black;
+         }
+         
 
     </style>
 </head>
@@ -74,8 +85,13 @@
 
 <!--login/log out/profile-->
 <div class="top">
-    <p id="login"><a href="/survey_server/home/">LOG OUT</a><br /></p>
+    {% if user.is_authenticated %}
+    <p id="login"><a href="{% url 'survey_server:logout' %}">LOG OUT</a><br /></p>
     <p id="profile"><a href="/survey_server/profile/">PROFILE</a><br /></p>
+    {% else %}
+    <p id="login"><a href="{% url 'survey_server:login' %}">LOG IN</a><br /></p>
+    {% endif %}
+    <p id="home"><a href="{% url 'survey_server:index' %}">HOME</a><br /></p>
     {% block top_block %}
     {% endblock %}
 </div>

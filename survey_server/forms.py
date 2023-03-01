@@ -1,6 +1,32 @@
 from django import forms
 from .models import *
 
+class UserRegistrationForm(forms.ModelForm):
+
+    # This form asks if the user is registering as a customer or owner and asks for their details
+
+    password = forms.CharField(widget=forms.PasswordInput())
+    email = forms.EmailField(required=True)
+
+    USER_REG_CHOICES = [
+        (1,'customer'),
+        (2,'manager'),
+    ]
+    user_type = forms.ChoiceField(
+        label='Would you like to register as a customer or a restaurant manager?',
+        choices=USER_REG_CHOICES,
+        widget=forms.RadioSelect
+    )
+
+    class Meta:
+        model = User
+        fields = ('username', 'email','password','user_type',)
+        help_texts = {
+            'username': None,
+			'email': None,
+            'password': None,
+        }
+
 class ChooseStarterForm(forms.ModelForm):
 
     # This form is question one of the survey
@@ -504,23 +530,7 @@ class RestaurantServiceStaffForm(forms.ModelForm):
         model = Survey
         fields = ('service_staff',)
 
-class UserRegistrationForm(forms.ModelForm):
 
-    # This form asks if the user is registering as a customer or owner and asks for their details
-
-    USER_REG_CHOICES = [
-        ('customer','customer'),
-        ('owner','owner'),
-    ]
-    profile_type = forms.ChoiceField(
-        label='Would you like to register as a customer or an owner?',
-        choices=USER_REG_CHOICES,
-        widget=forms.RadioSelect
-    )
-
-    class Meta:
-        model = User
-        fields = '__all__' 
 
 
 

@@ -1,38 +1,36 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 from django.template.defaultfilters import slugify
 
 
+class User(AbstractUser):
+    USER_TYPE_CHOICES = (
+		(1, 'customer'),
+		(2, 'manager'),
+	)
+
+    user_type = models.PositiveSmallIntegerField(choices=USER_TYPE_CHOICES, blank=True, default = 1)
+    def __str__(self):
+        return self.username
+
 class Customer(models.Model):
-    # id = models.IntegerField(primary_key=True)
-    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    user = models.OneToOneField(User,on_delete=models.CASCADE, primary_key=True, related_name = 'customer')
     profile_picture = models.ImageField(default = 0)
     bio = models.TextField(default=0)
     def __str__(self):
-        return self.user.userName
+        return self.user.username
 
 
 class Manager(models.Model):
-    # id = models.IntegerField(primary_key=True)
-    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    user = models.OneToOneField(User,on_delete=models.CASCADE, primary_key=True, related_name ='manager')
     profile_picture = models.ImageField(default = 0)
     bio = models.TextField(default=0)
     def __str__(self):
-        return self.user.userName
+        return self.user.username
     
 
-class User(models.Model):
-    # id = models.IntegerField(primary_key=True)
-    userName = models.CharField(max_length=128,unique = True)
-    email = models.EmailField(max_length=128,unique = True)
-    password = models.CharField(max_length=128,unique = True)
-    user_type = models.PositiveSmallIntegerField(default = 0)
-    def __str__(self):
-        return self.userName
-    
 
 class Restaurant(models.Model):
-    # id = models.IntegerField(primary_key=True)
     manager = models.ForeignKey(Manager,on_delete=models.CASCADE)
     logo = models.ImageField(default = 0)
     cuisine = models.CharField(max_length=128)
@@ -42,7 +40,6 @@ class Restaurant(models.Model):
 
 
 class Survey(models.Model):
-    # id =  models.IntegerField(primary_key=True)
     customer =  models.ForeignKey(Customer, on_delete=models.CASCADE)
     restaurant = models.ForeignKey(Restaurant,on_delete = models.CASCADE)
     voucher = models.OneToOneField('Voucher', on_delete=models.CASCADE,null = True,blank =True,related_name='surveys')
@@ -100,7 +97,6 @@ class Survey(models.Model):
 
 
 class Voucher(models.Model):
-    # id = models.IntegerField(primary_key=True)
     survey = models.OneToOneField('Survey',on_delete=models.CASCADE,related_name='vouchers')
     customer =  models.ForeignKey(Customer, on_delete=models.CASCADE)
     restaurant = models.ForeignKey(Restaurant,on_delete = models.CASCADE)
@@ -110,17 +106,4 @@ class Voucher(models.Model):
     is_valid = models.BooleanField(default=True)
     def __str__(self):
         return "Voucher for " + str(self.customer) + " at " + str(self.restaurant)
-
-
-"""
-I don't think we need this model since we have the Customer and Manager models which serve as profiles
-"""
-# class UserProfile(models.Model):
-#     user = models.OneToOneField(User,on_delete=models.CASCADE)
-#     website = models.URLField(blank=True)
-#     picture = models.ImageField(upload_to='profile_images',blank=True)
-
-#     def __str__(self):
-#         return self.user.userName + "'s Profile"
-
 

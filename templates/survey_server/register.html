@@ -8,12 +8,21 @@ register
 {% endblock %}
 
 {% block form_block %}
-<form name="user" method="post" action="">
+<form method="post" action="{% url 'survey_server:register' %}">
+   {% csrf_token %}
+   {{ form.as_p }}
+      <!-- <input type="text" id="username" name="username" placeholder="username" style="height: 20px;"></br>
+      <input type="email" id="email" name="email" placeholder="email" style="height: 20px;"></br>
+      <input type="password" id="password1" name="password1" placeholder="enter password" style="height: 20px;"></br>
+      <input type="password" id="password2" name="password2" placeholder="re-enter password" style="height: 20px;"></br> -->
+      <button type="submit"> Register </button>
+    </form>
 {% endblock %}
 
  {% block button_block %}
-    <button type="submit" onclick="register()">Go to login</button>
-
+ <a href="{% url 'survey_server:login' %}">
+    <button type="submit" onclick="login()">Go to login</button>
+ </a>
     {% endblock %}
 
 

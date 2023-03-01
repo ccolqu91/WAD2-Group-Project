@@ -90,7 +90,7 @@
 <div class="top">
 <!--    <p id="login"><a href="/survey_server/home/">LOG OUT</a><br /></p>-->
 <!--    <p id="profile"><a href="/survey_server/profile/">PROFILE</a><br /></p>-->
-    <p id="profile"><a href="/survey_server/home/">HOME</a><br /></p>
+    <p id="profile"><a href="{% url 'survey_server:index' %}">HOME</a><br /></p>
     {% block top_block %}
     {% endblock %}
 </div>
@@ -99,18 +99,16 @@
 <!--    <form>-->
     {% block form_block %}
 <!--    go to different dashboard-->
-    {% endblock %}
+    
 
 
 
-      <input type="text" id="username" name="username" placeholder="username" style="height: 20px;"></br>
-
-
-      <input type="password" id="password" name="password" placeholder="password" style="height: 20px;"></br>
+      
      <br></br>
       <button onclick="manager()">for manger </button>
       <button onclick="customer()">for customer </button>
     </form>
+    {% endblock %}
 
 </div>
 
