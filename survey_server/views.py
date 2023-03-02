@@ -28,15 +28,17 @@ def register(request):
             user.set_password(user.password)
             user.save()
             
-            if user_form['user_type'].value == 'customer':
+            if user.user_type == 1:
                 profile = Customer.objects.create(user=user)
             else:
                 profile = Manager.objects.create(user=user)
-
+            
             profile.save()
             login(request, user)
-
             registered = True
+            messages.success(request, "Registration successful." )
+            return redirect("index")
+
         else:
             print(user_form.errors)
     else:
