@@ -20,9 +20,9 @@ register
 {% endblock %}
 
  {% block button_block %}
- <a href="{% url 'survey_server:login' %}">
-    <button type="submit" onclick="login()">Go to login</button>
- </a>
+
+    <button id="login" onclick="login()">Go to login</button>
+
     {% endblock %}
 
 

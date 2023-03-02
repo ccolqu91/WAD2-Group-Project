@@ -1,0 +1,97 @@
+ body{
+             min-height: 500px;
+			background-color: #33665d;
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+		.text&pictue{
+		        display: flex;
+                justify-content: space-between;
+		}
+		.top_text{
+		  float:left;
+		 width: 60%;
+		}
+		.picture{
+		  float:right;
+		width:40%;
+		}
+		.down {
+            position:fixed;
+          float: left;
+          bottom:0;
+          left:500px;
+          background-color: #88a5a0;
+          padding: 5px;
+          border-radius: 5px;
+          color: black;
+
+         }
+         .down2{
+         position:fixed;
+          float: left;
+          bottom:0;
+          left:1000px;
+          background-color: #88a5a0;
+          padding: 5px;
+          border-radius: 5px;
+          color: black;
+         }
+         #hello{
+         color:#88a5a0;
+          font-size: 90px;
+         }
+         #text1{
+         color: #88a5a0;
+          font-size: 60px;
+         }
+         .top #login{
+         position:fixed;
+          float: left;
+          top:0;
+          right:100px;
+          background-color: #ccc;
+          padding: 5px;
+          border-radius: 5px;
+          color: black;
+         }
+         .top #home{
+         position:fixed;
+          float: left;
+          top:0;
+          right:200px;
+          background-color: #ccc;
+          padding: 5px;
+          border-radius: 5px;
+          color: black;
+         }
+         .top #profile{
+         position:fixed;
+          float: left;
+          top:0;
+          right:300px;
+          background-color: #ccc;
+          padding: 5px;
+          border-radius: 5px;
+          color: black;
+         }
+         .container{
+         padding-right: 15px;
+   padding-left: 15px;
+   margin-right: auto;
+   margin-left: auto;
+
+        }
+         footer{
+            color:white;
+         position: absolute;
+        bottom: -500px;
+        left: 0;
+        right: 0;
+        height: 130px;
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        line-height: 30px;
+
+    }

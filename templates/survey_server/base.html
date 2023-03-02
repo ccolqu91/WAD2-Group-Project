@@ -6,95 +6,94 @@
     {% block title %}
         <title>{% block title_block %}{% endblock %}</title>
     {% endblock %}
-    <style>
-        body{
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
 
-			background-color: #33665d;
-			background-repeat: no-repeat;
-			background-size: cover;
-		}
-		.down {
-            position:fixed;
-          float: left;
-          bottom:0;
-          left:500px;
-          background-color: #88a5a0;
-          padding: 5px;
-          border-radius: 5px;
-          color: black;
 
-         }
-         .down2{
-         position:fixed;
-          float: left;
-          bottom:0;
-          left:1000px;
-          background-color: #88a5a0;
-          padding: 5px;
-          border-radius: 5px;
-          color: black;
-         }
-         #hello{
-         color:#88a5a0;
-          font-size: 90px;
-         }
-         #text1{
-         color: #88a5a0;
-          font-size: 60px;
-         }
-         .top #login{
-         position:fixed;
-          float: left;
-          top:0;
-          right:100px;
-          background-color: #ccc;
-          padding: 5px;
-          border-radius: 5px;
-          color: black;
-         }
-         .top #home{
-         position:fixed;
-          float: left;
-          top:0;
-          right:200px;
-          background-color: #ccc;
-          padding: 5px;
-          border-radius: 5px;
-          color: black;
-         }
-         .top #profile{
-         position:fixed;
-          float: left;
-          top:0;
-          right:300px;
-          background-color: #ccc;
-          padding: 5px;
-          border-radius: 5px;
-          color: black;
-         }
-         
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
 
-    </style>
 </head>
 <body>
+<div class="px-3 py-2 bg-secondary text-white">
+      <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+          <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
+          </a>
+
+          <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+
+              {% block profile_block %}
+
+            <li>
+              <a href="{% url 'survey_server:profile' %}" class="nav-link text-white">
+                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="{% url 'survey_server:profile' %}"/></svg>
+                Profile
+              </a>
+            </li>
+              {% endblock %}
+
+              <li>
+              <a href="/survey_server/about/" class="nav-link text-white">
+                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="/survey_server/about/"/></svg>
+                About
+              </a>
+            </li>
+
+            <li>
+              <a href="{% url 'survey_server:index' %}" class="nav-link text-white">
+                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="{% url 'survey_server:index' %}"/></svg>
+                Home
+              </a>
+            </li>
+
+              <li>
+              <a href="{% url 'survey_server:logout' %}" class="nav-link text-white">
+                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="{% url 'survey_server:logout' %}"/></svg>
+                Log out
+              </a>
+            </li>
+               {% block extra_top_block %}
+              {% endblock %}
+
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+
+<div class="text&picture">
+    <div class="top_text">
 <div id="hello">
     Hello
     {% block hello_block %}
     {% endblock %}
 </div>
+    </div>
 
-<!--login/log out/profile-->
-<div class="top">
-    {% if user.is_authenticated %}
-    <p id="login"><a href="{% url 'survey_server:logout' %}">LOG OUT</a><br /></p>
-    <p id="profile"><a href="/survey_server/profile/">PROFILE</a><br /></p>
-    {% else %}
-    <p id="login"><a href="{% url 'survey_server:login' %}">LOG IN</a><br /></p>
-    {% endif %}
-    <p id="home"><a href="{% url 'survey_server:index' %}">HOME</a><br /></p>
-    {% block top_block %}
+<div class="picture">
+
+<div class="container mt-3">
+  <h2>profile picture</h2>
+    {% block picture_block %}
+
+  <div class="card" style="width:400px">
+    <img class="card-img-top" src="{% static "images/home.jpg" %}" alt="user image" style="width:100%">
+    <div class="card-body">
+
+      <a href="#" class="btn btn-primary">See Profile</a>
+    </div>
+  </div>
+
     {% endblock %}
+
 </div>
+
+
+</div>
+
+
 <div id="text1">
     {% block body_block %}
     {% endblock %}
@@ -103,11 +102,13 @@
 
 </body>
 </div>
-<div class="down">
-    <a href="/survey_server/about/">About us</a><br />
 
-</div>
-<div class="down2">
-<a href="/survey_server/about/">Contact us</a><br />
-</div>
+
+<footer>
+  <address>
+    Contact us at <a href="mailto:123@example.com">123@example.com</a>
+  </address>
+  <p>123 Main St, Glasgow, UK</p>
+  <p>Phone: 555-123-4567</p>
+</footer>
 </html>

@@ -8,4 +8,30 @@ Customer</br>
 {% endblock %}
 {% block body_block %}
 Your Vouchers
+
+{% endblock %}
+{% block picture_block %}
+<div class="card" style="width:400px">
+    <img class="card-img-top" src="{% static "images/home.jpg" %}" alt="user image" style="width:100%">
+    <div class="card-body">
+
+      <a href="#" class="btn btn-primary">See Profile</a>
+    </div>
+  </div>
+<a href="{% url 'survey_server:question1' %}"><button>Take the survey</button></a>
+
+<div class="container mt-3">
+
+  <div class="dropdown dropdown-menu-end">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+      choose a restaurant
+    </button>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="#">link 1</a></li>
+      <li><a class="dropdown-item" href="#">link 2</a></li>
+      <li><a class="dropdown-item" href="#">link 3</a></li>
+    </ul>
+  </div>
+</div>
+
 {% endblock %}

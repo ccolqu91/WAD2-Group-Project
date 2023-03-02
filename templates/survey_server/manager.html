@@ -9,3 +9,7 @@ Manager</br>
 {% block body_block %}
 Your Scoring
 {% endblock %}
+{% block picture_block %}
+<p>Would you like to know what ourusers think about your services?</p>
+<a a href="{% url 'survey_server:add_resturant' %}"><button>Add a restaurant</button></a>
+{% endblock %}
