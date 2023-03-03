@@ -27,6 +27,14 @@ class UserRegistrationForm(forms.ModelForm):
             'password': None,
         }
 
+class SelectRestaurant(forms.Form):
+    restaurant = forms.ChoiceField(choices=[(r.id, r.name) for r in Restaurant.objects.all()])
+
+    class Meta:
+        help_texts = {
+            'restaurant': None,
+        }
+
 class ChooseStarterForm(forms.ModelForm):
 
     # This form is question one of the survey
@@ -270,7 +278,7 @@ class ChooseDrinkForm(forms.ModelForm):
         ('yes','yes'),
         ('no','no'),
     ]
-    ordered_drinks = forms.ChoiceField(
+    ordered_drink = forms.ChoiceField(
         label='Did you order any drinks with your meal?',
         choices=ORDERED_DRINK_CHOICES,
         widget=forms.RadioSelect
@@ -380,7 +388,7 @@ class GreetingWaitingForm(forms.ModelForm):
         model = Survey
         fields = ('greeting_waiting',)
 
-class GreetingWaitingForm(forms.ModelForm):
+class GreetingCleanForm(forms.ModelForm):
 
     # This form is question 23 of the survey
 
@@ -400,7 +408,7 @@ class GreetingWaitingForm(forms.ModelForm):
         model = Survey
         fields = ('greeting_clean',)
 
-class GreetingWaitingForm(forms.ModelForm):
+class GreetingOrderForm(forms.ModelForm):
 
     # This form is question 24 of the survey
 

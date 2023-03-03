@@ -31,16 +31,20 @@ class Manager(models.Model):
 
 
 class Restaurant(models.Model):
-    manager = models.ForeignKey(Manager,on_delete=models.CASCADE)
+    manager = models.ForeignKey(User,on_delete=models.CASCADE)
+    name = models.CharField(max_length=256)
     logo = models.ImageField(default = 0)
     cuisine = models.CharField(max_length=128)
     about = models.TextField(null =0,blank = True)
+    slug = models.SlugField(unique=True)
+
     def __str__(self):
-        return str(self.manager) + "'s Restaurant"
+        self.slug = slugify(self.name)
+        return str(self.manager) + "'s Restaurant " + str(self.name)
 
 
 class Survey(models.Model):
-    customer =  models.ForeignKey(Customer, on_delete=models.CASCADE)
+    customer =  models.ForeignKey(User, on_delete=models.CASCADE)
     restaurant = models.ForeignKey(Restaurant,on_delete = models.CASCADE)
     voucher = models.OneToOneField('Voucher', on_delete=models.CASCADE,null = True,blank =True,related_name='surveys')
     max_score = models.IntegerField(default  = 0)

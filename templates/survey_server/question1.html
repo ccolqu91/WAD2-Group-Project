@@ -2,11 +2,11 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Question 1 - Survey Server</title>
+    <title>Page {{ page_id }} - Survey Server</title>
 </head>
 <body>
-    <h1>Question 1</h1>
-    <form method="post" action="{% url 'survey_server:question1' %}">
+    <h1>Page {{ page_id }}</h1>
+    <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" style="color: black;">Next</button>
