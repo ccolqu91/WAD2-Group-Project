@@ -143,7 +143,7 @@ def survey(request, restaurant_slug, page_id):
         return HttpResponse("Survey complete!")
 
     context_dict = {'form': form, 'restaurant': restaurant.name, 'page_id' : page_id}
-    return render(request, 'survey_server/question1.html', context=context_dict)
+    return render(request, 'survey_server/survey.html', context=context_dict)
 
 
 @login_required
