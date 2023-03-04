@@ -1,0 +1,32 @@
+
+ body{
+            min-height:auto;
+			background-color: #33665d;
+			background-repeat: no-repeat;
+
+		}
+
+
+ footer{
+        position:absolute;
+        bottom:0;
+        text-align:center;
+        width:100%;
+        }
+
+        #title{
+        display: flex !important;
+        align-items: center !important;
+        color:#88a5a0;
+          font-size:30px;
+        }
+
+ .restaurant_image{
+    position:absolute;
+    left:55%;
+ }
+
+     p{
+                color: pink;
+              font-size: 50px;
+     }

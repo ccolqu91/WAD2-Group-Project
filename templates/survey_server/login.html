@@ -8,6 +8,7 @@ login
 {% endblock %}
 
 {% block form_block %}
+
 <form method="post">
    {% csrf_token %}
    <input type="text" id="username" name="username" placeholder="username" style="height: 30px;"></br>
@@ -15,14 +16,22 @@ login
    <input type="password" id="password" name="password" placeholder="password" style="height: 30px;"></br>
    <h1></h1>
    <button type="submit"> Login </button>
+
+   <button>
+       <a href="{% url 'survey_server:register' %}" target="_blank">Go to register</a>
+   </button>
 </form>
+
+
 {% endblock %}
 
- {% block button_block %}
 
-    <button type="submit" onclick="register()">Go to register</button>
 
-    {% endblock %}
+<!-- {% block button_block %}-->
+
+<!--    <button type="submit" onclick="register()">Go to register</button>-->
+
+<!--    {% endblock %}-->
 
 
 

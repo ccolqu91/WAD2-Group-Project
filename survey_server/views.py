@@ -150,3 +150,7 @@ def survey(request, restaurant_slug, page_id):
 def user_logout(request):
     logout(request)
     return redirect(reverse('survey_server:index'))
+
+def add_restaurant(request):
+
+    return render(request, 'survey_server/add_restaurant.html')

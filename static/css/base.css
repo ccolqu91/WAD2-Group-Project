@@ -95,3 +95,16 @@
         line-height: 30px;
 
     }
+        #title{
+        display: flex !important;
+        align-items: center !important;
+        color:#88a5a0;
+          font-size:30px;
+        }
+        #search{
+        height:30px;
+        display: flex !important;
+        align-items: center !important;
+        position:absolute;
+        left: 40%;
+}

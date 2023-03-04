@@ -4,76 +4,75 @@
 <head>
 <title>survey server</title>
     <link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
-   <link rel="stylesheet" href="{% static 'css/index.css' %}">
-    <style>
-        #footer{
-         color:white;
-         position: absolute;
-        bottom: -500px;
-        left: 0;
-        right: 0;
-        height: 130px;
-        background-color: #333;
-        color: #fff;
-        text-align: center;
-        line-height: 30px;
-        }
-    </style>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+   <link rel="stylesheet" href="{% static 'css/index1.css' %}">
+<!--    <style>-->
+<!--        #footer{-->
+<!--         color:white;-->
+<!--         position: absolute;-->
+<!--        bottom: -500px;-->
+<!--        left: 0;-->
+<!--        right: 0;-->
+<!--        height: 130px;-->
+<!--        background-color: #333;-->
+<!--        color: #fff;-->
+<!--        text-align: center;-->
+<!--        line-height: 30px;-->
+<!--        }-->
+<!--    </style>-->
 
 </head>
 <body >
-<div class="px-3 py-2 bg-secondary text-white">
-      <div class="container">
-        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-          <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
-            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
-          </a>
 
-          <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
-
-              {% block profile_block %}
-
-
-              {% endblock %}
-
-              <li>
-              <a href="/survey_server/about/" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="/survey_server/about/"/></svg>
-                About
-              </a>
-            </li>
-
-
-               <li>
-              <a href="{% url 'survey_server:register' %}" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="{% url 'survey_server:register' %}"/></svg>
-                Register
-              </a>
-            </li>
-               {% if user.is_authenticated %}
-              <li>
-              <a href="{% url 'survey_server:logout' %}" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="{% url 'survey_server:logout' %}"/></svg>
-                Log out
-              </a>
-            </li>
-                 {% else %}
-              <li>
-              <a href="{% url 'survey_server:login' %}" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="{% url 'survey_server:login' %}"/></svg>
-                Log in
-              </a>
-            </li>
-              {% endif %}
-
-               {% block extra_top_block %}
-              {% endblock %}
-
-          </ul>
+<nav class="navbar navbar-expand-lg bg-secondary text-white">
+  <div class="container-fluid">
+    <a class="navbar-brand" id="title" href="{% url 'survey_server:index' %}" style="color:#88a5a0; font-size:30px;">Survey server</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+        <div class="left">
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
         </div>
-      </div>
+
+        <div class="right">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent" >
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+         <li class="nav-item" >
+          <a class="nav-link active" aria-current="page" href="{% url 'survey_server:login' %}" style="color:white;">About</a>
+        </li>
+
+
+        <li class="nav-item" >
+          <a class="nav-link active" aria-current="page" href="{% url 'survey_server:login' %}" style="color:white;">Log in</a>
+        </li>
+        <li class="nav-item" >
+          <a class="nav-link" href="{% url 'survey_server:register' %}" style="color:white;">Register</a>
+        </li>
+
+
+        <li class="nav-item dropdown" style="color:white;">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+
+      </ul>
+
     </div>
+            </div>
+  </div>
+</nav>
+
 <h1>SURVEY SERVER</h1>
 <div>
     <p id="text">Know what your customers love. <br /></p>
@@ -82,21 +81,59 @@
 </div>
 <div class="survey">
      <a href="{% url 'survey_server:select' %}">Take the survey</a>
+    <button type="button" class="btn btn-primary btn-lg" onclick="survey()">Take the survey</button>
+    <button type="button" class="btn btn-primary btn-lg"  onclick="select()">Select restaurant</button>
 
 </div>
 
 
-<img src="{% static 'images/home.jpg' %}" alt="Picture of food" />
+<div class="restaurant_image" >
+<div id="carouselExampleIndicators" class="carousel slide" style=" height:auto; width:500px;">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active" >
+      <img src="{% static 'images/home.jpg' %}" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item" >
+      <img src="{% static 'images/home.jpg' %}" class="d-block w-100" alt="..." >
+    </div>
+    <div class="carousel-item" >
+      <img src="{% static 'images/home.jpg' %}" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+</div>
+
 <div id="footer">
-<footer >
-  <address>
-    Contact us at <a href="mailto:123@example.com">123@example.com</a>
-  </address>
-  <p>123 Main St, Glasgow, UK</p>
-  <p>Phone: 123-123123</p>
+<footer class="bg-dark text-light">
+  <div class="container">
+
+
+        <h3>Contact us</h3>
+        <ul class="list-unstyled">
+          <li>Phone: 123-456-7890</li>
+          <li>Email: 123@example.com</li>
+          <li>Adress: 123 Main St, Glasgow, UK</li>
+        </ul>
+
+
+  </div>
 </footer>
 
 </div>
+ <script src="static/js/index.js"></script>
 
 </body>
 </html>

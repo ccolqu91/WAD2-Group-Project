@@ -11,25 +11,14 @@
 
 
      <link rel="stylesheet" href="{% static 'css/login&register.css' %}">
-<!--    <script src="{% static 'js/login&register.js' %}"></script>-->
+    <script src="{% static 'js/login&register.js' %}"></script>
 <!--    <script src="js/login&register.js"></script>-->
-    <style>
-    body{
-    min-height: 500px;
-    }
-    #footer{
-         color:white;
-         position: absolute;
-        bottom: -500px;
-        left: 0;
-        right: 0;
-        height: 130px;
-        background-color: #333;
-        color: #fff;
-        text-align: center;
-        line-height: 30px;
-        }
-    </style>
+<!--    <style>-->
+<!--    body{-->
+<!--    min-height: 800px !important;-->
+<!--    }-->
+
+<!--    </style>-->
 
     <script>
         function register(){
@@ -44,13 +33,21 @@
 
 <body>
 <div class="px-3 py-2 bg-secondary text-white">
+
       <div class="container">
+
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+             <a class="navbar-brand" id="title" href="{% url 'survey_server:index' %}">Survey server</a>
+            <form class="d-flex" id="search" role="search">
+                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                     <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
           <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
             <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
           </a>
 
           <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+
 
               {% block profile_block %}
 
@@ -104,7 +101,7 @@
     {% endblock %}
 </div>
 
-<div id="form">
+<div class="form">
 <!--    <form>-->
     {% block form_block %}
 <!--    go to different dashboard-->
@@ -119,15 +116,20 @@
     </form>
     {% endblock %}
 
+<!--    <div id="button">-->
+<!--    {% block button_block %}-->
+<!--    {% endblock %}-->
+
+<!--    </div>-->
+
+</div>
+<div class="blank">
+
 </div>
 
 
 <!--if have account, go to login, or register-->
-<div id="button">
-    {% block button_block %}
-    {% endblock %}
 
-</div>
 
 <!--<div class="down">-->
 <!--    <a href="/survey_server/about/">About us</a><br />-->
@@ -136,17 +138,36 @@
 <!--<div class="down2">-->
 <!--<a href="/survey_server/about/">Contact us</a><br />-->
 <!--</div>-->
-<div id="footer">
-<footer >
-  <address>
-    Contact us at <a href="mailto:123@example.com">123@example.com</a>
-  </address>
-  <p>123 Main St, Glasgow, UK</p>
-  <p>Phone: 123-123123</p>
+<!--<div id="footer">-->
+<!--<footer >-->
+<!--  <address>-->
+<!--    Contact us at <a href="mailto:123@example.com">123@example.com</a>-->
+<!--  </address>-->
+<!--  <p>123 Main St, Glasgow, UK</p>-->
+<!--  <p>Phone: 123-123123</p>-->
+<!--</footer>-->
+<!--</div>-->
+
+<footer class="bg-dark text-light">
+  <div class="container">
+
+
+        <h3>Contact us</h3>
+        <ul class="list-unstyled">
+          <li>Phone: 123-456-7890</li>
+          <li>Email: 123@example.com</li>
+          <li>Address: 123 Main St, Glasgow, UK</li>
+        </ul>
+
+
+  </div>
 </footer>
-</div>
+ {% block body_block %}
+    {% endblock %}
+
 
 </body>
+
 
 
 
