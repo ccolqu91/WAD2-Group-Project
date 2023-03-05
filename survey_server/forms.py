@@ -202,7 +202,7 @@ class ChooseDessertForm(forms.ModelForm):
         ('no','no'),
     ]
     ordered_dessert = forms.ChoiceField(
-        label='Did you order a starter?',
+        label='Did you order a dessert?',
         choices=ORDERED_DESSERT_CHOICES,
         widget=forms.RadioSelect
     )
