@@ -129,9 +129,13 @@ def survey(request, restaurant_slug, page_id):
                     form.instance.customer = User.objects.get(id=request.user.id)
                     form.instance.customer_id = request.user.id
                     answer_dict = form.cleaned_data
-                    created = Survey.objects.update_or_create(customer=request.user, restaurant= restaurant, defaults=answer_dict)[1]
-                    print(created)
-                    if page_id < 22:
+                    Survey.objects.update_or_create(customer=request.user, restaurant= restaurant, defaults=answer_dict)
+                    gatekeepers = ['ordered_starter', 'ordered_maincourse', 'ordered_dessert', 'ordered_drink', 'use_restroom']
+                    if page_id in [1, 4, 7, 10, 17] and any(map(lambda param: param in request.POST and request.POST[param] == 'no', gatekeepers)):
+                        return redirect(reverse('survey_server:survey',
+                                            kwargs={'restaurant_slug':
+                                                restaurant_slug, 'page_id' : page_id + 2}))
+                    elif page_id < 22:
                         return redirect(reverse('survey_server:survey',
                                             kwargs={'restaurant_slug':
                                                 restaurant_slug, 'page_id' : page_id + 1}))

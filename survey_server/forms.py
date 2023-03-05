@@ -464,8 +464,8 @@ class RestroomQuestionsForm(forms.ModelForm):
     )
 
     CHOOSE_RESTROOM_MISSING_CHOICES = [
-        ('yes','something was missing or something was out of order'),
-        ('no', 'everything was perfect'),
+        ('yes','Something was missing or something was out of order'),
+        ('no', 'Everything was perfect'),
         
     ]
     missing_restroom = forms.ChoiceField(
@@ -483,7 +483,7 @@ class RestaurantCleanForm(forms.ModelForm):
     # This form is question 28 of the survey
 
     CHOOSE_RESTROOM_CLEAN_CHOICES = [
-        ('very bad','something was missing or something was out of order'),
+        ('very bad','Something was missing or something was out of order'),
         ('bad', 'I did notice some aspect of the restaurant that was dirty or poorly maintained'),
         ('great', 'I did notice multiple aspects of the restaurant that was dirty or poorly maintained'),
         
@@ -503,7 +503,7 @@ class RestaurantPayBillForm(forms.ModelForm):
     # This form is question 29 of the survey
 
     PAY_BILL_CHOICES = [
-        ('very bad','something was missing or something was out of order'),
+        ('very bad','Something was missing or something was out of order'),
         ('bad', 'I did notice some aspect of the restaurant that was dirty or poorly maintained'),
         ('great', 'I did notice multiple aspects of the restaurant that was dirty or poorly maintained'),
         
@@ -523,7 +523,7 @@ class RestaurantServiceStaffForm(forms.ModelForm):
     # This form is question 30 of the survey
 
     SERVICE_STAFF_CHOICES = [
-        ('excellent','yes, all three'),
+        ('excellent','Yes, all three'),
         ('great', 'I found the staff to embody at least two of these qualities'),
         ('poor', 'I found the staff to embody at least one of these qualities'),
         ('bad', 'No, The staff seemed disinterested in me and my group'),
