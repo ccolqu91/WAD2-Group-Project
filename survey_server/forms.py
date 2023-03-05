@@ -1,6 +1,7 @@
 from django import forms
 from .models import *
 
+
 class UserRegistrationForm(forms.ModelForm):
 
     # This form asks if the user is registering as a customer or owner and asks for their details
@@ -399,7 +400,7 @@ class GreetingCleanForm(forms.ModelForm):
         ('No', 'No, our table was dirty and all of our tableware was missing'),
     ]
     greeting_clean = forms.ChoiceField(
-        label='Did you have to wait for a table?',
+        label='Was your table clean when you were seated?',
         choices=GREETING_CLEAN_CHOICES,
         widget=forms.RadioSelect
     )
@@ -437,7 +438,7 @@ class UseRestroomForm(forms.ModelForm):
         
     ]
     use_restroom = forms.ChoiceField(
-        label='Was your order taken promptly once you were ready?',
+        label='Did you use the restrooms?',
         choices=CHOOSE_RESTROOM_CHOICES,
         widget=forms.RadioSelect
     )
