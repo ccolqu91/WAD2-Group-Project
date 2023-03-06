@@ -44,10 +44,11 @@ def profile(request):
 def select_restaurant(request):
     if request.POST:
         form = SelectRestaurant(request.POST)
+        restaurant = request.POST.get('restaurant')
     else:
         form = SelectRestaurant()
-
-    return render(request, 'survey_server/select_restaurant.html',{'form':form})
+    restaurant = request.POST.get('restaurant')
+    return render(request, 'survey_server/select_restaurant.html',{'form':form,'restaurant':restaurant})
 
 def register(request):
     registered = False
@@ -116,7 +117,7 @@ def survey(request, restaurant_slug, page_id):
         restaurant = None
     
     if restaurant is None:
-        return redirect('home')
+        return redirect('survey_server:index')
     
     elif page_id < 22:
         form = form_dict[page_id]()

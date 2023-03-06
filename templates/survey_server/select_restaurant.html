@@ -10,20 +10,8 @@ Select restaurant
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-     <div class="btn-group">
-      <button class="btn btn-secondary btn-lg dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Choose restaurant
-      </button>
-       <ul class="dropdown-menu">
-            <li><a class="restaurant1" href="#">Action</a></li>
-            <li><a class="restaurant2" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="restaurant3" href="#">Something else here</a></li>
-       </ul>
-    </div>
-       <button type="button" class="btn btn-primary btn-lg">
-        <a href="{% url 'survey_server:survey' restaurant_slug='paesano' page_id=1 %}" style="color:white;"> Select restaurant </a>
-
+       <button type="submit" class="btn btn-primary btn-lg">
+        <a {% if form.restaurant.value %}onclick="href='{% url 'survey_server:survey' restaurant_slug=restaurant page_id=1 %}'"{% endif %} style="color:white;">Select restaurant</a>
        </button>
      </form>
 

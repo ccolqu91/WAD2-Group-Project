@@ -47,7 +47,11 @@
 
 
         <li class="nav-item" >
+          {% if request.user.is_authenticated %}
+          <a class="nav-link active" aria-current="page" href="{% url 'survey_server:login' %}" style="color:white;">Log out</a>
+          {% else %}
           <a class="nav-link active" aria-current="page" href="{% url 'survey_server:login' %}" style="color:white;">Log in</a>
+          {% endif %}
         </li>
         <li class="nav-item" >
           <a class="nav-link" href="{% url 'survey_server:register' %}" style="color:white;">Register</a>
@@ -80,11 +84,11 @@
 
 </div>
 <div class="survey">
-     <a href="{% url 'survey_server:select' %}">Take the survey</a>
-    <button type="button" class="btn btn-primary btn-lg" onclick="survey()">Take the survey</button>
-    <button type="button" class="btn btn-primary btn-lg"  onclick="select()">Select restaurant</button>
-
+  <button type="button" class="btn btn-primary btn-lg" onclick="select()">
+      <a href="{% url 'survey_server:select' %}" style="color: white;text-decoration: none">Select a restaurant</a>
+  </button>
 </div>
+
 
 
 <div class="restaurant_image" >

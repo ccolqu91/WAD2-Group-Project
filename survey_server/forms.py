@@ -29,7 +29,7 @@ class UserRegistrationForm(forms.ModelForm):
         }
 
 class SelectRestaurant(forms.Form):
-    restaurant = forms.ChoiceField(choices=[(r.id, r.name) for r in Restaurant.objects.all()])
+    restaurant = forms.ChoiceField(choices=[(r.slug, r.name) for r in Restaurant.objects.all()])
 
     class Meta:
         help_texts = {
