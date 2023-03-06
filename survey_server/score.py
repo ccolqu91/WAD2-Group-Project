@@ -272,14 +272,14 @@ def CalculateScore(Survey):
     elif Survey.restroom_clean == "No":
         hygiene_score -= 4
 
-    #27
+    #Q27
     if Survey.missing_restroom == "yes":
         hygiene_score -= 2
     elif Survey.missing_restroom == "no":
         hygiene_score += 2
         customer_service_score += 1
 
-    #28
+    #Q28
     if Survey.clean_restaurant == "very bad":
         hygiene_score -= 2
         customer_service_score -= 1
@@ -290,7 +290,7 @@ def CalculateScore(Survey):
         hygiene_score += 2
         customer_service_score += 1
 
-    #29
+    #Q29
     if Survey.pay_bill_restaurant == "great":
         customer_service_score += 1
     elif Survey.pay_bill_restaurant == "bad":
@@ -298,7 +298,7 @@ def CalculateScore(Survey):
     elif Survey.pay_bill_restaurant == "very bad":
         customer_service_score -= 1
 
-    #30
+    #Q30
     if Survey.greeting_clean == "Excellent":
         customer_service_score += 5
     elif Survey.greeting_clean == "Great":
@@ -307,6 +307,26 @@ def CalculateScore(Survey):
         customer_service_score += 1
     elif Survey.greeting_clean == "bad":
         customer_service_score -= 5
+
+    # turns the final score into a percentage
+    final_food_quality_score = (food_quality_score/max_food_quality_score) * 100
+    final_customer_service_score = (customer_service_score/max_customer_service_score) * 100
+    final_hygiene_score  = (hygiene_score/max_hygiene_score) * 100
+    final_value_for_money_score = (value_for_money_score/max_value_for_money_score) * 100
+    final_menu_variety_score = (menu_variety_score/max_menu_variety_score) * 100
+
+    # an array of the final scores with a loop to check that they are not negative
+    var_names = [final_food_quality_score, 
+                 final_customer_service_score, 
+                 final_hygiene_score, 
+                 final_value_for_money_score, 
+                 final_menu_variety_score]
+    
+    for var_name in var_names:
+        if var_name < 0:
+            var_name = 0
+    
+    return final_food_quality_score,final_customer_service_score,final_hygiene_score,final_value_for_money_score,final_menu_variety_score
 
 
 
