@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.urls import reverse
 from survey_server.forms import *
 from survey_server.models import *
+from .decorators import *
 
 
 form_dict = {1 : ChooseStarterForm,
@@ -41,6 +42,7 @@ def manager(request):
 def profile(request):
     return render(request, 'survey_server/profile.html')
 
+@customer_required
 def select_restaurant(request):
     if request.POST:
         form = SelectRestaurant(request.POST)
@@ -108,7 +110,7 @@ def user_login(request):
     else:
         return render(request, 'survey_server/login.html')
     
-
+@customer_required
 def survey(request, restaurant_slug, page_id):
     try:
         restaurant = Restaurant.objects.get(slug=restaurant_slug)
@@ -156,6 +158,7 @@ def user_logout(request):
     logout(request)
     return redirect(reverse('survey_server:index'))
 
+@manager_required
 def add_restaurant(request):
 
     return render(request, 'survey_server/add_restaurant.html')
