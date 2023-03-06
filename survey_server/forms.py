@@ -483,9 +483,9 @@ class RestaurantCleanForm(forms.ModelForm):
     # This form is question 28 of the survey
 
     CHOOSE_RESTROOM_CLEAN_CHOICES = [
-        ('very bad','Something was missing or something was out of order'),
+        ('very bad','I did notice multiple aspects of the restaurant that was dirty or poorly maintained'),
         ('bad', 'I did notice some aspect of the restaurant that was dirty or poorly maintained'),
-        ('great', 'I did notice multiple aspects of the restaurant that was dirty or poorly maintained'),
+        ('great', 'No, everything was perfect for our visit'),
         
     ]
     clean_restaurant = forms.ChoiceField(
@@ -503,9 +503,9 @@ class RestaurantPayBillForm(forms.ModelForm):
     # This form is question 29 of the survey
 
     PAY_BILL_CHOICES = [
-        ('very bad','Something was missing or something was out of order'),
-        ('bad', 'I did notice some aspect of the restaurant that was dirty or poorly maintained'),
-        ('great', 'I did notice multiple aspects of the restaurant that was dirty or poorly maintained'),
+        ('very bad', 'No, The bill was confusing'),
+        ('bad', 'No, it was complicated for us to get separate bills'),
+        ('great', 'Yes, there was no trouble'),
         
     ]
     pay_bill_restaurant = forms.ChoiceField(
