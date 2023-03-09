@@ -25,7 +25,8 @@ urlpatterns = [
     path('customer/', views.customer, name='customer'),
     path('manager/', views.manager, name='manager'),
     path('profile/', views.profile, name='profile'),
-path('survey/', views.register, name='survey'),
+path('survey/', views.survey, name='survey'),
+
     path('survey_server/', include('survey_server.urls')),
 path('login/', views.user_login, name='login'),
 path('register/', views.register, name='register'),

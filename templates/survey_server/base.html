@@ -20,7 +20,7 @@
             <a class="navbar-brand" id="title" href="{% url 'survey_server:index' %}" style="color:#88a5a0; font-size:30px;">Survey server</a>
             <form class="d-flex" id="search" role="search" style="height:30px;position:absolute;left: 40%;">
                      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                     <button class="btn btn-outline-success" type="submit">Search</button>
+                     <button class="btn btn-outline-success" type="submit" style="font-size:20px;color:#2b4017;">Search</button>
             </form>
           <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
             <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
@@ -80,7 +80,7 @@
 <div class="picture">
 
 <div class="container mt-3">
-  <h2>profile picture</h2>
+  <h2>profile image</h2>
     {% block picture_block %}
 
   <div class="card" style="width:400px">
@@ -98,17 +98,21 @@
 
 </div>
 
-
+<!--text1 holes the text at the left side-->
 <div id="text1">
     {% block body_block %}
+<!--    put chart or text in this block,which should be at the left-->
     {% endblock %}
 </div>
-  {% block script_block %}
-    {% endblock %}
 
 
 </div>
 
+<div id="bottom" style="text-align:center">
+    {% block bottom_block %}
+    {% endblock %}
+
+</div>
 
 <footer class="bg-dark text-light">
   <div class="container">

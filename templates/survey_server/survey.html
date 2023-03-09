@@ -1,15 +1,79 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Page {{ page_id }} - Survey Server</title>
-</head>
-<body>
-    <h1>Page {{ page_id }}: Your experience at {{ restaurant }}</h1>
-    <form method="post">
+{% extends 'survey_server/base.html' %}
+{% load static %}
+{% block title_block %}
+Survey
+{% endblock %}
+{% block hello_block %}
+Survey</br>
+{% endblock %}
+{% block body_block %}
+<h1>Page {{ page_id }}: Your experience at {{ restaurant }}</h1>
+<form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" style="color: black;">Next</button>
-    </form>
-</body>
-</html>
+ </form>
+
+{% endblock %}
+<!--the bottom_block holding the page number -->
+ {% block bottom_block %}
+
+
+        <nav style="height:100px;position:absolute;bottom:-300px;width:100%;">
+  <ul class="pagination" style="padding: 1rem 1rem;">
+    <li class="page-item disabled" style=" font-size: 1.5rem ;">
+      <a class="page-link" href="#" tabindex="-1">Previous</a>
+    </li>
+    <li class="page-item active" style="font-size: 1.5rem;">
+      <a class="page-link" href="#" style="color:#1f2a14;">1</a>
+    </li>
+    <li class="page-item" style="font-size: 1.5rem;">
+      <a class="page-link" href="#" style="color:#1f2a14;">2</a>
+    </li>
+    <li class="page-item" style=" font-size: 1.5rem;">
+      <a class="page-link" href="#" style="color:#1f2a14;">3</a>
+    </li>
+    <li class="page-item"style=" font-size: 1.5rem;">
+      <a class="page-link" href="#" style="color:#1f2a14;">4</a>
+    </li>
+    <li class="page-item" style="font-size: 1.5rem;">
+      <a class="page-link" href="#" style="color:#1f2a14;">5</a>
+    </li>
+    <li class="page-item" style=" font-size: 1.5rem;">
+      <a class="page-link" href="#" >Next</a>
+    </li>
+  </ul>
+</nav>
+
+    {% endblock %}
+{% block picture_block %}
+<div class="card" style="width:400px">
+<!--    put restuarant logo at here-->
+    <img class="card-img-top" src="{% static 'images/home.jpg' %}" alt="user image" style="width:100%">
+    <div class="card-body">
+
+      <a href="#" class="btn btn-primary">logo</a>
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Page {{ page_id }} - Survey Server</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--    <h1>Page {{ page_id }}: Your experience at {{ restaurant }}</h1>-->
+<!--    <form method="post">-->
+<!--        {% csrf_token %}-->
+<!--        {{ form.as_p }}-->
+<!--        <button type="submit" style="color: black;">Next</button>-->
+<!--    </form>-->
+<!--</body>-->
+<!--</html>-->

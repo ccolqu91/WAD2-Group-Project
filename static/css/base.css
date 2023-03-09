@@ -82,6 +82,11 @@
    margin-left: auto;
 
         }
+        #bottom{
+          position: absolute;
+        bottom: -250px !important;
+        width:100%;
+        }
          footer{
             color:white;
          position: absolute;

@@ -15,11 +15,14 @@ login
    <h1></h1>
    <input type="password" id="password" name="password" placeholder="password" style="height: 30px;"></br>
    <h1></h1>
-   <button type="submit"> Login </button>
+   <button type="submit" class="btn btn-success"> Login </button>
 
-   <button>
-       <a href="{% url 'survey_server:register' %}" target="_blank">Go to register</a>
-   </button>
+<!--   <button>-->
+<!--       <a href="{% url 'survey_server:register' %}" target="_blank">Go to register</a>-->
+<!--   </button>-->
+   <button type="button" class="btn btn-outline-secondary"><a href="{% url 'survey_server:register' %}" target="_blank">Go to register</a></button>
+
+
 </form>
 
 
