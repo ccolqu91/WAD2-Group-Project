@@ -28,14 +28,23 @@
 
           <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
 
-              {% block profile_block %}
+              {% block dashboard_block %}
 
             <li>
-              <a href="{% url 'survey_server:profile' %}" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="{% url 'survey_server:profile' %}"/></svg>
-                Profile
+                {% if user.user_type == 2 %}
+              <a href="{% url 'survey_server:customer' %}" class="nav-link text-white">
+                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="{% url 'survey_server:customer' %}"/></svg>
+                Dashboard
               </a>
+                 {% else %}
+                 <a href="{% url 'survey_server:customer' %}" class="nav-link text-white">
+                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="{% url 'survey_server:customer' %}"/></svg>
+                Dashboard
+              </a>
+                {% endif %}
             </li>
+
+
               {% endblock %}
 
               <li>
@@ -74,7 +83,13 @@
     Hello
     {% block hello_block %}
     {% endblock %}
+
+
 </div>
+         <div id="text_content">
+            {% block left_content %}
+            {% endblock %}
+        </div>
     </div>
 
 <div class="picture">
@@ -112,7 +127,7 @@
     {% block bottom_block %}
     {% endblock %}
 
-</div>
+
 
 <footer class="bg-dark text-light">
   <div class="container">
@@ -128,6 +143,6 @@
 
   </div>
 </footer>
-
+</div>
 </body>
 </html>
