@@ -1,5 +1,7 @@
  body{
-             min-height: 500px;
+
+          height:auto;
+
 			background-color: #33665d;
 			background-repeat: no-repeat;
 			background-size: cover;
@@ -11,6 +13,9 @@
 		.top_text{
 		  float:left;
 		 width: 60%;
+		  min-height:700px;
+          height:auto;
+
 		}
 		.picture{
 		  float:right;
@@ -84,8 +89,9 @@
         }
         #bottom{
           position: absolute;
-        bottom: -250px !important;
+        bottom: 0px !important;
         width:100%;
+
         }
          footer{
             color:white;
@@ -112,4 +118,8 @@
         align-items: center !important;
         position:absolute;
         left: 40%;
+
+        #text_content{
+        font-size:2px;
+        }
 }

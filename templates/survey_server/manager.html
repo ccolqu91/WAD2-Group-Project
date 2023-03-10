@@ -6,9 +6,14 @@ Manager
 {% block hello_block %}
 Manager</br>
 {% endblock %}
-{% block body_block %}
+
+
+{% block left_content %}
+
+<p style="color:#88a5a0; font-size: 45px;"> Your Scoring</p>
+
 <!--put the chart at here-->
-Your Scoring
+
 
 {% endblock %}
 {% block picture_block %}
@@ -21,7 +26,7 @@ Your Scoring
       <a href="#" class="btn btn-primary">See Profile</a>
     </div>
   </div>
-<p>Would you like to know what ourusers think about your services?</p>
+<p>Would you like to know what our users think about your services?</p>
 
 <button type="button" class="btn btn-primary btn-lg"  onclick="window.location.href='/survey_server/register'">Add a restaurant</button>
 
