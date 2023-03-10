@@ -7,7 +7,5 @@ admin.site.register(Manager)
 admin.site.register(Restaurant)
 admin.site.register(User)
 admin.site.register(Survey)
-admin.site.register(Voucher)
-# admin.site.register(UserProfile)
 
 

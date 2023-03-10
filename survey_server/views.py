@@ -8,6 +8,7 @@ from survey_server.models import *
 from .decorators import *
 from .score import *
 from .voucher import *
+import datetime
 
 
 form_dict = {1 : ChooseStarterForm,
@@ -161,21 +162,19 @@ def survey(request, restaurant_slug, page_id):
 def survey_success(request, restaurant_slug, survey_id):
     current_survey = Survey.objects.get(id=survey_id)
     scores_list = CalculateScore(current_survey)
-    max_scores = scores_list[1]
-    actual_scores = scores_list[0]
-    Survey.objects.update_or_create(id = survey_id, defaults = {'max_food_quality_score' : max_scores[0],
-                                                                'max_customer_service_score' : max_scores[1],
-                                                                'max_hygiene_score' : max_scores[2],
-                                                                'max_value_for_money_score' : max_scores[3],
-                                                                'max_menu_variety_score' : max_scores[4],
-                                                                'food_quality_score' : actual_scores[0],
-                                                                'customer_service_score'  : actual_scores[1],
-                                                                'hygiene_score' : actual_scores[2],
-                                                                'value_for_money_score' : actual_scores[3],
-                                                                'menu_variety_score' : actual_scores[4]})
+    
 
-    # voucher function
-    context = {'voucher_code': 'voucher code'}
+    voucher_code=get_voucher()
+
+    Survey.objects.update_or_create(id = survey_id, defaults = {'food_quality_score' : scores_list[0],
+                                                                'customer_service_score'  : scores_list[1],
+                                                                'hygiene_score' : scores_list[2],
+                                                                'value_for_money_score' : scores_list[3],
+                                                                'menu_variety_score' : scores_list[4],
+                                                                'voucher_code' : voucher_code,
+                                                                'voucher_is_valid' : True,
+                                                                'voucher_issue_date' : datetime.date.today()})
+    context = {'voucher_code': voucher_code}
     return render(request, 'survey_server/success.html', context)
 
 @login_required
