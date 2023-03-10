@@ -94,6 +94,20 @@ class Survey(models.Model):
     pay_bill_restaurant = models.CharField(max_length=128,default = 0 )
     service_staff = models.CharField(max_length=128,default = 0 )
 
+    # Scoring Variables - max scores for this survey
+    max_food_quality_score = models.IntegerField(default = 0)
+    max_customer_service_score = models.IntegerField(default = 0)
+    max_hygiene_score  = models.IntegerField(default = 0)
+    max_value_for_money_score = models.IntegerField(default = 0)
+    max_menu_variety_score = models.IntegerField(default = 0)
+
+    # Scoring Variables - actual scores for this survey
+    food_quality_score = models.IntegerField(default = 0)
+    customer_service_score = models.IntegerField(default = 0)
+    hygiene_score  = models.IntegerField(default = 0)
+    value_for_money_score = models.IntegerField(default = 0)
+    menu_variety_score = models.IntegerField(default = 0)
+
 
     def __str__(self):
         return str(self.customer) + "'s Survey for " + str(self.restaurant)
@@ -101,13 +115,14 @@ class Survey(models.Model):
 
 
 class Voucher(models.Model):
-    survey = models.OneToOneField('Survey',on_delete=models.CASCADE,related_name='vouchers')
+    survey = models.OneToOneField(Survey,on_delete=models.CASCADE,related_name='vouchers')
     customer =  models.ForeignKey(Customer, on_delete=models.CASCADE)
     restaurant = models.ForeignKey(Restaurant,on_delete = models.CASCADE)
     vocher_code= models.CharField(max_length=128, null=True, blank=True)
     value = models.IntegerField(default = 0)
     issue_date = models.DateField(null=True, blank=True)
     is_valid = models.BooleanField(default=True)
+    
     def __str__(self):
         return "Voucher for " + str(self.customer) + " at " + str(self.restaurant)
 

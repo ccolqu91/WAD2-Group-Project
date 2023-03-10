@@ -6,6 +6,8 @@ from django.urls import reverse
 from survey_server.forms import *
 from survey_server.models import *
 from .decorators import *
+from .score import *
+from .voucher import *
 
 
 form_dict = {1 : ChooseStarterForm,
@@ -147,11 +149,34 @@ def survey(request, restaurant_slug, page_id):
                 print(form.errors)
 
     else:
-        return HttpResponse("Survey complete!")
+        survey_id = Survey.objects.filter(customer=request.user, restaurant=restaurant).latest('id').id
+        return redirect(reverse('survey_server:survey_success',
+                                            kwargs={'restaurant_slug':
+                                                restaurant_slug, 'survey_id' : survey_id}))
 
     context_dict = {'form': form, 'restaurant': restaurant.name, 'page_id' : page_id}
     return render(request, 'survey_server/survey.html', context=context_dict)
 
+@customer_required
+def survey_success(request, restaurant_slug, survey_id):
+    current_survey = Survey.objects.get(id=survey_id)
+    scores_list = CalculateScore(current_survey)
+    max_scores = scores_list[1]
+    actual_scores = scores_list[0]
+    Survey.objects.update_or_create(id = survey_id, defaults = {'max_food_quality_score' : max_scores[0],
+                                                                'max_customer_service_score' : max_scores[1],
+                                                                'max_hygiene_score' : max_scores[2],
+                                                                'max_value_for_money_score' : max_scores[3],
+                                                                'max_menu_variety_score' : max_scores[4],
+                                                                'food_quality_score' : actual_scores[0],
+                                                                'customer_service_score'  : actual_scores[1],
+                                                                'hygiene_score' : actual_scores[2],
+                                                                'value_for_money_score' : actual_scores[3],
+                                                                'menu_variety_score' : actual_scores[4]})
+
+    # voucher function
+    context = {'voucher_code': 'voucher code'}
+    return render(request, 'survey_server/success.html', context)
 
 @login_required
 def user_logout(request):

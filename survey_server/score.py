@@ -322,11 +322,18 @@ def CalculateScore(Survey):
                  final_value_for_money_score, 
                  final_menu_variety_score]
     
-    for var_name in var_names:
-        if var_name < 0:
-            var_name = 0
+    # an array of max available scores
+    max_scores = [max_food_quality_score, 
+                 max_customer_service_score, 
+                 max_hygiene_score, 
+                 max_value_for_money_score, 
+                 max_menu_variety_score]
     
-    return final_food_quality_score,final_customer_service_score,final_hygiene_score,final_value_for_money_score,final_menu_variety_score
+    for i in range(len(var_names)): 
+        if var_names[i] < 0:
+            var_names[i] = 0
+    
+    return [var_names, max_scores]
 
 
 
