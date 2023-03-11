@@ -45,6 +45,9 @@ def manager(request):
 def profile(request):
     return render(request, 'survey_server/profile.html')
 
+def about(request):
+    return render(request, 'survey_server/about.html')
+
 @customer_required
 def select_restaurant(request):
     if request.POST:
