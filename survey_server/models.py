@@ -1,7 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.template.defaultfilters import slugify
+import os
+from django.core.exceptions import ValidationError
 
+def validate_file_extension(value):
+    if not value.name.endswith('.csv'):
+        raise ValidationError('Only CSV files are allowed.')
 
 class User(AbstractUser):
     USER_TYPE_CHOICES = (
@@ -28,16 +33,32 @@ class Manager(models.Model):
     def __str__(self):
         return self.user.username
     
+def menu_upload_to(instance, filename):
+    parent_directory_path = 'menus'
+    if not os.path.exists(parent_directory_path):
+        os.makedirs(parent_directory_path)
+    directory_path = os.path.join(parent_directory_path, instance.slug)
+    if not os.path.exists(directory_path):
+        os.makedirs(directory_path)
+    return os.path.join(directory_path, filename)
 
+def logo_upload_to(instance, filename):
+    parent_directory_path = 'logos'
+    if not os.path.exists(parent_directory_path):
+        os.makedirs(parent_directory_path)
+    directory_path = os.path.join(parent_directory_path, instance.slug)
+    if not os.path.exists(directory_path):
+        os.makedirs(directory_path)
+    return os.path.join(directory_path, filename)
 
 class Restaurant(models.Model):
     manager = models.ForeignKey(User,on_delete=models.CASCADE)
     name = models.CharField(max_length=256)
-    logo = models.ImageField(default = 0)
+    logo = models.ImageField(upload_to=logo_upload_to, default = 0)
     cuisine = models.CharField(max_length=128)
     about = models.TextField(null =0,blank = True)
     slug = models.SlugField(unique=True)
-    menu = models.FileField(upload_to='menus/{0}'.format(slug),  null=True)
+    menu = models.FileField(upload_to=menu_upload_to, validators=[validate_file_extension])
 
     def __str__(self):
         self.slug = slugify(self.name)

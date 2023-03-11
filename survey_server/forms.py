@@ -41,6 +41,9 @@ class AddRestaurant(forms.ModelForm):
     class Meta:
         model = Restaurant
         fields = ('name', 'logo','cuisine','about','menu')
+        help_texts = {
+            'menu': "Please submit as a .csv file with four columns headered 'starters','mains', 'desserts' and 'drinks'.",
+        }
 
         
 

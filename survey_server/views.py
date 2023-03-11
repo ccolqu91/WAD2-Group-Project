@@ -187,5 +187,16 @@ def user_logout(request):
 
 @manager_required
 def add_restaurant(request):
+    if request.POST:
+        form = AddRestaurant(request.POST, request.FILES)
+        if form.is_valid():
+            restaurant = form.save(commit=False)
+            restaurant.manager = request.user
+            restaurant.slug = slugify(restaurant.name)
+            restaurant.save()
+            form.save_m2m() # needed for saving many-to-many fields
+            return redirect(reverse('manager'))
+    else:
+        form = AddRestaurant()
 
-    return render(request, 'survey_server/add_restaurant.html')
+    return render(request, 'survey_server/add_restaurant.html',{'form':form})

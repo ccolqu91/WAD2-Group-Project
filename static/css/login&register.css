@@ -30,6 +30,20 @@
           align-items: center;
 
         }
+        .form_restaurant{
+          position: relative;
+          background-color: #ccc;
+          padding: 10px;
+          border-radius: 5px;
+          min-height: 200px;
+          height: auto;
+          text-align: center;
+          margin: 0 auto;
+          display: inline-block;
+          justify-content: center;
+          align-items: center;
+
+        }
         .blank{
         height:100px;
         }
