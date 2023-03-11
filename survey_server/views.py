@@ -9,6 +9,7 @@ from .decorators import *
 from .score import *
 from .voucher import *
 import datetime
+from .menu import *
 
 
 form_dict = {1 : ChooseStarterForm,
@@ -195,6 +196,7 @@ def add_restaurant(request):
             restaurant.slug = slugify(restaurant.name)
             restaurant.save()
             form.save_m2m() # needed for saving many-to-many fields
+            populate_menu_items(restaurant.slug)
             return redirect(reverse('manager'))
     else:
         form = AddRestaurant()

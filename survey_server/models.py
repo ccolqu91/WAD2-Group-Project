@@ -1,12 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.template.defaultfilters import slugify
+from .upload import *
+from django.conf import settings
+from django.db.models.signals import pre_delete
+from django.dispatch import receiver
+import shutil
 import os
-from django.core.exceptions import ValidationError
 
-def validate_file_extension(value):
-    if not value.name.endswith('.csv'):
-        raise ValidationError('Only CSV files are allowed.')
 
 class User(AbstractUser):
     USER_TYPE_CHOICES = (
@@ -33,23 +34,8 @@ class Manager(models.Model):
     def __str__(self):
         return self.user.username
     
-def menu_upload_to(instance, filename):
-    parent_directory_path = 'menus'
-    if not os.path.exists(parent_directory_path):
-        os.makedirs(parent_directory_path)
-    directory_path = os.path.join(parent_directory_path, instance.slug)
-    if not os.path.exists(directory_path):
-        os.makedirs(directory_path)
-    return os.path.join(directory_path, filename)
 
-def logo_upload_to(instance, filename):
-    parent_directory_path = 'logos'
-    if not os.path.exists(parent_directory_path):
-        os.makedirs(parent_directory_path)
-    directory_path = os.path.join(parent_directory_path, instance.slug)
-    if not os.path.exists(directory_path):
-        os.makedirs(directory_path)
-    return os.path.join(directory_path, filename)
+
 
 class Restaurant(models.Model):
     manager = models.ForeignKey(User,on_delete=models.CASCADE)
@@ -63,7 +49,45 @@ class Restaurant(models.Model):
     def __str__(self):
         self.slug = slugify(self.name)
         return str(self.manager) + "'s Restaurant " + str(self.name)
+    def delete(self, *args, **kwargs):
+        # Delete associated logo file
+        if self.logo:
+            if os.path.isfile(self.logo.path):
+                os.remove(self.logo.path)
+        # Delete associated menu files
+        menu_dir_path = os.path.join(settings.MEDIA_ROOT, 'menus', self.slug)
+        if os.path.exists(menu_dir_path):
+            for filename in os.listdir(menu_dir_path):
+                file_path = os.path.join(menu_dir_path, filename)
+                if os.path.isfile(file_path):
+                    os.remove(file_path)
+            os.rmdir(menu_dir_path)
+        super(Restaurant, self).delete(*args, **kwargs)
 
+
+@receiver(pre_delete, sender=Restaurant)
+def delete_restaurant_files(sender, instance, **kwargs):
+    # Delete the menu directory
+    menu_dir_path = os.path.join(settings.MEDIA_ROOT, 'menus', instance.slug)
+    shutil.rmtree(menu_dir_path, ignore_errors=True)
+    
+    # Delete the logo directory
+    logo_dir_path = os.path.join(settings.MEDIA_ROOT, 'logos', instance.slug)
+    shutil.rmtree(logo_dir_path, ignore_errors=True)
+
+class MenuItem(models.Model):
+    TYPE_CHOICES = (
+        ('starters', 'Starter'),
+        ('mains', 'Main'),
+        ('desserts', 'Dessert'),
+        ('drinks', 'Drink'),
+    )
+    type = models.CharField(max_length=10, choices=TYPE_CHOICES)
+    name = models.CharField(max_length=100)
+    restaurant = models.ForeignKey(Restaurant, on_delete=models.CASCADE, related_name='menu_items')
+
+    def __str__(self):
+        return self.name + ", a " + self.get_type_display() + " by " + self.restaurant.name
 
     
 class Survey(models.Model):
