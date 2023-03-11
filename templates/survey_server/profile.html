@@ -1,10 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'survey_server/base.html' %}
+{% load static %}
+{% block title_block %}
+Profile
+{% endblock %}
+{% block hello_block %}
+</br>
+{% endblock %}
 
-</body>
-</html>
+{% block left_content %}
+
+<p style="color:#88a5a0; font-size: 45px;"> Profile info here</p>
+
+
+{% endblock %}
+
+
+{% block picture_block %}
+<div class="card" style="width:400px">
+    <img class="card-img-top" src="{% static 'images/home.jpg' %}" alt="user image" style="width:100%">
+    
+<!--some image here?-->
+
+</div>
+
+{% endblock %}

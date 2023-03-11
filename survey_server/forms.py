@@ -36,6 +36,14 @@ class SelectRestaurant(forms.Form):
             'restaurant': None,
         }
 
+class AddRestaurant(forms.ModelForm):
+
+    class Meta:
+        model = Restaurant
+        fields = ('name', 'logo','cuisine','about','menu')
+
+        
+
 class ChooseStarterForm(forms.ModelForm):
 
     # This form is question one of the survey

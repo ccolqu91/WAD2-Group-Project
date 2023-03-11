@@ -37,6 +37,7 @@ class Restaurant(models.Model):
     cuisine = models.CharField(max_length=128)
     about = models.TextField(null =0,blank = True)
     slug = models.SlugField(unique=True)
+    menu = models.FileField(upload_to='menus/{0}'.format(slug),  null=True)
 
     def __str__(self):
         self.slug = slugify(self.name)
