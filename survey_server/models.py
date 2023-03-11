@@ -97,8 +97,6 @@ class Survey(models.Model):
     voucher_value = models.IntegerField(default = 0)
     voucher_issue_date = models.DateField(null=True, blank=True)
     voucher_is_valid = models.BooleanField(default=True)
-    max_score = models.IntegerField(default  = 0)
-    final_score = models.IntegerField(default = 0)
 
     # Starter Variables
     ordered_starter = models.CharField(max_length=128,default = 0)

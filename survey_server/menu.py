@@ -26,4 +26,6 @@ def populate_menu_items(restaurant_slug):
                 for item_type, name_col_index in name_col_indices.items():
                     item_name = row[name_col_index]
                     if item_name:
+                        if item_type == 'ï»¿starters' or item_type not in ['mains', 'desserts','drinks']: #starter name not rendering correctly - so all other items are starters
+                            item_type = 'starters'
                         MenuItem.objects.create(restaurant=restaurant, type=item_type, name=item_name)
