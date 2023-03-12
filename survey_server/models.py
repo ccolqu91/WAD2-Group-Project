@@ -104,6 +104,7 @@ class Survey(models.Model):
     size_starter = models.CharField(max_length=128, default = 0)
     presentation_starter = models.CharField(max_length=128,default = 0)
     variety_starter = models.CharField(max_length=128,default = 0 )
+    starter_order = models.CharField(max_length=128,default = 0 )
 
     # MainCourse Variables
     ordered_maincourse = models.CharField(max_length=128,default = 0)
@@ -111,6 +112,7 @@ class Survey(models.Model):
     size_maincourse = models.CharField(max_length=128, default = 0)
     presentation_maincourse = models.CharField(max_length=128,default = 0)
     variety_maincourse = models.CharField(max_length=128,default = 0 )
+    main_order = models.CharField(max_length=128,default = 0 )
 
     # Dessert Variables
     ordered_dessert = models.CharField(max_length=128,default = 0)
@@ -118,6 +120,7 @@ class Survey(models.Model):
     size_dessert = models.CharField(max_length=128, default = 0)
     presentation_dessert = models.CharField(max_length=128,default = 0)
     variety_dessert = models.CharField(max_length=128,default = 0 )
+    dessert_order = models.CharField(max_length=128,default = 0 )
 
     # Drinks Variables
     ordered_drink = models.CharField(max_length=128,default = 0)
@@ -125,6 +128,7 @@ class Survey(models.Model):
     size_drink = models.CharField(max_length=128, default = 0)
     presentation_drink = models.CharField(max_length=128,default = 0)
     variety_drink = models.CharField(max_length=128,default = 0 )
+    drink_order = models.CharField(max_length=128,default = 0 )
 
     # Greeting Variables
     greeting_entry = models.CharField(max_length=128,default = 0 )

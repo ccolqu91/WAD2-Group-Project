@@ -130,9 +130,26 @@ def survey(request, restaurant_slug, page_id):
     
     elif page_id < 22:
         form = form_dict[page_id]()
+        """ assigning choices that display on page """
+        if page_id == 2: #starters form
+            form.fields['starter_order'].choices = list(MenuItem.objects.filter(restaurant=restaurant,type='starters').values_list('id', 'name'))
+        elif page_id == 5: #mains form
+            form.fields['main_order'].choices = list(MenuItem.objects.filter(restaurant=restaurant,type='mains').values_list('id', 'name'))
+        elif page_id == 8: #desserts form
+            form.fields['dessert_order'].choices = list(MenuItem.objects.filter(restaurant=restaurant,type='desserts').values_list('id', 'name'))
+        elif page_id == 11: #drinks form
+            form.fields['drink_order'].choices = list(MenuItem.objects.filter(restaurant=restaurant,type='drinks').values_list('id', 'name'))
         if request.method == 'POST':
             form = form_dict[page_id](request.POST)
-
+            """ assigning choices again when request.POST """
+            if page_id == 2: #starters form
+                form.fields['starter_order'].choices = list(MenuItem.objects.filter(restaurant=restaurant,type='starters').values_list('id', 'name'))
+            elif page_id == 5: #mains form
+                form.fields['main_order'].choices = list(MenuItem.objects.filter(restaurant=restaurant,type='mains').values_list('id', 'name'))
+            elif page_id == 8: #desserts form
+                form.fields['dessert_order'].choices = list(MenuItem.objects.filter(restaurant=restaurant,type='desserts').values_list('id', 'name'))
+            elif page_id == 11: #drinks form
+                form.fields['drink_order'].choices = list(MenuItem.objects.filter(restaurant=restaurant,type='drinks').values_list('id', 'name'))
             if form.is_valid():
                 if restaurant:
                     form.instance.restaurant = restaurant
@@ -159,8 +176,8 @@ def survey(request, restaurant_slug, page_id):
                                             kwargs={'restaurant_slug':
                                                 restaurant_slug, 'survey_id' : survey_id}))
 
-    context_dict = {'form': form, 'restaurant': restaurant.name, 'page_id' : page_id}
-    return render(request, 'survey_server/survey.html', context=context_dict)
+    context= {'form': form, 'restaurant': restaurant.name, 'page_id' : page_id}
+    return render(request, 'survey_server/survey.html', context=context)
 
 @customer_required
 def survey_success(request, restaurant_slug, survey_id):
