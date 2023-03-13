@@ -6,10 +6,29 @@ Customer
 {% block hello_block %}
 Customer</br>
 {% endblock %}
-{% block body_block %}
-Your Vouchers
+
+{% block left_content %}
+
+<p style="color:#88a5a0; font-size: 45px;"> Your Vouchers</p>
+
+<!--put the chart at here-->
+
 
 {% endblock %}
+ {% block dashboard_block %}
+
+            <li>
+              <a href="{% url 'survey_server:customer' %}" class="nav-link text-white">
+                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="{% url 'survey_server:customer' %}"/></svg>
+                Dashboard
+              </a>
+            </li>
+
+
+              {% endblock %}
+
+
+
 {% block picture_block %}
 <div class="card" style="width:400px">
     <img class="card-img-top" src="{% static 'images/home.png' %}" alt="user image" style="width:100%">
@@ -18,7 +37,7 @@ Your Vouchers
       <a href="#" class="btn btn-primary">See Profile</a>
     </div>
   </div>
-<a href="{% url 'survey_server:select' %}"><button>Take the survey</button></a>
+<a href="{% url 'survey_server:select' %}"><button type="submit" class="btn btn-success" style="background-color:#653829;"> Take the survey </button></a>
 </div>
 
 {% endblock %}
