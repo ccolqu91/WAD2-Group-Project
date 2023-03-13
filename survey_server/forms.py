@@ -1,7 +1,5 @@
 from django import forms
-#from .models import *
-from django.contrib.auth.models import User
-from .models import Survey
+from .models import *
 
 
 class UserRegistrationForm(forms.ModelForm):
@@ -31,7 +29,7 @@ class UserRegistrationForm(forms.ModelForm):
         }
 
 class SelectRestaurant(forms.Form):
-#    restaurant = forms.ChoiceField(choices=[(r.slug, r.name) for r in Restaurant.objects.all()])
+    restaurant = forms.ChoiceField(choices=[(r.slug, r.name) for r in Restaurant.objects.all()])
 
     class Meta:
         help_texts = {
