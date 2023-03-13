@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.urls import reverse
 from survey_server.forms import *
-from survey_server.models import *
+# from survey_server.models import *
 from .decorators import *
 from .score import *
 from .voucher import *

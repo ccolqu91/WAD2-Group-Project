@@ -1,6 +1,7 @@
 from django import forms
-from .models import *
-
+#from .models import *
+from django.contrib.auth.models import User
+from .models import Survey
 
 class UserRegistrationForm(forms.ModelForm):
 
@@ -29,7 +30,7 @@ class UserRegistrationForm(forms.ModelForm):
         }
 
 class SelectRestaurant(forms.Form):
-    restaurant = forms.ChoiceField(choices=[(r.slug, r.name) for r in Restaurant.objects.all()])
+    # restaurant = forms.ChoiceField(choices=[(r.slug, r.name) for r in Restaurant.objects.all()])
 
     class Meta:
         help_texts = {
@@ -39,7 +40,7 @@ class SelectRestaurant(forms.Form):
 class AddRestaurant(forms.ModelForm):
 
     class Meta:
-        model = Restaurant
+        # model = Restaurant
         fields = ('name', 'logo','cuisine','about','menu')
         help_texts = {
             'menu': "Please submit as a .csv file with four columns headered 'starters','mains', 'desserts' and 'drinks'.",
