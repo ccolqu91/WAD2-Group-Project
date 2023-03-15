@@ -176,7 +176,7 @@ def survey(request, restaurant_slug, page_id):
                                             kwargs={'restaurant_slug':
                                                 restaurant_slug, 'survey_id' : survey_id}))
 
-    context= {'form': form, 'restaurant': restaurant.name, 'page_id' : page_id}
+    context= {'form': form, 'restaurant': restaurant.name, 'page_id' : page_id,'restaurant_slug' : restaurant_slug}
     return render(request, 'survey_server/survey.html', context=context)
 
 @customer_required

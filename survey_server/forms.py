@@ -1,7 +1,6 @@
 from django import forms
-#from .models import *
 from django.contrib.auth.models import User
-from .models import Survey
+from .models import Survey, Restaurant
 
 class UserRegistrationForm(forms.ModelForm):
 
@@ -30,7 +29,7 @@ class UserRegistrationForm(forms.ModelForm):
         }
 
 class SelectRestaurant(forms.Form):
-    # restaurant = forms.ChoiceField(choices=[(r.slug, r.name) for r in Restaurant.objects.all()])
+    restaurant = forms.ChoiceField(choices=[(r.slug, r.name) for r in Restaurant.objects.all()])
 
     class Meta:
         help_texts = {
@@ -40,9 +39,10 @@ class SelectRestaurant(forms.Form):
 class AddRestaurant(forms.ModelForm):
 
     class Meta:
-        # model = Restaurant
+        model = Restaurant
         fields = ('name', 'logo','cuisine','about','menu')
         help_texts = {
+            'logo' : "Please submit a single jpg file called 'logo.jpg'.",
             'menu': "Please submit as a .csv file with four columns headered 'starters','mains', 'desserts' and 'drinks'.",
         }
 
@@ -566,10 +566,3 @@ class RestaurantServiceStaffForm(forms.ModelForm):
     class Meta:
         model = Survey
         fields = ('service_staff',)
-
-
-
-
-
-
-
