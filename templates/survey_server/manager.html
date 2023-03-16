@@ -7,20 +7,21 @@ Manager
 Manager</br>
 {% endblock %}
 
-
 {% block left_content %}
 
 <p style="color:#88a5a0; font-size: 45px;"> Your Scoring</p>
 
 <!--put the chart at here-->
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<canvas id="myChart"></canvas>
+<script src="{%static 'js\myChart.js' %}"></script>
 
 {% endblock %}
 {% block picture_block %}
 
-</script>
+
 <div class="card" style="width:400px">
-    <img class="card-img-top" src="{% static "images/home.png" %}" alt="user image" style="width:100%">
+    <img class="card-img-top" src="{% static 'images/manager.jpg' %}" alt="user image" style="width:100%">
     <div class="card-body">
 
       <a href="#" class="btn btn-primary">See Profile</a>

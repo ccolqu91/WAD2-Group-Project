@@ -1,7 +1,9 @@
 from django.urls import path
 from survey_server import views
 
+
 app_name = 'survey_server'
+
 
 urlpatterns = [
 path('', views.index, name='index'),
@@ -15,5 +17,7 @@ path('register/', views.register, name='register'),
 path('logout/', views.user_logout, name='logout'),
 path('select/', views.select_restaurant, name='select'),
 path('about/', views.about, name='about'),
-path('add_restaurant/', views.add_restaurant, name='add_restaurant')
+path('add_restaurant/', views.add_restaurant, name='add_restaurant'),
+
+
 ]

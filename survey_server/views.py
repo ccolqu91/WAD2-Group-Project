@@ -1,8 +1,12 @@
+from collections import Counter
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.urls import reverse
+from django.http import JsonResponse
+from survey_server.models import Survey
+from django.views.generic import View
 from survey_server.forms import *
 # from survey_server.models import *
 from .decorators import *
@@ -212,10 +216,26 @@ def add_restaurant(request):
             restaurant.manager = request.user
             restaurant.slug = slugify(restaurant.name)
             restaurant.save()
-            form.save_m2m() # needed for saving many-to-many fields
+            form.save_m2m()
             populate_menu_items(restaurant.slug)
             return redirect(reverse('manager'))
     else:
         form = AddRestaurant()
 
     return render(request, 'survey_server/add_restaurant.html',{'form':form})
+
+
+
+# not sure if we need to add a new Score model in our models.py 
+# because if we want let our chartjs chart change with the new data reecived 
+# we need a view and a new model factor to link the data in database and chart we wanna show to our tutor
+
+# def chart_data(request):
+#     scores = Score.objects.all()
+#     labels = [str(score.date) for score in scores]
+#     values = [score.value for score in scores]
+#     data = {
+#         'labels': labels,
+#         'values': values,
+#     }
+#     return JsonResponse(data)
