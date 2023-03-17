@@ -1,14 +1,12 @@
  body{
 
           height:auto;
-<<<<<<< HEAD
 
-			background-color: #33665d;
-=======
+
             margin: 20px;
             padding: 20px;
 			background-color: #FDF9F1;
->>>>>>> main
+		
 			background-repeat: no-repeat;
 			background-size: cover;
 		}
