@@ -2,7 +2,11 @@
 
           height:auto;
 
+
+            margin: 20px;
+            padding: 20px;
 			background-color: #FDF9F1;
+		
 			background-repeat: no-repeat;
 			background-size: cover;
 		}
@@ -43,6 +47,8 @@
           color: black;
          }
          #hello{
+         margin: 20px;
+         padding: 10px;
          color:#88a5a0;
           font-size: 90px;
          }

@@ -7,6 +7,8 @@
         <title>{% block title_block %}{% endblock %}</title>
     {% endblock %}
 
+
+
     <style>
         body{
 
@@ -47,6 +49,7 @@
         }
 
     </style>
+
 </head>
 
 <body>
@@ -78,11 +81,11 @@
 <button type="submit" style="color: black;">Next</button>
 <script>
     var ident =$("input[name = 'ident']:checked").val();
-    if(ident=='yes'){   //注意判断身份中用单引号
+    if(ident=='yes'){
 
-    loginform.action="/index";     //注意这块的路径是绝对路径
+    loginform.action="/index";
 
-    loginform.submit();表单进行提交，结果就跳转到相应的action对应的页面中
+    loginform.submit();
 
 }
 </script>
