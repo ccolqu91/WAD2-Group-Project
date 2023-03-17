@@ -1,6 +1,9 @@
  body{
             min-height:auto;
-			background-color: #33665d;
+            margin-left: 40px;
+            margin-right: 40px;
+
+			background-color: #FDF9F1;
 			background-repeat: no-repeat;
 
 		}
@@ -10,13 +13,14 @@
          #index{
          color:#88a5a0;
           font-size: 90px;
+          font-family: "Garamond", serif;
          }
 
 
 
         .form{
         position:relative;
-          background-color: #ccc;
+          background-color: #BCB7AB;
           padding: 10px;
           border-radius: 5px;
           width: 300px;
@@ -26,6 +30,20 @@
           text-align: center;
           margin: auto;
           display: flex;
+          justify-content: center;
+          align-items: center;
+
+        }
+        .form_restaurant{
+          position: relative;
+          background-color: #ccc;
+          padding: 10px;
+          border-radius: 5px;
+          min-height: 200px;
+          height: auto;
+          text-align: center;
+          margin: 0 auto;
+          display: inline-block;
           justify-content: center;
           align-items: center;
 
@@ -40,7 +58,7 @@
 
 
           left:675px;
-          background-color: #ccc;
+          background-color: #BCB7AB
           padding: 10px;
           border-radius: 5px;
           color: black;
@@ -52,7 +70,7 @@
           float: left;
           top:0;
           right:100px;
-          background-color: #ccc;
+          background-color: #BCB7AB;
           padding: 5px;
           border-radius: 5px;
           color: black;

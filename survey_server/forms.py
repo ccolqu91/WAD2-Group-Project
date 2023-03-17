@@ -1,6 +1,6 @@
 from django import forms
-from .models import *
 
+from .models import Survey, Restaurant,User
 
 class UserRegistrationForm(forms.ModelForm):
 
@@ -35,6 +35,18 @@ class SelectRestaurant(forms.Form):
         help_texts = {
             'restaurant': None,
         }
+
+class AddRestaurant(forms.ModelForm):
+
+    class Meta:
+        model = Restaurant
+        fields = ('name', 'logo','cuisine','about','menu')
+        help_texts = {
+            'logo' : "Please submit a single jpg file called 'logo.jpg'.",
+            'menu': "Please submit as a .csv file with four columns headered 'starters','mains', 'desserts' and 'drinks'.",
+        }
+
+        
 
 class ChooseStarterForm(forms.ModelForm):
 
@@ -89,10 +101,13 @@ class StarterQuestionsForm(forms.ModelForm):
         choices=PRESENTATION_STARTER_CHOICES,
         widget=forms.RadioSelect
     )
+    starter_order = forms.ChoiceField(
+        label='What starter did you order?',
+    )
 
     class Meta:
         model = Survey
-        fields = ('time_starter','size_starter','presentation_starter',)
+        fields = ('time_starter','size_starter','presentation_starter','starter_order')
 
 
 class VariertyStarterForm(forms.ModelForm):
@@ -168,10 +183,14 @@ class MainCourseQuestionsForm(forms.ModelForm):
         choices=PRESENTATION_MAINCOURSE_CHOICES,
         widget=forms.RadioSelect
     )
+    main_order = forms.ChoiceField(
+        label='What main course did you order?',
+        choices=[],
+    )
 
     class Meta:
         model = Survey
-        fields = ('time_maincourse','size_maincourse','presentation_maincourse',)
+        fields = ('time_maincourse','size_maincourse','presentation_maincourse','main_order')
 
 class VariertyMainCourseForm(forms.ModelForm):
 
@@ -246,10 +265,15 @@ class DessertQuestionsForm(forms.ModelForm):
         choices=PRESENTATION_DESSERT_CHOICES,
         widget=forms.RadioSelect
     )
+    dessert_order = forms.ChoiceField(
+        label='What dessert course did you order?',
+        choices=[],
+    )
+
 
     class Meta:
         model = Survey
-        fields = ('time_dessert','size_dessert','presentation_dessert',)
+        fields = ('time_dessert','size_dessert','presentation_dessert','dessert_order')
 
 class VariertyDessertForm(forms.ModelForm):
 
@@ -324,10 +348,14 @@ class DrinkQuestionsForm(forms.ModelForm):
         choices=PRESENTATION_DRINK_CHOICES,
         widget=forms.RadioSelect
     )
+    drink_order = forms.ChoiceField(
+        label='What drink course did you order?',
+        choices=[],
+    )
 
     class Meta:
         model = Survey
-        fields = ('time_drink','size_drink','presentation_drink',)
+        fields = ('time_drink','size_drink','presentation_drink','drink_order')
 
 class VariertyDrinkForm(forms.ModelForm):
 
@@ -538,10 +566,3 @@ class RestaurantServiceStaffForm(forms.ModelForm):
     class Meta:
         model = Survey
         fields = ('service_staff',)
-
-
-
-
-
-
-

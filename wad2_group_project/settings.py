@@ -19,6 +19,7 @@ STATICFILES_DIRS = [STATIC_DIR, ]
 MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
+ALLOWED_FILE_TYPES = ['jpeg', 'png','jpg', 'csv']
 
 
 
@@ -44,7 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'survey_server'
+    'survey_server',
 ]
 
 MIDDLEWARE = [

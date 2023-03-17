@@ -6,8 +6,8 @@
     {% block title %}
         <title>{% block title_block %}{% endblock %}</title>
     {% endblock %}
- <link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.staticfile.org/twitter-bootstrap/5.1.1/js/bootstrap.bundle.min.js"></script>
+    <link href="{% static 'bootstrap-5.3.0-alpha1-dist/css/bootstrap.min.css' %}" rel="stylesheet">
+    <script src="{% static 'bootstrap-5.3.0-alpha1-dist/js/bootstrap.bundle.min.js' %}"></script>
 
 
      <link rel="stylesheet" href="{% static 'css/login&register.css' %}">
@@ -93,6 +93,11 @@
         </div>
       </div>
     </div>
+
+<div id="context" style=" margin-left: 40px;
+  margin-right: 40px;">
+
+
 <div id="index">
     SURVEY SERVER
     {% block index_block %}
@@ -108,9 +113,10 @@
     {% endblock %}
 </div>
 
-<div class="form">
-<!--    <form>-->
+
     {% block form_block %}
+    <div class="form">
+      <!--    <form>-->
 <!--    go to different dashboard-->
     
 
@@ -121,6 +127,7 @@
       <button onclick="manager()">for manger </button>
       <button onclick="customer()">for customer </button>
     </form>
+    
     {% endblock %}
 
 <!--    <div id="button">-->
@@ -133,6 +140,7 @@
 <div class="blank">
 
 </div>
+    </div>
 
 
 <!--if have account, go to login, or register-->

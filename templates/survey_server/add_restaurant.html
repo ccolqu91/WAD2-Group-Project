@@ -1,0 +1,32 @@
+{% extends 'survey_server/login&registerBase.html' %}
+{% load static %}
+{% block title_block %}
+Add Restaurant
+{% endblock %}
+{% block index_block %}
+</br>Add Restaurant
+{% endblock %}
+
+{% block form_block %}
+
+<form class="form_restaurant" method="post" enctype="multipart/form-data">
+   {% csrf_token %}
+   {{ form.as_p }}
+   <button type="submit">Submit</button>
+
+
+</form>
+
+
+{% endblock %}
+
+
+
+<!-- {% block button_block %}-->
+
+<!--    <button type="submit" onclick="register()">Go to register</button>-->
+
+<!--    {% endblock %}-->
+
+
+

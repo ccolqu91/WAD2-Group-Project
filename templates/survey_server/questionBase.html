@@ -7,46 +7,48 @@
         <title>{% block title_block %}{% endblock %}</title>
     {% endblock %}
 
-    <style>
-        body{
+<!--    <style>-->
+<!--        body{-->
 
-			background-color: #33665d;
-			background-repeat: no-repeat;
-			background-size: cover;
-		}
+<!--			background-color: #FDF9F1;-->
+<!--			background-repeat: no-repeat;-->
+<!--			background-size: cover;-->
+<!--		}-->
 
 
-         #index{
-         color:#88a5a0;
-          font-size: 90px;
-         }
+<!--         #index{-->
+<!--         color:#88a5a0;-->
+<!--          font-size: 90px;-->
+<!--         }-->
 
-        #question{
-         text-align: center;
-            color: #b7e1d9;
-            font-size: 30px;
-        }
-        #choices{
-            position:fixed;
+<!--        #question{-->
+<!--         text-align: center;-->
+<!--            color: #b7e1d9;-->
+<!--            font-size: 30px;-->
+<!--            height:auto;-->
+<!--        }-->
+<!--        #choices{-->
+<!--            position:fixed;-->
 
-          left:560px;
+<!--          left:560px;-->
 
-            color: white;
-            font-size: 20px;
-        }
-        button{
+<!--            color: white;-->
+<!--            font-size: 20px;-->
+<!--        }-->
+<!--        button{-->
 
-          position:fixed;
-          float: left;
-          bottom:100px;
-          left:700px;
-          background-color: #ccc;
-          padding: 10px;
-          border-radius: 5px;
-          color: black;
-        }
+<!--          position:fixed;-->
+<!--          float: left;-->
+<!--          bottom:100px;-->
+<!--          left:700px;-->
+<!--          background-color: #ccc;-->
+<!--          padding: 10px;-->
+<!--          border-radius: 5px;-->
+<!--          color: black;-->
+<!--        }-->
 
-    </style>
+<!--    </style>-->
+     <link rel="stylesheet" href="{% static 'css/questionBase.css' %}">
 </head>
 
 <body>
@@ -78,11 +80,11 @@
 <button type="submit" style="color: black;">Next</button>
 <script>
     var ident =$("input[name = 'ident']:checked").val();
-    if(ident=='yes'){   //注意判断身份中用单引号
+    if(ident=='yes'){
 
-    loginform.action="/index";     //注意这块的路径是绝对路径
+    loginform.action="/index";
 
-    loginform.submit();表单进行提交，结果就跳转到相应的action对应的页面中
+    loginform.submit();
 
 }
 </script>

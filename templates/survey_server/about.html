@@ -1,0 +1,54 @@
+{% extends 'survey_server/base.html' %}
+{% load static %}
+{% block title_block %}
+About us
+{% endblock %}
+{% block hello_block %}
+</br>
+{% endblock %}
+
+{% block left_content %}
+
+<style>
+    .about {
+            background-color: #D3D1C3;
+            text-align: center;
+            margin-left: 50px;
+            margin-right: 50px;
+            padding: 25px;
+        }
+
+
+     h1{
+       text-align:center;
+        color: #5C7563;
+        font-family: "Garamond", serif;
+       }
+</style>
+
+<h1> About Us</h1>
+
+<div class="about">
+    <p style="color:#5C7563; font-size: 20px;">
+        Survey Server is a new web app designed to provide a platform for industries to collect valuable analytics from their customers using a pre-designed survey covering crucial areas of their industry.
+    </p>
+    <p style="color:#5C7563; font-size: 20px;">
+        Its first survey is for the restaurant industry, which allows restaurants to customize the survey with their logo and name. Customers can then participate in the survey and receive a voucher as an incentive.
+    </p>
+    <p style="color:#5C7563; font-size: 20px;">
+        The survey will cover food quality, customer service, hygiene, value for money, and menu variety, and analytics will be totalled for each restaurant. Restaurant owners can log in to see their analytics and the total number of survey participants.
+    </p>
+</div>
+
+{% endblock %}
+
+
+{% block picture_block %}
+<div class="card" style="width:400px">
+    <img class="card-img-top" src="{% static 'images/pic1.jpg' %}" alt="user image" style="width:100%">
+    
+<!--some image here?-->
+
+</div>
+
+{% endblock %}

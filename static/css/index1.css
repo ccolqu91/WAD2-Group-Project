@@ -1,7 +1,11 @@
 
  body{
             min-height:auto;
-			background-color: #33665d;
+
+         margin-left: 20px;
+         margin-right: 20px;
+
+			background-color: #FDF9F1;
 			background-repeat: no-repeat;
 
 		}
@@ -17,8 +21,9 @@
         #title{
         display: flex !important;
         align-items: center !important;
-        color:#88a5a0;
+        color: #FDF9F1;
           font-size:30px;
+          font-family: "Verdana";
         }
 
  .restaurant_image{
@@ -27,6 +32,8 @@
  }
 
      p{
-                color: pink;
-              font-size: 50px;
+                color: #597157;
+              font-size: 75px;
+              font-family: "Garamond", serif;
      }
+
