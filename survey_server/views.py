@@ -215,7 +215,7 @@ def add_restaurant(request):
             restaurant.save()
             form.save_m2m()
             populate_menu_items(restaurant.slug)
-            return redirect(reverse('manager'))
+            return redirect(reverse('survey_server:manager'))
     else:
         form = AddRestaurant()
 
@@ -227,7 +227,11 @@ def customer(request):
     vouchers = []
     for survey in surveys:
         if survey.voucher_code and survey.voucher_is_valid:
-            vouchers.append(survey.voucher_code)
+            voucher_dict = {
+                'Voucher': survey.voucher_code,
+                'Restaurant': survey.restaurant.name
+            }
+            vouchers.append(voucher_dict)
     return render(request, 'survey_server/customer.html', {'vouchers': vouchers})
 
 

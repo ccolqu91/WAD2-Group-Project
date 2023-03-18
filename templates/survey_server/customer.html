@@ -20,16 +20,17 @@ Customer</br>
     </thead>
     <tbody>
       {% if vouchers %}
-        {% for voucher in vouchers %}
-          <tr>
-            <td>{{ voucher }}</td>
-          </tr>
-        {% endfor %}
-      {% else %}
-        <tr>
-          <td>No vouchers found</td>
-        </tr>
-      {% endif %}
+  {% for voucher in vouchers %}
+    <tr>
+      <td>Voucher: {{ voucher.Voucher }}</td>
+      <td>Restaurant: {{ voucher.Restaurant }}</td>
+    </tr>
+  {% endfor %}
+{% else %}
+  <tr>
+    <td>No vouchers found</td>
+  </tr>
+{% endif %}
     </tbody>
   </table>
 </div>
