@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Survey, Restaurant, User
+from .models import Survey, Restaurant, User, Customer, Manager
 
 class UserRegistrationForm(forms.ModelForm):
 
@@ -27,6 +27,16 @@ class UserRegistrationForm(forms.ModelForm):
 			'email': None,
             'password': None,
         }
+
+class CustomerProfileForm(forms.ModelForm):
+    class Meta:
+        model = Customer
+        fields = ('profile_picture','bio')
+
+class ManagerProfileForm(forms.ModelForm):
+    class Meta:
+        model = Manager
+        fields = ('profile_picture','bio')
 
 class SelectRestaurant(forms.Form):
     restaurant = forms.ChoiceField(choices=[(r.slug, r.name) for r in Restaurant.objects.all()])

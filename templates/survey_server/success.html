@@ -1,10 +1,10 @@
 {% extends 'survey_server/base.html' %}
 {% load static %}
 {% block title_block %}
-Customer
+Survey Server · Success!
 {% endblock %}
 {% block hello_block %}
-Customer</br>
+{{request.user}}</br>
 <h1> Done! </h1>
 <h2> Thank you for taking part in the survey! Your voucher code is: {{ voucher_code }} </h2>
 {% endblock %}

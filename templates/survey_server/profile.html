@@ -1,15 +1,23 @@
 {% extends 'survey_server/base.html' %}
 {% load static %}
 {% block title_block %}
-Profile
+Survey Server · Profile
 {% endblock %}
 {% block hello_block %}
-</br>
+{{request.user}}</br>
 {% endblock %}
 
 {% block left_content %}
 
 <p style="color:#88a5a0; font-size: 45px;"> Profile info here</p>
+<div>
+    <form method = "post" enctype="multipart/form-data">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <button class="w-10 btn btn-lg btn-primary" type="submit">Save Changes</button>
+    </div>
+    </form>
+</div>
 
 
 {% endblock %}
@@ -17,7 +25,13 @@ Profile
 
 {% block picture_block %}
 <div class="card" style="width:400px">
-    <img class="card-img-top" src="{% static 'images/home.jpg' %}" alt="user image" style="width:100%">
+    <img class="card-img-top" 
+    {% if request.user.user_type == 1 %}
+    src="{{ request.user.customer.profile_picture.url }}"
+    {% else %}
+    src="{{ request.user.manager.profile_picture.url }}"
+    {% endif %}
+    alt="user image" style="width:100%">
     
 <!--some image here?-->
 

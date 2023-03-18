@@ -1,10 +1,10 @@
 {% extends 'survey_server/base.html' %}
 {% load static %}
 {% block title_block %}
-Manager
+Survey Server · Manager
 {% endblock %}
 {% block hello_block %}
-Manager</br>
+{{request.user}}</br>
 {% endblock %}
 
 
@@ -29,16 +29,13 @@ Manager</br>
 
 
 <div class="card" style="width:400px">
-    <img class="card-img-top" src="{% static 'images/manager.jpg' %}" alt="user image" style="width:100%">
-    <div class="card-body">
-
-      <a href="#" class="btn btn-primary">See Profile</a>
-    </div>
+    <img class="card-img-top" src="{{request.user.manager.profile_picture.url}}" alt="user image" style="width:100%">
   </div>
+{% if not has_restaurant %}
 <p>Would you like to know what our users think about your services?</p>
 
 <button type="button" class="btn btn-primary btn-lg"  onclick="window.location.href='/survey_server/add_restaurant'">Add a restaurant</button>
-
+{% endif %}
 
 {% endblock %}
 

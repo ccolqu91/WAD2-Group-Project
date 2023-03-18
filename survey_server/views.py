@@ -40,11 +40,41 @@ form_dict = {1 : ChooseStarterForm,
 def index(request):
     return render(request, 'survey_server/index.html')
 
+@manager_required
 def manager(request):
-    return render(request, 'survey_server/manager.html')
+    has_restaurant = Restaurant.objects.filter(manager=request.user).exists()
+    return render(request, 'survey_server/manager.html',{'has_restaurant':has_restaurant})
 
+@login_required
 def profile(request):
-    return render(request, 'survey_server/profile.html')
+    if request.user.user_type == 1: # customer
+        customer = Customer.objects.get(user=request.user)
+        profile_instance = Customer.objects.get(user=request.user).__dict__
+        form = CustomerProfileForm(initial=profile_instance)
+        if request.method == "POST":
+            form = CustomerProfileForm(request.POST, request.FILES)
+            if form.is_valid():
+                new_info = form.save(commit = False)
+                customer.user = request.user
+                customer.bio = new_info.bio
+                customer.profile_picture = new_info.profile_picture
+                customer.save()
+    elif request.user.user_type == 2: # manager
+        manager = Manager.objects.get(user=request.user)
+        profile_instance = Manager.objects.get(user=request.user).__dict__
+        form = ManagerProfileForm(initial=profile_instance)
+        print(profile_instance)
+        if request.method == "POST":
+            form = ManagerProfileForm(request.POST, request.FILES)
+            form.user = request.user
+            if form.is_valid():
+                new_info = form.save(commit = False)
+                manager.user = request.user
+                manager.bio = new_info.bio
+                manager.profile_picture = new_info.profile_picture
+                manager.save()
+
+    return render(request, 'survey_server/profile.html',{'form': form})
 
 def about(request):
     return render(request, 'survey_server/about.html')
@@ -225,7 +255,7 @@ def customer(request):
         if survey.voucher_issue_date + relativedelta(months=3) < today:
             survey.voucher_is_valid = False
             survey.save()
-
+    profile= Customer.objects.get(user=request.user)
     vouchers = []
     for survey in surveys:
         if survey.voucher_code and survey.voucher_is_valid:
@@ -236,7 +266,8 @@ def customer(request):
                 'expiry' : survey.voucher_issue_date + relativedelta(months=3)
             }
             vouchers.append(voucher_dict)
-    return render(request, 'survey_server/customer.html', {'vouchers': vouchers})
+    return render(request, 'survey_server/customer.html', {'vouchers': vouchers,
+                                                            'profile': profile})
 
 
 
