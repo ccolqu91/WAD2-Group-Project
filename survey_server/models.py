@@ -94,7 +94,7 @@ class Survey(models.Model):
     customer =  models.ForeignKey(User, on_delete=models.CASCADE)
     restaurant = models.ForeignKey(Restaurant,on_delete = models.CASCADE)
     voucher_code= models.CharField(max_length=128, null=True, blank=True)
-    voucher_value = models.IntegerField(default = 0)
+    voucher_value = models.IntegerField(default = 15)
     voucher_issue_date = models.DateField(null=True, blank=True)
     voucher_is_valid = models.BooleanField(default=True)
 

@@ -1,4 +1,3 @@
-from collections import Counter
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -6,14 +5,14 @@ from django.contrib import messages
 from django.urls import reverse
 from django.http import JsonResponse
 from survey_server.models import Survey
-from django.views.generic import View
 from survey_server.forms import *
-# from survey_server.models import *
 from .decorators import *
 from .score import *
 from .voucher import *
 import datetime
 from .menu import *
+from dateutil.relativedelta import relativedelta
+
 
 
 form_dict = {1 : ChooseStarterForm,
@@ -94,16 +93,11 @@ def register(request):
 
 
 def user_login(request):
-
     if request.method == 'POST':
-
         username = request.POST.get('username')
         password = request.POST.get('password')
-
         user = authenticate(username=username, password=password)
-
         if user:
-
             if user.is_active:
                 login(request, user)
                 return redirect(reverse('survey_server:index'))
@@ -185,7 +179,6 @@ def survey_success(request, restaurant_slug, survey_id):
     current_survey = Survey.objects.get(id=survey_id)
     scores_list = CalculateScore(current_survey)
     
-
     voucher_code=get_voucher()
 
     Survey.objects.update_or_create(id = survey_id, defaults = {'food_quality_score' : scores_list[0],
@@ -224,12 +217,23 @@ def add_restaurant(request):
 @customer_required
 def customer(request):
     surveys = Survey.objects.filter(customer=request.user)
+    
+    """ check if any voucher is older than 3 months
+    if yes, make it invalid """
+    today = datetime.date.today()
+    for survey in surveys:
+        if survey.voucher_issue_date + relativedelta(months=3) < today:
+            survey.voucher_is_valid = False
+            survey.save()
+
     vouchers = []
     for survey in surveys:
         if survey.voucher_code and survey.voucher_is_valid:
             voucher_dict = {
                 'Voucher': survey.voucher_code,
-                'Restaurant': survey.restaurant.name
+                'Restaurant': survey.restaurant.name,
+                'value' : survey.voucher_value,
+                'expiry' : survey.voucher_issue_date + relativedelta(months=3)
             }
             vouchers.append(voucher_dict)
     return render(request, 'survey_server/customer.html', {'vouchers': vouchers})

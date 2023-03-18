@@ -16,14 +16,19 @@ Customer</br>
     <thead>
       <tr>
         <th>Voucher Code</th>
+        <th>Restaurant</th>
+        <th>Value</th>
+        <th>Valid until</th>
       </tr>
     </thead>
     <tbody>
       {% if vouchers %}
   {% for voucher in vouchers %}
     <tr>
-      <td>Voucher: {{ voucher.Voucher }}</td>
-      <td>Restaurant: {{ voucher.Restaurant }}</td>
+      <td>{{ voucher.Voucher }}</td>
+      <td>{{ voucher.Restaurant }}</td>
+      <td>{{ voucher.value }}%</td>
+      <td>{{ voucher.expiry }}</td>
     </tr>
   {% endfor %}
 {% else %}
