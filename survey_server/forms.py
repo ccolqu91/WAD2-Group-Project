@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Survey, Restaurant,User
+from .models import Survey, Restaurant, User
 
 class UserRegistrationForm(forms.ModelForm):
 

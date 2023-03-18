@@ -45,6 +45,8 @@ def customer(request):
     return render(request, 'survey_server/customer.html')
 
 def manager(request):
+    my_restaurant = Restaurant.objects.get(manager=request.user)
+    my_surveys = Survey.objects.filter(restaurant = my_restaurant)
     return render(request, 'survey_server/manager.html')
 
 def profile(request):
@@ -223,6 +225,15 @@ def add_restaurant(request):
         form = AddRestaurant()
 
     return render(request, 'survey_server/add_restaurant.html',{'form':form})
+
+@login_required
+def customer_dashboard(request):
+    surveys = Survey.objects.filter(customer=request.user)
+    vouchers = []
+    for survey in surveys:
+        if survey.voucher_code and survey.voucher_is_valid:
+            vouchers.append(survey.voucher_code)
+    return render(request, 'survey_server/customer.html', {'vouchers': vouchers})
 
 
 

@@ -3,12 +3,12 @@
 var ctx = document.getElementById('myChart').getContext('2d');
 
         var  charData= {
-                labels: ['7th','6th', '5th', '4th','3th', 'second', 'lastest'],
+                labels: {{labels|safe}}
                 datasets: [{
                     label: 'last five score',
                     backgroundColor: 'rgb(128, 0, 128)',
                     borderColor: 'rgb(128, 0, 128)',
-                    data: [7, 5, 5, 2, 10, 10, 10]
+                    data: {{data|safe}}
                 }]
             };
 
