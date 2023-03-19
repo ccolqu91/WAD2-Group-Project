@@ -12,6 +12,7 @@ from .voucher import *
 import datetime
 from .menu import *
 from dateutil.relativedelta import relativedelta
+from django.db.models import Avg
 
 
 
@@ -43,6 +44,16 @@ def index(request):
 @manager_required
 def manager(request):
     has_restaurant = Restaurant.objects.filter(manager=request.user).exists()
+    if has_restaurant:
+        my_restaurant=Restaurant.objects.get(manager=request.user)
+        avg_scores = Survey.objects.filter(restaurant=my_restaurant).aggregate(
+                                            avg_food_quality_score=Avg('food_quality_score'),
+                                            avg_customer_service_score=Avg('customer_service_score'),
+                                            avg_hygiene_score=Avg('hygiene_score'),
+                                            avg_value_for_money_score=Avg('value_for_money_score'),
+                                            avg_menu_variety_score=Avg('menu_variety_score'),
+                                            )
+
     return render(request, 'survey_server/manager.html',{'has_restaurant':has_restaurant})
 
 @login_required
@@ -209,7 +220,10 @@ def survey_success(request, restaurant_slug, survey_id):
     current_survey = Survey.objects.get(id=survey_id)
     scores_list = CalculateScore(current_survey)
     
-    voucher_code=get_voucher()
+    if not current_survey.voucher_code:
+        voucher_code=get_voucher()
+    else:
+        voucher_code=current_survey.voucher_code
 
     Survey.objects.update_or_create(id = survey_id, defaults = {'food_quality_score' : scores_list[0],
                                                                 'customer_service_score'  : scores_list[1],
