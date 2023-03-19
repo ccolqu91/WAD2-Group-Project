@@ -33,9 +33,45 @@ Survey Server · Manager
   </div>
 {% if not has_restaurant %}
 <p>Would you like to know what our users think about your services?</p>
-
 <button type="button" class="btn btn-primary btn-lg"  onclick="window.location.href='/survey_server/add_restaurant'">Add a restaurant</button>
+{% else %}
+<p style="color:#88a5a0; font-size: 45px;"> Your Menu's Top Choices</p>
+{% if has_surveys %}
+<div class="container">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Course</th>
+        <th>Top Meal Choice</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>Starter</td>
+      <td>{{ top_starter }}</td>
+    </tr>
+    <tr>
+      <td>Main</td>
+      <td>{{ top_main }}</td>
+    </tr>
+    <tr>
+      <td>Dessert</td>
+      <td>{{ top_dessert }}</td>
+    </tr>
+    <tr>
+      <td>Drink</td>
+      <td>{{ top_drink }}</td>
+    </tr>
+{% else %}
+  <tr>
+    <td>No information on dishes yet - come back soon!</td>
+  </tr>
 {% endif %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
+
 
 {% endblock %}
 

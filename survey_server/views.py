@@ -13,6 +13,7 @@ import datetime
 from .menu import *
 from dateutil.relativedelta import relativedelta
 from django.db.models import Avg
+from django.db.models import Count
 
 
 
@@ -44,17 +45,48 @@ def index(request):
 @manager_required
 def manager(request):
     has_restaurant = Restaurant.objects.filter(manager=request.user).exists()
+    context = {'has_restaurant':has_restaurant}
     if has_restaurant:
         my_restaurant=Restaurant.objects.get(manager=request.user)
-        avg_scores = Survey.objects.filter(restaurant=my_restaurant).aggregate(
-                                            avg_food_quality_score=Avg('food_quality_score'),
-                                            avg_customer_service_score=Avg('customer_service_score'),
-                                            avg_hygiene_score=Avg('hygiene_score'),
-                                            avg_value_for_money_score=Avg('value_for_money_score'),
-                                            avg_menu_variety_score=Avg('menu_variety_score'),
-                                            )
+        has_surveys=Survey.objects.filter(restaurant=my_restaurant).exists()
+        if has_surveys:
+            avg_scores = Survey.objects.filter(restaurant=my_restaurant).aggregate(
+                                                avg_food_quality_score=Avg('food_quality_score'),
+                                                avg_customer_service_score=Avg('customer_service_score'),
+                                                avg_hygiene_score=Avg('hygiene_score'),
+                                                avg_value_for_money_score=Avg('value_for_money_score'),
+                                                avg_menu_variety_score=Avg('menu_variety_score'),
+                                                )
 
-    return render(request, 'survey_server/manager.html',{'has_restaurant':has_restaurant})
+            most_frequent_starter = Survey.objects.filter(restaurant=my_restaurant).annotate(
+                count=Count('starter_order')
+            ).order_by('-count').first().starter_order
+            top_starter = MenuItem.objects.get(id = most_frequent_starter).name
+
+            most_frequent_main = Survey.objects.filter(restaurant=my_restaurant).annotate(
+                count=Count('main_order')
+            ).order_by('-count').first().main_order
+            top_main = MenuItem.objects.get(id = most_frequent_main).name
+
+            most_frequent_dessert = Survey.objects.filter(restaurant=my_restaurant).annotate(
+                count=Count('dessert_order')
+            ).order_by('-count').first().dessert_order
+            top_dessert = MenuItem.objects.get(id = most_frequent_dessert).name
+
+            most_frequent_drink = Survey.objects.filter(restaurant=my_restaurant).annotate(
+                count=Count('drink_order')
+            ).order_by('-count').first().drink_order
+            top_drink = MenuItem.objects.get(id = most_frequent_drink).name
+
+            print(top_starter, top_main, top_dessert, top_drink)
+
+            context['top_starter'] = top_starter
+            context['top_main'] = top_main
+            context['top_dessert'] = top_dessert
+            context['top_drink'] = top_drink
+        context['has_surveys'] = has_surveys
+    has_surveys=False
+    return render(request, 'survey_server/manager.html',context)
 
 @login_required
 def profile(request):
@@ -147,9 +179,6 @@ def user_login(request):
         else:
             print(f"Invalid login details: {username}, {password}")
             return HttpResponse("Invalid login details supplied.")
-
-    
-
     else:
         return render(request, 'survey_server/login.html')
     
