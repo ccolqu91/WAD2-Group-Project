@@ -11,10 +11,10 @@
 			background-size: cover;
 		}
 		.text&pictue{
-
-}
 		        display: flex;
                 justify-content: space-between;
+                position:relative;
+                top:50px;
 		}
 		.top_text{
 		  float:left;
@@ -49,6 +49,8 @@
           color: black;
          }
          #hello{
+         position:relative;
+         top:50px;
          margin: 20px;
          padding: 10px;
          color:#88a5a0;
@@ -126,4 +128,5 @@
         #text_content{
         font-size:2px;
         }
+
 }
