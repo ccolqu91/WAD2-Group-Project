@@ -1,19 +1,17 @@
  body{
 
           height:auto;
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 746b074d67e62c326bcbbe5574b9df28ab5066e9
-            margin: 20px;
-            padding: 20px;
+            margin: 0px;
+            padding: 0px;
 			background-color: #FDF9F1;
 		
 			background-repeat: no-repeat;
 			background-size: cover;
 		}
 		.text&pictue{
+
+}
 		        display: flex;
                 justify-content: space-between;
 		}
@@ -105,7 +103,7 @@
          footer{
             color:white;
          position: absolute;
-        bottom: -500px;
+        bottom: -200px;
         left: 0;
         right: 0;
         height: 130px;

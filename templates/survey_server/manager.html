@@ -1,10 +1,10 @@
 {% extends 'survey_server/base.html' %}
 {% load static %}
 {% block title_block %}
-Manager
+Survey Server · Manager
 {% endblock %}
 {% block hello_block %}
-Manager</br>
+{{request.user}}</br>
 {% endblock %}
 
 
@@ -29,15 +29,81 @@ Manager</br>
 
 
 <div class="card" style="width:400px">
-    <img class="card-img-top" src="{% static 'images/manager.jpg' %}" alt="user image" style="width:100%">
-    <div class="card-body">
-
-      <a href="#" class="btn btn-primary">See Profile</a>
-    </div>
+    <img class="card-img-top" src="{{request.user.manager.profile_picture.url}}" alt="user image" style="width:100%">
   </div>
+  <p style="color:#88a5a0; font-size: 45px;"> Your Restaurant Information</p>
+  {% if has_restaurant %}
+  <div>
+      <div class="container">
+    <table class="table table-hover">
+      <tbody>
+      <tr>
+        <td>Name</td>
+        <td>{{ restaurant.name }}</td>
+      </tr>
+      <tr>
+        <td>Cuisine</td>
+        <td>{{ restaurant.cuisine }}</td>
+      </tr>
+      <tr>
+        <td>About</td>
+        <td>{{ restaurant.about }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+      </div>
+      <div>
+              <a href="{% url 'survey_server:edit_restaurant' %}" class="btn btn-lg btn-primary ml-2">Edit Your Restaurant</a>
+  
+      </div>
+      {% else %}
+    <tr>
+      <td>No restaurant yet - add one here!</td>
+    </tr>
+    </div>
+    <button type="button" class="btn btn-primary btn-lg"  onclick="window.location.href='/survey_server/add_restaurant'">Add a restaurant</button>
+  {% endif %}
+{% if not has_restaurant %}
 <p>Would you like to know what our users think about your services?</p>
-
 <button type="button" class="btn btn-primary btn-lg"  onclick="window.location.href='/survey_server/add_restaurant'">Add a restaurant</button>
+{% else %}
+<p style="color:#88a5a0; font-size: 45px;"> Your Menu's Top Choices</p>
+{% if has_surveys %}
+<div class="container">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Course</th>
+        <th>Top Meal Choice</th>
+      </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td>Starter</td>
+      <td>{{ top_starter }}</td>
+    </tr>
+    <tr>
+      <td>Main</td>
+      <td>{{ top_main }}</td>
+    </tr>
+    <tr>
+      <td>Dessert</td>
+      <td>{{ top_dessert }}</td>
+    </tr>
+    <tr>
+      <td>Drink</td>
+      <td>{{ top_drink }}</td>
+    </tr>
+{% else %}
+  <tr>
+    <td>No information on dishes yet - come back soon!</td>
+  </tr>
+{% endif %}
+    </tbody>
+  </table>
+</div>
+{% endif %}
 
 
 {% endblock %}

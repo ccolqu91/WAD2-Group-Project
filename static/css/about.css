@@ -1,0 +1,23 @@
+ .about {
+            background-color: #D3D1C3;
+            text-align: center;
+            margin-left: 50px;
+            margin-right: 50px;
+            padding: 25px;
+        }
+
+
+     h1{
+       text-align:center;
+        color: #5C7563;
+        font-family: "Garamond", serif;
+       }
+       p{
+       color:#5C7563; font-size: 20px;
+
+       .card{
+       position:relative;
+       z-index: -1;
+       width:400px;
+       top:100px;
+       }

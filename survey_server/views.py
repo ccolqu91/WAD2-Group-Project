@@ -1,4 +1,3 @@
-from collections import Counter
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -6,14 +5,16 @@ from django.contrib import messages
 from django.urls import reverse
 from django.http import JsonResponse
 from survey_server.models import Survey
-from django.views.generic import View
 from survey_server.forms import *
-# from survey_server.models import *
 from .decorators import *
 from .score import *
 from .voucher import *
 import datetime
 from .menu import *
+from dateutil.relativedelta import relativedelta
+from django.db.models import Avg
+from django.db.models import Count
+
 
 
 form_dict = {1 : ChooseStarterForm,
@@ -41,14 +42,89 @@ form_dict = {1 : ChooseStarterForm,
 def index(request):
     return render(request, 'survey_server/index.html')
 
-def customer(request):
-    return render(request, 'survey_server/customer.html')
-
+@manager_required
 def manager(request):
-    return render(request, 'survey_server/manager.html')
+    has_restaurant = Restaurant.objects.filter(manager=request.user).exists()
+    context = {'has_restaurant':has_restaurant}
+    if has_restaurant:
+        my_restaurant=Restaurant.objects.get(manager=request.user)
+        context['has_restaurant']=has_restaurant
+        context['restaurant']=my_restaurant.__dict__
+        has_surveys=Survey.objects.filter(restaurant=my_restaurant).exists()
+        if has_surveys:
+            avg_scores = Survey.objects.filter(restaurant=my_restaurant).aggregate(
+                                                avg_food_quality_score=Avg('food_quality_score'),
+                                                avg_customer_service_score=Avg('customer_service_score'),
+                                                avg_hygiene_score=Avg('hygiene_score'),
+                                                avg_value_for_money_score=Avg('value_for_money_score'),
+                                                avg_menu_variety_score=Avg('menu_variety_score'),
+                                                )
 
+            most_frequent_starter = Survey.objects.filter(restaurant=my_restaurant).annotate(
+                count=Count('starter_order')
+            ).order_by('-count').first().starter_order
+            top_starter = MenuItem.objects.get(id = most_frequent_starter).name
+
+            most_frequent_main = Survey.objects.filter(restaurant=my_restaurant).annotate(
+                count=Count('main_order')
+            ).order_by('-count').first().main_order
+            top_main = MenuItem.objects.get(id = most_frequent_main).name
+
+            most_frequent_dessert = Survey.objects.filter(restaurant=my_restaurant).annotate(
+                count=Count('dessert_order')
+            ).order_by('-count').first().dessert_order
+            top_dessert = MenuItem.objects.get(id = most_frequent_dessert).name
+
+            most_frequent_drink = Survey.objects.filter(restaurant=my_restaurant).annotate(
+                count=Count('drink_order')
+            ).order_by('-count').first().drink_order
+            top_drink = MenuItem.objects.get(id = most_frequent_drink).name
+
+            print(top_starter, top_main, top_dessert, top_drink)
+
+            context['top_starter'] = top_starter
+            context['top_main'] = top_main
+            context['top_dessert'] = top_dessert
+            context['top_drink'] = top_drink
+        context['has_surveys'] = has_surveys
+    has_surveys=False
+    return render(request, 'survey_server/manager.html',context)
+
+@login_required
 def profile(request):
-    return render(request, 'survey_server/profile.html')
+    context={}
+    if request.user.user_type == 1: # customer
+        customer = Customer.objects.get(user=request.user)
+        profile_instance = Customer.objects.get(user=request.user).__dict__
+        form = CustomerProfileForm(initial=profile_instance)
+        if request.method == "POST":
+            form = CustomerProfileForm(request.POST, request.FILES)
+            if form.is_valid():
+                new_info = form.save(commit = False)
+                customer.user = request.user
+                customer.bio = new_info.bio
+                customer.profile_picture = new_info.profile_picture
+                customer.save()
+    elif request.user.user_type == 2: # manager
+        has_restaurant = Restaurant.objects.filter(manager=request.user).exists()
+        if has_restaurant:
+            restaurant = Restaurant.objects.get(manager=request.user)
+            context['has_restaurant']=has_restaurant
+            context['restaurant']=restaurant.__dict__
+        manager = Manager.objects.get(user=request.user)
+        profile_instance = Manager.objects.get(user=request.user).__dict__
+        form = ManagerProfileForm(initial=profile_instance)
+        if request.method == "POST":
+            form = ManagerProfileForm(request.POST, request.FILES)
+            form.user = request.user
+            if form.is_valid():
+                new_info = form.save(commit = False)
+                manager.user = request.user
+                manager.bio = new_info.bio
+                manager.profile_picture = new_info.profile_picture
+                manager.save()
+    context['form']= form
+    return render(request, 'survey_server/profile.html',context)
 
 def about(request):
     return render(request, 'survey_server/about.html')
@@ -97,16 +173,11 @@ def register(request):
 
 
 def user_login(request):
-
     if request.method == 'POST':
-
         username = request.POST.get('username')
         password = request.POST.get('password')
-
         user = authenticate(username=username, password=password)
-
         if user:
-
             if user.is_active:
                 login(request, user)
                 return redirect(reverse('survey_server:index'))
@@ -115,9 +186,6 @@ def user_login(request):
         else:
             print(f"Invalid login details: {username}, {password}")
             return HttpResponse("Invalid login details supplied.")
-
-    
-
     else:
         return render(request, 'survey_server/login.html')
     
@@ -125,6 +193,8 @@ def user_login(request):
 def survey(request, restaurant_slug, page_id):
     try:
         restaurant = Restaurant.objects.get(slug=restaurant_slug)
+        restaurant_voucher_value = Restaurant.objects.get(manager=restaurant.manager).restaurant
+        print(restaurant_voucher_value)
 
     except Restaurant.DoesNotExist:
         restaurant = None
@@ -188,8 +258,10 @@ def survey_success(request, restaurant_slug, survey_id):
     current_survey = Survey.objects.get(id=survey_id)
     scores_list = CalculateScore(current_survey)
     
-
-    voucher_code=get_voucher()
+    if not current_survey.voucher_code:
+        voucher_code=get_voucher()
+    else:
+        voucher_code=current_survey.voucher_code
 
     Survey.objects.update_or_create(id = survey_id, defaults = {'food_quality_score' : scores_list[0],
                                                                 'customer_service_score'  : scores_list[1],
@@ -218,11 +290,59 @@ def add_restaurant(request):
             restaurant.save()
             form.save_m2m()
             populate_menu_items(restaurant.slug)
-            return redirect(reverse('manager'))
+            return redirect(reverse('survey_server:manager'))
     else:
         form = AddRestaurant()
 
     return render(request, 'survey_server/add_restaurant.html',{'form':form})
+
+@manager_required
+def edit_restaurant(request):
+    editing=True
+    restaurant = Restaurant.objects.get(manager=request.user)
+    restaurant_instance = Restaurant.objects.get(manager=request.user).__dict__
+    form = EditRestaurant(initial=restaurant_instance)
+    if request.method == "POST":
+        form = EditRestaurant(request.POST, request.FILES)
+        form['voucher_value'].initial = restaurant.voucher_value
+        form.manager = request.user
+        if form.is_valid():
+            new_info = form.save(commit = False)
+            restaurant.manager = request.user
+            restaurant.name = new_info.name
+            restaurant.about = new_info.about
+            restaurant.logo = new_info.logo
+            restaurant.menu = new_info.menu
+            restaurant.voucher_value = new_info.voucher_value
+            restaurant.slug = slugify(restaurant.name)
+            restaurant.save()
+
+    return render(request, 'survey_server/add_restaurant.html',{'form': form,'editing':editing})
+
+@customer_required
+def customer(request):
+    surveys = Survey.objects.filter(customer=request.user)
+    
+    """ check if any voucher is older than 3 months
+    if yes, make it invalid """
+    today = datetime.date.today()
+    for survey in surveys:
+        if survey.voucher_issue_date + relativedelta(months=3) < today:
+            survey.voucher_is_valid = False
+            survey.save()
+    profile= Customer.objects.get(user=request.user)
+    vouchers = []
+    for survey in surveys:
+        if survey.voucher_code and survey.voucher_is_valid:
+            voucher_dict = {
+                'Voucher': survey.voucher_code,
+                'Restaurant': survey.restaurant.name,
+                'value' : survey.voucher_value,
+                'expiry' : survey.voucher_issue_date + relativedelta(months=3)
+            }
+            vouchers.append(voucher_dict)
+    return render(request, 'survey_server/customer.html', {'vouchers': vouchers,
+                                                            'profile': profile})
 
 
 

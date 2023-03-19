@@ -1,43 +1,59 @@
 {% extends 'survey_server/base.html' %}
 {% load static %}
 {% block title_block %}
-Customer
+Survey Server · Customer
 {% endblock %}
 {% block hello_block %}
-Customer</br>
+{{request.user}}</br>
 {% endblock %}
 
 {% block left_content %}
 
 <p style="color:#88a5a0; font-size: 45px;"> Your Vouchers</p>
 
-<!--put the chart at here-->
-
+<div class="container">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Voucher Code</th>
+        <th>Restaurant</th>
+        <th>Value</th>
+        <th>Valid until</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% if vouchers %}
+  {% for voucher in vouchers %}
+    <tr>
+      <td>{{ voucher.Voucher }}</td>
+      <td>{{ voucher.Restaurant }}</td>
+      <td>{{ voucher.value }}%</td>
+      <td>{{ voucher.expiry }}</td>
+    </tr>
+  {% endfor %}
+{% else %}
+  <tr>
+    <td>No vouchers found</td>
+  </tr>
+{% endif %}
+    </tbody>
+  </table>
+</div>
 
 {% endblock %}
- {% block dashboard_block %}
 
-            <li>
-              <a href="{% url 'survey_server:customer' %}" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="{% url 'survey_server:customer' %}"/></svg>
-                Dashboard
-              </a>
-            </li>
-
-
-              {% endblock %}
-
-
+{% block dashboard_block %}
+  <li>
+    <a href="{% url 'survey_server:customer' %}" class="nav-link text-white">
+      <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="{% url 'survey_server:customer' %}"/></svg>
+      Dashboard
+    </a>
+  </li>
+{% endblock %}
 
 {% block picture_block %}
 <div class="card" style="width:400px">
-    <img class="card-img-top" src="{% static 'images/home.png' %}" alt="user image" style="width:100%">
-    <div class="card-body">
-
-      <a href="#" class="btn btn-primary">See Profile</a>
-    </div>
-  </div>
-<a href="{% url 'survey_server:select' %}"><button type="submit" class="btn btn-success" style="background-color:#653829;"> Take the survey </button></a>
+    <img class="card-img-top" src="{{ request.user.customer.profile_picture.url }}" alt="user image" style="width:100%">
 </div>
-
+<a href="{% url 'survey_server:select' %}"><button type="submit" class="btn btn-success" style="background-color:#653829;"> Take the survey </button></a>
 {% endblock %}

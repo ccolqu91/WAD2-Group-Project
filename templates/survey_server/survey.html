@@ -1,10 +1,10 @@
 {% extends 'survey_server/base.html' %}
 {% load static %}
 {% block title_block %}
-Survey
+Survey Server · Survey
 {% endblock %}
 {% block hello_block %}
-Survey</br>
+{{request.user}}</br>
 {% endblock %}
 
 {% block left_content %}
@@ -23,29 +23,7 @@ Survey</br>
 
 
         <nav style="height:100px;position:absolute;bottom:-300px;width:100%;">
-  <ul class="pagination" style="padding: 1rem 1rem;">
-    <li class="page-item disabled" style=" font-size: 1.5rem ;">
-      <a class="page-link" href="#" tabindex="-1">Previous</a>
-    </li>
-    <li class="page-item active" style="font-size: 1.5rem;">
-      <a class="page-link" href="#" style="color:#1f2a14;">1</a>
-    </li>
-    <li class="page-item" style="font-size: 1.5rem;">
-      <a class="page-link" href="#" style="color:#1f2a14;">2</a>
-    </li>
-    <li class="page-item" style=" font-size: 1.5rem;">
-      <a class="page-link" href="#" style="color:#1f2a14;">3</a>
-    </li>
-    <li class="page-item"style=" font-size: 1.5rem;">
-      <a class="page-link" href="#" style="color:#1f2a14;">4</a>
-    </li>
-    <li class="page-item" style="font-size: 1.5rem;">
-      <a class="page-link" href="#" style="color:#1f2a14;">5</a>
-    </li>
-    <li class="page-item" style=" font-size: 1.5rem;">
-      <a class="page-link" href="#" >Next</a>
-    </li>
-  </ul>
+
 </nav>
 
     {% endblock %}

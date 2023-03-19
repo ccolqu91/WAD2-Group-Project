@@ -1,11 +1,7 @@
  body{
-            min-height:auto;
-<<<<<<< HEAD
-=======
 
->>>>>>> 746b074d67e62c326bcbbe5574b9df28ab5066e9
-            margin-left: 40px;
-            margin-right: 40px;
+
+
 
 			background-color: #FDF9F1;
 			background-repeat: no-repeat;
@@ -18,6 +14,9 @@
          color:#88a5a0;
           font-size: 90px;
           font-family: "Garamond", serif;
+          right:0px;
+          position:absolute;
+          top:150px !important;
          }
 
 
@@ -25,14 +24,14 @@
         .form{
         position:relative;
           background-color: #BCB7AB;
-          padding: 10px;
+
           border-radius: 5px;
-          width: 300px;
+          width: 100%;
 
           min-height:200px;
           height:auto;
           text-align: center;
-          margin: auto;
+
           display: flex;
           justify-content: center;
           align-items: center;
