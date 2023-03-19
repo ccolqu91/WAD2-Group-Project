@@ -31,6 +31,39 @@ Survey Server · Manager
 <div class="card" style="width:400px">
     <img class="card-img-top" src="{{request.user.manager.profile_picture.url}}" alt="user image" style="width:100%">
   </div>
+  <p style="color:#88a5a0; font-size: 45px;"> Your Restaurant Information</p>
+  {% if has_restaurant %}
+  <div>
+      <div class="container">
+    <table class="table table-hover">
+      <tbody>
+      <tr>
+        <td>Name</td>
+        <td>{{ restaurant.name }}</td>
+      </tr>
+      <tr>
+        <td>Cuisine</td>
+        <td>{{ restaurant.cuisine }}</td>
+      </tr>
+      <tr>
+        <td>About</td>
+        <td>{{ restaurant.about }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+      </div>
+      <div>
+              <a href="{% url 'survey_server:edit_restaurant' %}" class="btn btn-lg btn-primary ml-2">Edit Your Restaurant</a>
+  
+      </div>
+      {% else %}
+    <tr>
+      <td>No restaurant yet - add one here!</td>
+    </tr>
+    </div>
+    <button type="button" class="btn btn-primary btn-lg"  onclick="window.location.href='/survey_server/add_restaurant'">Add a restaurant</button>
+  {% endif %}
 {% if not has_restaurant %}
 <p>Would you like to know what our users think about your services?</p>
 <button type="button" class="btn btn-primary btn-lg"  onclick="window.location.href='/survey_server/add_restaurant'">Add a restaurant</button>

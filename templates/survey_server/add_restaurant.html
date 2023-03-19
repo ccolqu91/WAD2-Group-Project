@@ -4,7 +4,11 @@
 Survey Server · Add Restaurant
 {% endblock %}
 {% block index_block %}
+{% if editing %}
+</br>Edit Your Restaurant
+{% else %}
 </br>Add Restaurant
+{% endif %}
 {% endblock %}
 
 {% block form_block %}

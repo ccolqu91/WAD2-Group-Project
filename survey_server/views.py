@@ -48,6 +48,8 @@ def manager(request):
     context = {'has_restaurant':has_restaurant}
     if has_restaurant:
         my_restaurant=Restaurant.objects.get(manager=request.user)
+        context['has_restaurant']=has_restaurant
+        context['restaurant']=my_restaurant.__dict__
         has_surveys=Survey.objects.filter(restaurant=my_restaurant).exists()
         if has_surveys:
             avg_scores = Survey.objects.filter(restaurant=my_restaurant).aggregate(
@@ -90,6 +92,7 @@ def manager(request):
 
 @login_required
 def profile(request):
+    context={}
     if request.user.user_type == 1: # customer
         customer = Customer.objects.get(user=request.user)
         profile_instance = Customer.objects.get(user=request.user).__dict__
@@ -103,10 +106,14 @@ def profile(request):
                 customer.profile_picture = new_info.profile_picture
                 customer.save()
     elif request.user.user_type == 2: # manager
+        has_restaurant = Restaurant.objects.filter(manager=request.user).exists()
+        if has_restaurant:
+            restaurant = Restaurant.objects.get(manager=request.user)
+            context['has_restaurant']=has_restaurant
+            context['restaurant']=restaurant.__dict__
         manager = Manager.objects.get(user=request.user)
         profile_instance = Manager.objects.get(user=request.user).__dict__
         form = ManagerProfileForm(initial=profile_instance)
-        print(profile_instance)
         if request.method == "POST":
             form = ManagerProfileForm(request.POST, request.FILES)
             form.user = request.user
@@ -116,8 +123,8 @@ def profile(request):
                 manager.bio = new_info.bio
                 manager.profile_picture = new_info.profile_picture
                 manager.save()
-
-    return render(request, 'survey_server/profile.html',{'form': form})
+    context['form']= form
+    return render(request, 'survey_server/profile.html',context)
 
 def about(request):
     return render(request, 'survey_server/about.html')
@@ -186,6 +193,8 @@ def user_login(request):
 def survey(request, restaurant_slug, page_id):
     try:
         restaurant = Restaurant.objects.get(slug=restaurant_slug)
+        restaurant_voucher_value = Restaurant.objects.get(manager=restaurant.manager).restaurant
+        print(restaurant_voucher_value)
 
     except Restaurant.DoesNotExist:
         restaurant = None
@@ -286,6 +295,27 @@ def add_restaurant(request):
         form = AddRestaurant()
 
     return render(request, 'survey_server/add_restaurant.html',{'form':form})
+
+@manager_required
+def edit_restaurant(request):
+    editing=True
+    restaurant = Restaurant.objects.get(manager=request.user)
+    restaurant_instance = Restaurant.objects.get(manager=request.user).__dict__
+    form = EditRestaurant(initial=restaurant_instance)
+    if request.method == "POST":
+        form = EditRestaurant(request.POST, request.FILES)
+        form.manager = request.user
+        if form.is_valid():
+            new_info = form.save(commit = False)
+            restaurant.manager = request.user
+            restaurant.name = new_info.name
+            restaurant.about = new_info.about
+            restaurant.logo = new_info.logo
+            restaurant.menu = new_info.menu
+            restaurant.slug = slugify(restaurant.name)
+            restaurant.save()
+
+    return render(request, 'survey_server/add_restaurant.html',{'form': form,'editing':editing})
 
 @customer_required
 def customer(request):

@@ -1,6 +1,7 @@
 from django import forms
-
+from django.template.defaultfilters import slugify
 from .models import Survey, Restaurant, User, Customer, Manager
+from .upload import *
 
 class UserRegistrationForm(forms.ModelForm):
 
@@ -29,11 +30,15 @@ class UserRegistrationForm(forms.ModelForm):
         }
 
 class CustomerProfileForm(forms.ModelForm):
+    profile_picture = forms.ImageField(label='You can upload a profile picture here',required=False)
+    bio = forms.CharField(label='Your bio - tell us something about yourself!',required=False, widget=forms.Textarea)
     class Meta:
         model = Customer
         fields = ('profile_picture','bio')
 
 class ManagerProfileForm(forms.ModelForm):
+    profile_picture = forms.ImageField(label='You can upload a profile picture here',required=False)
+    bio = forms.CharField(label='Your bio - tell us something about yourself!',required=False, widget=forms.Textarea)
     class Meta:
         model = Manager
         fields = ('profile_picture','bio')
@@ -47,16 +52,27 @@ class SelectRestaurant(forms.Form):
         }
 
 class AddRestaurant(forms.ModelForm):
+    voucher_value=forms.IntegerField(initial=15)
 
     class Meta:
         model = Restaurant
-        fields = ('name', 'logo','cuisine','about','menu')
+        fields = ('name', 'logo','cuisine','about','menu','voucher_value')
         help_texts = {
             'logo' : "Please submit a single jpg file called 'logo.jpg'.",
             'menu': "Please submit as a .csv file with four columns headered 'starters','mains', 'desserts' and 'drinks'.",
         }
 
-        
+class EditRestaurant(forms.ModelForm):
+    name = forms.CharField(max_length=256,required=False)
+    logo = forms.ImageField(required=False,help_text="Please submit a single jpg file called 'logo.jpg'.")
+    cuisine = forms.CharField(max_length=128,required=False)
+    about = forms.CharField(required=False, widget=forms.Textarea)
+    menu = forms.FileField(required=False, validators=[validate_file_extension],help_text="Please submit as a .csv file with four columns headered 'starters','mains', 'desserts' and 'drinks'.")
+
+    class Meta:
+        model = Restaurant
+        fields = ('name', 'logo','cuisine','about','menu')
+
 
 class ChooseStarterForm(forms.ModelForm):
 
