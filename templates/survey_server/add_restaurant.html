@@ -1,10 +1,14 @@
 {% extends 'survey_server/login&registerBase.html' %}
 {% load static %}
 {% block title_block %}
-Add Restaurant
+Survey Server · Add Restaurant
 {% endblock %}
 {% block index_block %}
+{% if editing %}
+</br>Edit Your Restaurant
+{% else %}
 </br>Add Restaurant
+{% endif %}
 {% endblock %}
 
 {% block form_block %}

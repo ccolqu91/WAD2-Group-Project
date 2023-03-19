@@ -1,6 +1,8 @@
  body{
              min-height: 1000px;
              height:auto;
+             margin-left: 20px;
+            margin-right: 20px;
 			background-color: #9F9D96;
 			background-repeat: no-repeat;
 			background-size: cover;
@@ -82,4 +84,11 @@
         position:absolute;
         right:50px;
         }
+
+        #context{
+         margin-left: 20px;
+         margin-right: 20px;
+        }
+
+
 

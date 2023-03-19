@@ -38,10 +38,6 @@
 
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
              <a class="navbar-brand" id="title" href="{% url 'survey_server:index' %}">Survey server</a>
-            <form class="d-flex" id="search" role="search">
-                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                     <button class="btn btn-outline-success" type="submit">Search</button>
-                </form>
           <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
             <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
           </a>
@@ -93,6 +89,11 @@
         </div>
       </div>
     </div>
+
+<div id="context" style=" margin-left: 40px;
+  margin-right: 40px;">
+
+
 <div id="index">
     SURVEY SERVER
     {% block index_block %}
@@ -100,13 +101,13 @@
 </div>
 
 <!--login/log out/profile-->
-<div class="top">
+
 <!--    <p id="login"><a href="/survey_server/home/">LOG OUT</a><br /></p>-->
 <!--    <p id="profile"><a href="/survey_server/profile/">PROFILE</a><br /></p>-->
 
     {% block top_block %}
     {% endblock %}
-</div>
+
 
 
     {% block form_block %}
@@ -135,6 +136,7 @@
 <div class="blank">
 
 </div>
+    </div>
 
 
 <!--if have account, go to login, or register-->

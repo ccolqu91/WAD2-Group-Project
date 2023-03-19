@@ -34,9 +34,6 @@ class Manager(models.Model):
     def __str__(self):
         return self.user.username
     
-
-
-
 class Restaurant(models.Model):
     manager = models.ForeignKey(User,on_delete=models.CASCADE)
     name = models.CharField(max_length=256)
@@ -45,6 +42,7 @@ class Restaurant(models.Model):
     about = models.TextField(null =0,blank = True)
     slug = models.SlugField(unique=True)
     menu = models.FileField(upload_to=menu_upload_to, validators=[validate_file_extension])
+    voucher_value = models.IntegerField(default=15)
 
     def __str__(self):
         self.slug = slugify(self.name)
@@ -94,7 +92,7 @@ class Survey(models.Model):
     customer =  models.ForeignKey(User, on_delete=models.CASCADE)
     restaurant = models.ForeignKey(Restaurant,on_delete = models.CASCADE)
     voucher_code= models.CharField(max_length=128, null=True, blank=True)
-    voucher_value = models.IntegerField(default = 0)
+    voucher_value = models.IntegerField(default = 15)
     voucher_issue_date = models.DateField(null=True, blank=True)
     voucher_is_valid = models.BooleanField(default=True)
 

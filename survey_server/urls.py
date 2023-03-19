@@ -18,6 +18,5 @@ path('logout/', views.user_logout, name='logout'),
 path('select/', views.select_restaurant, name='select'),
 path('about/', views.about, name='about'),
 path('add_restaurant/', views.add_restaurant, name='add_restaurant'),
-
-
+path('edit_restaurant/', views.edit_restaurant, name='edit_restaurant'),
 ]
