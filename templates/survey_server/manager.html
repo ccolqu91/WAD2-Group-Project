@@ -7,14 +7,22 @@ Manager
 Manager</br>
 {% endblock %}
 
+
+
 {% block left_content %}
 
 <p style="color:#88a5a0; font-size: 45px;"> Your Scoring</p>
 
 <!--put the chart at here-->
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <canvas id="myChart"></canvas>
 <script src="{%static 'js\myChart.js' %}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<canvas id="myChart"></canvas>
+<script src="{%static 'js\myChart.js' %}"></script>
+
 
 {% endblock %}
 {% block picture_block %}

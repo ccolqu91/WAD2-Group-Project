@@ -1,9 +1,15 @@
  body{
 
           height:auto;
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 746b074d67e62c326bcbbe5574b9df28ab5066e9
             margin: 20px;
             padding: 20px;
 			background-color: #FDF9F1;
+		
 			background-repeat: no-repeat;
 			background-size: cover;
 		}

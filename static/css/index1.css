@@ -2,9 +2,17 @@
  body{
             min-height:auto;
 
+<<<<<<< HEAD
          margin-left: 20px;
          margin-right: 20px;
 
+=======
+
+         margin-left: 20px;
+         margin-right: 20px;
+
+
+>>>>>>> 746b074d67e62c326bcbbe5574b9df28ab5066e9
 			background-color: #FDF9F1;
 			background-repeat: no-repeat;
 
