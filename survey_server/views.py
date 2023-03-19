@@ -304,6 +304,7 @@ def edit_restaurant(request):
     form = EditRestaurant(initial=restaurant_instance)
     if request.method == "POST":
         form = EditRestaurant(request.POST, request.FILES)
+        form['voucher_value'].initial = restaurant.voucher_value
         form.manager = request.user
         if form.is_valid():
             new_info = form.save(commit = False)
@@ -312,6 +313,7 @@ def edit_restaurant(request):
             restaurant.about = new_info.about
             restaurant.logo = new_info.logo
             restaurant.menu = new_info.menu
+            restaurant.voucher_value = new_info.voucher_value
             restaurant.slug = slugify(restaurant.name)
             restaurant.save()
 

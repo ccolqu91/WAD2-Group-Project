@@ -68,10 +68,11 @@ class EditRestaurant(forms.ModelForm):
     cuisine = forms.CharField(max_length=128,required=False)
     about = forms.CharField(required=False, widget=forms.Textarea)
     menu = forms.FileField(required=False, validators=[validate_file_extension],help_text="Please submit as a .csv file with four columns headered 'starters','mains', 'desserts' and 'drinks'.")
+    voucher_value=forms.IntegerField()
 
     class Meta:
         model = Restaurant
-        fields = ('name', 'logo','cuisine','about','menu')
+        fields = ('name', 'logo','cuisine','about','menu','voucher_value')
 
 
 class ChooseStarterForm(forms.ModelForm):
