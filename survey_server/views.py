@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -88,7 +89,7 @@ def manager(request):
             context['top_drink'] = top_drink
         context['has_surveys'] = has_surveys
     has_surveys=False
-    return render(request, 'survey_server/manager.html',context)
+    return render(request, 'survey_server/manager.html', context)
 
 @login_required
 def profile(request):
@@ -347,11 +348,11 @@ def customer(request):
 
 
 # not sure if we need to add a new Score model in our models.py 
-# because if we want let our chartjs chart change with the new data reecived 
+# because if we want let our chartjs chart change with the new data received 
 # we need a view and a new model factor to link the data in database and chart we wanna show to our tutor
-
+# first version 
 # def chart_data(request):
-#     scores = Score.objects.all()
+#     scores = Survey.objects.all()
 #     labels = [str(score.date) for score in scores]
 #     values = [score.value for score in scores]
 #     data = {
@@ -359,3 +360,12 @@ def customer(request):
 #         'values': values,
 #     }
 #     return JsonResponse(data)
+
+
+def my_chart(request):
+    data = Survey.objects.all().values('name','value')
+    chart_data = {
+        'labels':[d['name']for d in data],
+        'data':[d['value']for d in data],
+    }
+    return JsonResponse(json.dumps(chart_data),safe = False)

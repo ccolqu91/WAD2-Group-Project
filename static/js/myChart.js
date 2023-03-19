@@ -1,24 +1,24 @@
 
 // this is a very basic example 
-var ctx = document.getElementById('myChart').getContext('2d');
+// var ctx = document.getElementById('myChart').getContext('2d');
 
-        var  charData= {
-                labels: ['7th','6th', '5th', '4th','3th', 'second', 'lastest'],
-                datasets: [{
-                    label: 'last five score',
-                    backgroundColor: 'rgb(128, 0, 128)',
-                    borderColor: 'rgb(128, 0, 128)',
-                    data: [7, 5, 5, 2, 10, 10, 10]
-                }]
-            };
+//         var  charData= {
+//                 labels: ['7th','6th', '5th', '4th','3th', 'second', 'lastest'],
+//                 datasets: [{
+//                     label: 'last seven score',
+//                     backgroundColor: 'rgb(128, 0, 128)',
+//                     borderColor: 'rgb(128, 0, 128)',
+//                     data: [7, 5, 5, 2, 10, 10, 10]
+//                 }]
+//             };
 
-        var myChart = new Chart(ctx,{
-            type:'bar',
-            data:charData,
-            oprions:{}
+//         var myChart = new Chart(ctx,{
+//             type:'bar',
+//             data:charData,
+//             oprions:{}
 
 
-        });
+//         });
 
 
 // here is the skeleton i will use for our final version once I figure the relationship between views and js and html we can get a acceptable chart
@@ -63,3 +63,33 @@ var ctx = document.getElementById('myChart').getContext('2d');
 //         });
 //     </script>
    
+
+var ctx = document.getElementById('myChart').getContext('2d');
+
+fetch('/my_chart')
+    .then(response=>response.json())
+    .then(chartData=>{
+        var myChart = new chartData(ctx,{
+            type:'bar',
+            data:{
+                labels:chartData,labels,
+                datasets:[{
+                    label:'My Data',
+                    data:chartData.labels,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor:'rgba(255, 99, 132, 1)'
+
+
+                }]
+            },
+            oprions:{
+                scales:{
+                    yAxes:[{
+                        ticks:{
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
+    });
