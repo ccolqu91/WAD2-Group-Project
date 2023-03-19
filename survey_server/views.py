@@ -230,12 +230,12 @@ def add_restaurant(request):
 # because if we want let our chartjs chart change with the new data reecived 
 # we need a view and a new model factor to link the data in database and chart we wanna show to our tutor
 
-# def chart_data(request):
-#     scores = Score.objects.all()
-#     labels = [str(score.date) for score in scores]
-#     values = [score.value for score in scores]
-#     data = {
-#         'labels': labels,
-#         'values': values,
-#     }
-#     return JsonResponse(data)
+def chart_data(request):
+    scores = Survey.objects.all()
+    labels = [str(score.date) for score in scores]
+    values = [score.value for score in scores]
+    data = {
+        'labels': labels,
+        'values': values,
+    }
+    return JsonResponse(data)
