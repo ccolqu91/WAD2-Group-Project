@@ -362,10 +362,10 @@ def customer(request):
 #     return JsonResponse(data)
 
 
-def my_chart(request):
-    data = Survey.objects.all().values('name','value')
-    chart_data = {
-        'labels':[d['name']for d in data],
-        'data':[d['value']for d in data],
-    }
-    return JsonResponse(json.dumps(chart_data),safe = False)
+# def my_chart(request):
+#     data = Survey.objects.all().values('name','value')
+#     chart_data = {
+#         'labels':[d['name']for d in data],
+#         'data':[d['value']for d in data],
+#     }
+#     return JsonResponse(json.dumps(chart_data),safe = False)

@@ -17,19 +17,14 @@ Survey Server · Manager
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <canvas id="myChart"></canvas>
-<script src="{%static 'js\myChart.js' %}"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<canvas id="myChart"></canvas>
-<script src="{%static 'js\myChart.js' %}"></script>
-
+<script src="{% static 'js/myChart.js' %}"></script>
 
 {% endblock %}
 {% block picture_block %}
 
 
 <div class="card" style="width:400px">
-    <img class="card-img-top" src="{{request.user.manager.profile_picture.url}}" alt="user image" style="width:100%">
+    <img class="card-img-top" src="{% static 'images/manager.jpg' %}" alt="user image" style="width:100%">
   </div>
   <p style="color:#88a5a0; font-size: 45px;"> Your Restaurant Information</p>
   {% if has_restaurant %}

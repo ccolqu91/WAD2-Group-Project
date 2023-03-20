@@ -1,95 +1,67 @@
 
 // this is a very basic example 
-// var ctx = document.getElementById('myChart').getContext('2d');
+var ctx = document.getElementById("myChart").getContext('2d');
 
-//         var  charData= {
-//                 labels: ['7th','6th', '5th', '4th','3th', 'second', 'lastest'],
-//                 datasets: [{
-//                     label: 'last seven score',
-//                     backgroundColor: 'rgb(128, 0, 128)',
-//                     borderColor: 'rgb(128, 0, 128)',
-//                     data: [7, 5, 5, 2, 10, 10, 10]
-//                 }]
-//             };
+        var  charData= {
+                labels: ['Food Quality', 'Customer Service', 'Hygiene', 'Value for Money', 'Menu Variety'],
+                datasets: [{
+                    label: 'average score',
+                    backgroundColor: 'rgb(128, 0, 128)',
+                    borderColor: 'rgb(128, 0, 128)',
+                    data: [7, 5, 5, 2, 10]
+                }]
+            };
 
-//         var myChart = new Chart(ctx,{
-//             type:'bar',
-//             data:charData,
-//             oprions:{}
-
-
-//         });
+        var myChart = new Chart(ctx,{
+            type:'bar',
+            data:charData,
+            oprions:{}
 
 
-// here is the skeleton i will use for our final version once I figure the relationship between views and js and html we can get a acceptable chart
-// <script>
-//         $(document).ready(function() {
-//             var ctx = document.getElementById('myChart').getContext('2d');
-//             var myChart = new Chart(ctx, {
-//                 type: 'line',
-//                 data: {
-//                     labels: [],
-//                     datasets: [{
-//                         label: 'Score',
-//                         data: [],
-//                         borderColor: 'rgb(255, 99, 132)',
-//                         backgroundColor: 'rgba(255, 99, 132, 0.5)',
-//                         fill: true,
-//                     }]
-//                 },
-//                 options: {
-//                     scales: {
-//                         yAxes: [{
-//                             ticks: {
-//                                 beginAtZero: true,
-//                                 stepSize: 10,
-//                             }
-//                         }]
-//                     }
-//                 }
-//             });
-
-//             setInterval(function() {
-//                 $.ajax({
-//                     url: '/chart_data',
-//                     type: 'get',
-//                     success: function(data) {
-//                         myChart.data.labels = data.labels;
-//                         myChart.data.datasets[0].data = data.values;
-//                         myChart.update();
-//                     }
-//                 });
-//             }, 3000);
-//         });
-//     </script>
-   
+        });
 
 var ctx = document.getElementById('myChart').getContext('2d');
+var data = {
+    labels: ['Food Quality', 'Customer Service', 'Hygiene', 'Value for Money', 'Menu Variety'],
+    datasets: [{
+        label: 'Average Scores',
+        data: [
+            { avg_food_quality_score },
+            { avg_customer_service_score },
+            { avg_hygiene_score },
+            { avg_value_for_money_score },
+            { avg_menu_variety_score }
+        ],
+        backgroundColor: [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)',
+            'rgba(153, 102, 255, 0.2)'
+        ],
+        borderColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(75, 192, 192, 1)',
+            'rgba(153, 102, 255, 1)'
+        ],
+        borderWidth: 1
+    }]
+};
 
-fetch('/my_chart')
-    .then(response=>response.json())
-    .then(chartData=>{
-        var myChart = new chartData(ctx,{
-            type:'bar',
-            data:{
-                labels:chartData,labels,
-                datasets:[{
-                    label:'My Data',
-                    data:chartData.labels,
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor:'rgba(255, 99, 132, 1)'
-
-
-                }]
-            },
-            oprions:{
-                scales:{
-                    yAxes:[{
-                        ticks:{
-                            beginAtZero:true
-                        }
-                    }]
-                }
+var options = {
+    scales: {
+        yAxes: [{
+            ticks: {
+                beginAtZero: true
             }
-        });
-    });
+        }]
+    }
+};
+
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: data,
+    options: options
+});
