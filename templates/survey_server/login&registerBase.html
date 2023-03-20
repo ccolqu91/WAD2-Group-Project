@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
     {% block title %}
         <title>{% block title_block %}{% endblock %}</title>
     {% endblock %}
@@ -12,13 +13,6 @@
 
      <link rel="stylesheet" href="{% static 'css/login&register.css' %}">
     <script src="{% static 'js/login&register.js' %}"></script>
-<!--    <script src="js/login&register.js"></script>-->
-<!--    <style>-->
-<!--    body{-->
-<!--    min-height: 800px !important;-->
-<!--    }-->
-
-<!--    </style>-->
 
     <script>
         function register(){
@@ -29,10 +23,11 @@
           window.location.href="{% url 'survey_server:login' %}";
     }
     </script>
+
 </head>
 
-<body>
-<div class="px-3 py-2 bg-secondary text-white">
+<body style="width:100%;min-height:800px;">
+<div class="px-3 py-2 bg-secondary text-white"style="position:fixed;z-index:999;top:0px;width:100%;padding: 0px;right:0px;" >
 
       <div class="container">
 
@@ -90,11 +85,11 @@
       </div>
     </div>
 
-<div id="context" style=" margin-left: 40px;
-  margin-right: 40px;">
+<!--<div id="context" style=" margin-left: 0px;-->
+<!--  margin-right: 0px;padding:0px;">-->
 
 
-<div id="index">
+<div id="index"style="position:relative;top:100px; z-index: -1;">
     SURVEY SERVER
     {% block index_block %}
     {% endblock %}
@@ -116,9 +111,6 @@
 <!--    go to different dashboard-->
     
 
-
-
-      
      <br></br>
       <button onclick="manager()">for manger </button>
       <button onclick="customer()">for customer </button>
@@ -126,40 +118,14 @@
     
     {% endblock %}
 
-<!--    <div id="button">-->
-<!--    {% block button_block %}-->
-<!--    {% endblock %}-->
 
-<!--    </div>-->
 
 </div>
 <div class="blank">
 
 </div>
-    </div>
 
-
-<!--if have account, go to login, or register-->
-
-
-<!--<div class="down">-->
-<!--    <a href="/survey_server/about/">About us</a><br />-->
-
-<!--</div>-->
-<!--<div class="down2">-->
-<!--<a href="/survey_server/about/">Contact us</a><br />-->
-<!--</div>-->
-<!--<div id="footer">-->
-<!--<footer >-->
-<!--  <address>-->
-<!--    Contact us at <a href="mailto:123@example.com">123@example.com</a>-->
-<!--  </address>-->
-<!--  <p>123 Main St, Glasgow, UK</p>-->
-<!--  <p>Phone: 123-123123</p>-->
-<!--</footer>-->
-<!--</div>-->
-
-<footer class="bg-dark text-light">
+<footer class="bg-dark text-light"style="position:absolute;bottom:-200px;right:0px;width:100%;margin:0px;padding:0px;">
   <div class="container">
 
 

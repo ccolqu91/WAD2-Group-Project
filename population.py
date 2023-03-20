@@ -5,7 +5,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "wad2_group_project.settings")
 import django
 django.setup()
 
-from survey_server.models import User, Customer, Manager, Restaurant, Survey, Voucher
+from survey_server.models import User, Customer, Manager, Restaurant, Survey
 
 import datetime
 
@@ -83,20 +83,6 @@ survery_data = [
     },
 ]
 
-voucher_data = [
-    {
-      "vocher_code": "1234",
-      "value": "100",
-      "issue_date": datetime.datetime.now(),
-      "is_valid": True,
-    },
-    {
-      "vocher_code": "1235",
-      "value": "1000",
-      "issue_date": datetime.datetime.now(),
-      "is_valid": False,
-    },
-]
 
 def populate():
     print("Populating User data \n")
@@ -133,16 +119,6 @@ def populate():
         survey.restaurant = restaurant_instances[0]
         survey_instances.append(survey)
     Survey.objects.bulk_create(survey_instances)
-
-    print("Populating Voucher data \n")
-    voucher_instances = []
-    for i, data in enumerate(voucher_data):
-        voucher = Voucher(**data)
-        voucher.survey = survey_instances[i]
-        voucher.customer = customer_instance
-        voucher.restaurant = restaurant_instances[0]
-        voucher_instances.append(voucher)
-    Voucher.objects.bulk_create(voucher_instances)
 
     print("Done")
 
