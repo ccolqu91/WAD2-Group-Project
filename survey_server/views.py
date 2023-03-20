@@ -43,6 +43,9 @@ form_dict = {1 : ChooseStarterForm,
 def index(request):
     return render(request, 'survey_server/index.html')
 
+
+
+
 @manager_required
 def manager(request):
     has_restaurant = Restaurant.objects.filter(manager=request.user).exists()
@@ -59,6 +62,8 @@ def manager(request):
                                                 avg_hygiene_score=Avg('hygiene_score'),
                                                 avg_value_for_money_score=Avg('value_for_money_score'),
                                                 avg_menu_variety_score=Avg('menu_variety_score'),
+            
+            context = {'avg_scores': avg_scores}
                                                 )
 
             most_frequent_starter = Survey.objects.filter(restaurant=my_restaurant).annotate(

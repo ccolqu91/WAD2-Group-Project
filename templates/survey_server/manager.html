@@ -1,5 +1,6 @@
 {% extends 'survey_server/base.html' %}
 {% load static %}
+<link rel="stylesheet" href="{% static 'css/manager.css' %}">
 {% block title_block %}
 Survey Server · Manager
 {% endblock %}
@@ -14,10 +15,17 @@ Survey Server · Manager
 <p style="color:#88a5a0; font-size: 45px;"> Your Scoring</p>
 
 <!--put the chart at here-->
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<canvas id="myChart"></canvas>
-<script src="{% static 'js/myChart.js' %}"></script>
+{% if has_surveys %}
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <canvas id="myChart"  data-food-quality-score="{{ avg_scores.avg_food_quality_score }}"
+                            data-customer-service-score="{{ avg_scores.avg_customer_service_score }}"
+                            data-hygiene-score="{{ avg_scores.avg_hygiene_score }}"
+                            data-value-for-money-score="{{ avg_scores.avg_value_for_money_score }}"
+                            data-menu-variety-score="{{ avg_scores.avg_menu_variety_score }}"></canvas>
+      <script src="{% static 'js/Chart.js' %}"></script>
+      {% else %}
+      <p id="no-data">No one has completed your Survey yet-come back soon!</p>
+  {% endif %}
 
 {% endblock %}
 {% block picture_block %}
