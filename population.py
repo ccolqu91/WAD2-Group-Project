@@ -95,19 +95,19 @@ def populate():
 
     print("Populating Customer \n")
     customer_instance = Customer(**customer_data)
-    customer_instance.user = user_instances[0]
+    customer_instance.user = User.objects.get(username='customer')
     customer_instance.save()
 
     print("Populating Manager \n")
     manager_instance = Manager(**manager_data)
-    manager_instance.user = user_instances[0]
+    manager_instance.user = User.objects.get(username='manager')
     manager_instance.save()
 
     print("Populating Restaurant data \n")
     restaurant_instances = []
     for data in restaurant_data:
         restaurant = Restaurant(**data)
-        restaurant.manager = user_instances[1]
+        restaurant.manager = User.objects.get(username='manager')
         restaurant_instances.append(restaurant)
     Restaurant.objects.bulk_create(restaurant_instances)
 
@@ -115,12 +115,13 @@ def populate():
     survey_instances = []
     for data in survery_data:
         survey = Survey(**data)
-        survey.customer = user_instances[0]
+        survey.customer = User.objects.get(username='customer')
         survey.restaurant = restaurant_instances[0]
         survey_instances.append(survey)
     Survey.objects.bulk_create(survey_instances)
 
     print("Done")
+
 
 
 if __name__ == "__main__":
