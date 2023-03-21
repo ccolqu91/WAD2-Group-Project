@@ -53,7 +53,7 @@ Survey Server · Customer
 
 {% block picture_block %}
 <div class="card" style="width:400px">
-    <img class="card-img-top" src="{{ request.user.customer.profile_picture.url }}" alt="user image" style="width:100%">
+    <img class="card-img-top" src="{{ request.user.customer.profile_picture.url }}" alt="pls upload your porfile picture" style="width:100%">
 </div>
 <a href="{% url 'survey_server:select' %}"><button type="submit" class="btn btn-success" style="background-color:#653829;"> Take the survey </button></a>
 {% endblock %}

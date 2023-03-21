@@ -32,7 +32,7 @@ Survey Server · Manager
 
 
 <div class="card" style="width:400px">
-    <img class="card-img-top" src="{% static 'images/manager.jpg' %}" alt="user image" style="width:100%">
+    <img class="card-img-top" src="{{request.user.manager.profile_picture.url}}" alt="please upload your profile picture" style="width:100%">
   </div>
   <p style="color:#88a5a0; font-size: 45px;"> Your Restaurant Information</p>
   {% if has_restaurant %}
