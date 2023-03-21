@@ -23,8 +23,24 @@ user_data = [
     {
         "first_name": "Jimmy",
         "last_name": "Neutron",
-        "username": "manager",
+        "username": "manager1",
         "email": "manager@gmail.com",
+        "user_type": 2,
+        "password": "Weak.123",
+    },
+    {
+        "first_name": "Bob",
+        "last_name": "Builder",
+        "username": "manager2",
+        "email": "manager1@gmail.com",
+        "user_type": 2,
+        "password": "Weak.123",
+    },
+    {
+        "first_name": "Tom",
+        "last_name": "Jerry",
+        "username": "manager3",
+        "email": "manager2@gmail.com",
         "user_type": 2,
         "password": "Weak.123",
     },
@@ -74,6 +90,21 @@ restaurant_data = [
     },
 ]
 
+survery_data = [
+    {
+        "voucher_code": "1234",
+        "voucher_value": 100,
+        "voucher_issue_date": datetime.datetime.now(),
+        "voucher_is_valid": True,
+    },
+    {
+        "voucher_code": "1235",
+        "voucher_value": 100,
+        "voucher_issue_date": datetime.datetime.now(),
+        "voucher_is_valid": False,
+    },
+]
+
 
 def populate():
     print("Populating User data \n")
@@ -84,71 +115,36 @@ def populate():
         user_instances.append(user)
     User.objects.bulk_create(user_instances)
 
-    # Get the customer user instance created above
-    customer_user = User.objects.get(username='customer')
-
     print("Populating Customer \n")
     customer_instance = Customer(**customer_data)
-    customer_instance.user = customer_user
+    customer_instance.user = User.objects.get(username='customer')
     customer_instance.save()
 
     print("Populating Manager \n")
     manager_instance = Manager(**manager_data)
-    manager_instance.user = User.objects.get(username='manager')
+    manager_instance.user = User.objects.get(username='manager1')
     manager_instance.save()
 
     print("Populating Restaurant data \n")
     restaurant_instances = []
     for i, data in enumerate(restaurant_data):
         restaurant = Restaurant(**data)
-        restaurant.manager = User.objects.get(username='manager')
-        restaurant.slug = f"{restaurant.slug}-{i+1}"
+        restaurant.manager = User.objects.get(username=f'manager{i+1}')
         restaurant_instances.append(restaurant)
     Restaurant.objects.bulk_create(restaurant_instances)
 
-    # Get the restaurant instances created above
-    burger_king = Restaurant.objects.get(slug='burger-king-1')
-    crown_burger = Restaurant.objects.get(slug='crown-burger-2')
-    kfc = Restaurant.objects.get(slug='kfc-3')
-
     print("Populating Survey data \n")
-    # Create the survey instances with the customer user instance and the restaurant instances
-    survey_instances = [
-        Survey(
-            customer=customer_user,
-            restaurant=burger_king,
-            food_quality_score=20,
-            customer_service_score=20,
-            hygiene_score=15,
-            value_for_money_score=20,
-            menu_variety_score=15,
-            voucher_issue_date='2022-01-01' 
-        ),
-        Survey(
-            customer=customer_user,
-            restaurant=crown_burger,
-            food_quality_score=10,
-            customer_service_score=10,
-            hygiene_score=5,
-            value_for_money_score=10,
-            menu_variety_score=5,
-            voucher_issue_date='2022-01-01'
-        ),
-        Survey(
-            customer=customer_user,
-            restaurant=kfc,
-            food_quality_score=15,
-            customer_service_score=20,
-            hygiene_score=10,
-            value_for_money_score=15,
-            menu_variety_score=10,
-            voucher_issue_date='2022-01-01' 
-        ),
-    ]
+    survey_instances = []
+    for data in survery_data:
+        survey = Survey(**data)
+        survey.customer = User.objects.get(username='customer')
+        survey.restaurant = restaurant_instances[0]
+        survey_instances.append(survey)
     Survey.objects.bulk_create(survey_instances)
 
     print("Done")
 
+
+
 if __name__ == "__main__":
     populate()
-       
