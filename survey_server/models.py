@@ -150,7 +150,10 @@ class Survey(models.Model):
     hygiene_score  = models.IntegerField(default = 0)
     value_for_money_score = models.IntegerField(default = 0)
     menu_variety_score = models.IntegerField(default = 0)
+<<<<<<< HEAD
    
+=======
+>>>>>>> eb7384365705c4a1583bd7d2ea1d9c2b7bf85e89
 
 
     def __str__(self):
