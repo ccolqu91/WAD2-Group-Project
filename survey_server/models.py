@@ -31,6 +31,7 @@ class Manager(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE, primary_key=True, related_name ='manager')
     profile_picture = models.ImageField(default = 0)
     bio = models.TextField(default=0)
+    
     def __str__(self):
         return self.user.username
     
@@ -150,11 +151,6 @@ class Survey(models.Model):
     hygiene_score  = models.IntegerField(default = 0)
     value_for_money_score = models.IntegerField(default = 0)
     menu_variety_score = models.IntegerField(default = 0)
-<<<<<<< HEAD
-   
-=======
->>>>>>> eb7384365705c4a1583bd7d2ea1d9c2b7bf85e89
-
 
     def __str__(self):
         return str(self.customer) + "'s Survey for " + str(self.restaurant)
