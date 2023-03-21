@@ -3,6 +3,7 @@
           height:auto;
 
 
+
             margin: 0px;
             padding: 0px;
 			background-color: #FDF9F1;
@@ -100,7 +101,7 @@
          footer{
             color:white;
          position: absolute;
-        bottom:-200px;
+        bottom:0px;
 
         left: 0;
         right: 0;

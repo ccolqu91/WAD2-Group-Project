@@ -2,6 +2,7 @@
 {% load static %}
 {% block title_block %}
 Survey Server · Add Restaurant
+
 {% endblock %}
 {% block index_block %}
 {% if editing %}
@@ -13,7 +14,7 @@ Survey Server · Add Restaurant
 
 {% block form_block %}
 
-<form class="form_restaurant" method="post" enctype="multipart/form-data">
+<form class="form_restaurant" method="post" enctype="multipart/form-data" style="position:relative;top:150px;">
    {% csrf_token %}
    {{ form.as_p }}
    <button type="submit">Submit</button>
