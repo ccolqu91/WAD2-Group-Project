@@ -330,10 +330,11 @@ def customer(request):
     """ check if any voucher is older than 3 months
     if yes, make it invalid """
     today = datetime.date.today()
-    for survey in surveys:
-        if survey.voucher_issue_date + relativedelta(months=3) < today:
-            survey.voucher_is_valid = False
-            survey.save()
+    if Survey.objects.filter(customer=request.user).exists():
+        for survey in surveys:
+            if survey.voucher_issue_date + relativedelta(months=3) < today:
+                survey.voucher_is_valid = False
+                survey.save()
     profile= Customer.objects.get(user=request.user)
     vouchers = []
     for survey in surveys:
