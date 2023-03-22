@@ -44,7 +44,7 @@ def edit_restaurant_test(self):
     self.assertEqual(restaurant.voucher_value, 10)
 
 
-class RegisterViewTestCase(TestCase):
+class RegisterTest(TestCase):
 
     def setUp(self):
         self.client = Client()
