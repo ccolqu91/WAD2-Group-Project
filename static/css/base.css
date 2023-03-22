@@ -4,6 +4,8 @@
 
 
 
+
+
             margin: 0px;
             padding: 0px;
 			background-color: #FDF9F1;
@@ -22,6 +24,8 @@
 		 width: 60%;
 		  min-height:700px;
           height:auto;
+          padding:10px;
+
 
 		}
 		.picture{
@@ -52,8 +56,8 @@
          #hello{
          position:relative;
          top:50px;
-         margin: 20px;
-         padding: 10px;
+         margin-bottom: 20px;
+
          color:#88a5a0;
           font-size: 90px;
          }
@@ -100,7 +104,7 @@
 
          footer{
             color:white;
-         position: absolute;
+         position: relative;
         bottom:0px;
 
         left: 0;
@@ -128,6 +132,10 @@
 
         #text_content{
         font-size:2px;
+        position:relative;
+        top:20px;
+        margin-top:10px;
+
         }
 
 }

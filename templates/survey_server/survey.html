@@ -7,6 +7,10 @@ Survey Server · Survey
 {{request.user}}</br>
 {% endblock %}
 
+{% block profile_name %}
+<h2>{{ restaurant }}</h2>
+{% endblock %}
+
 {% block left_content %}
 <h1>Page {{ page_id }}: Your experience at {{ restaurant }}</h1>
 <form method="post" style="margin: 10px;padding: 20px;">
