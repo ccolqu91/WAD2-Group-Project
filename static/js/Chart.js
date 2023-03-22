@@ -4,11 +4,11 @@ var ctx = document.getElementById('myChart');
             datasets: [{
             label: 'Average Scores',
             data: [
-                 canvas.dataset.foodQualityScore,
-                 canvas.dataset.customerServiceScore,
-                 canvas.dataset.hygieneScore,
-                 canvas.dataset.valueForMoneyScore,
-                 canvas.dataset.menuVarietyScore
+                 ctx.dataset.foodQualityScore,
+                 ctx.dataset.customerServiceScore,
+                 ctx.dataset.hygieneScore,
+                 ctx.dataset.valueForMoneyScore,
+                 ctx.dataset.menuVarietyScore
               ],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
