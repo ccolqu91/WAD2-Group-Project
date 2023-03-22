@@ -1,6 +1,7 @@
 from django.test import TestCase
 from .models import Survey, Restaurant, User
 from .score import CalculateScore
+from .voucher import get_voucher
 
 class ScoreTestCase(TestCase):
     def test_negative_scores(self):
@@ -48,3 +49,8 @@ class ScoreTestCase(TestCase):
         self.assertEqual(scores[2], 0)
         self.assertEqual(scores[3], 0)
         self.assertEqual(scores[4], 0)
+
+class GetVoucherTestCase(TestCase):
+    def test_voucher_length(self):
+        voucher = get_voucher()
+        self.assertEqual(len(voucher), 7)
