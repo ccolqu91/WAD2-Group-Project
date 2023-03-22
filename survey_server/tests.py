@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from django.test import TestCase, Client
 from django.urls import reverse
 from survey_server.models import User,Restaurant, Customer
@@ -72,7 +71,6 @@ class RegisterTest(TestCase):
         User.objects.create_user(username='testuser', password='testpass123')
         response = self.client.post('/login/', {'username': 'testuser', 'password': 'testpass123'})
         self.assertEqual(response.status_code, 404)
-=======
 from django.test import TestCase
 from .models import Survey, Restaurant, User
 from .score import CalculateScore
@@ -129,4 +127,3 @@ class GetVoucherTestCase(TestCase):
     def test_voucher_length(self):
         voucher = get_voucher()
         self.assertEqual(len(voucher), 7)
->>>>>>> 12dc75adb0549083a3b65081bca9dc10c8c5cfd5
