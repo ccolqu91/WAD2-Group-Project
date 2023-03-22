@@ -343,7 +343,7 @@ def customer(request):
                 'Voucher': survey.voucher_code,
                 'Restaurant': survey.restaurant.name,
                 'value' : survey.voucher_value,
-                'expiry' : survey.voucher_issue_date + relativedelta(months=3)
+                # 'expiry' : survey.voucher_issue_date + relativedelta(months=3)
             }
             vouchers.append(voucher_dict)
     return render(request, 'survey_server/customer.html', {'vouchers': vouchers,
