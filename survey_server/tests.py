@@ -1,6 +1,8 @@
 from django.test import TestCase, Client
 from django.urls import reverse
-from survey_server.models import User,Restaurant, Customer
+from survey_server.models import User,Restaurant, Customer, Survey
+from .score import CalculateScore
+from .voucher import get_voucher
 
 
 
@@ -71,10 +73,6 @@ class RegisterTest(TestCase):
         User.objects.create_user(username='testuser', password='testpass123')
         response = self.client.post('/login/', {'username': 'testuser', 'password': 'testpass123'})
         self.assertEqual(response.status_code, 404)
-from django.test import TestCase
-from .models import Survey, Restaurant, User
-from .score import CalculateScore
-from .voucher import get_voucher
 
 class ScoreTestCase(TestCase):
     def test_negative_scores(self):
