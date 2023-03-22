@@ -331,7 +331,8 @@ def customer(request):
     today = datetime.date.today()
     if Survey.objects.filter(customer=request.user).exists():
         for survey in surveys:
-            if survey.voucher_issue_date + relativedelta(months=3) < today:
+            #print(survey.voucher_issue_date)
+            if survey.voucher_issue_date != None and survey.voucher_issue_date + relativedelta(months=3) < today:
                 survey.voucher_is_valid = False
                 survey.save()
     profile= Customer.objects.get(user=request.user)
