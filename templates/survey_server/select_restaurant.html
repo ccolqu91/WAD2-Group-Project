@@ -8,7 +8,8 @@ Survey Server · Select Restaurant
 {% endblock %}
 
 {% block left_content %}
-
+<div style="margin-top: 50px;">
+  </tr>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
@@ -16,6 +17,7 @@ Survey Server · Select Restaurant
         <a {% if form.restaurant.value %}onclick="href='{% url 'survey_server:survey' restaurant_slug=restaurant page_id=1 %}'"{% endif %} >Select restaurant</a>
        </button>
      </form>
+    </div>
 
 
 <!--put the chart at here-->
