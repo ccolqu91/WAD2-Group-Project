@@ -199,8 +199,6 @@ def user_login(request):
 def survey(request, restaurant_slug, page_id):
     try:
         restaurant = Restaurant.objects.get(slug=restaurant_slug)
-        restaurant_voucher_value = Restaurant.objects.get(manager=restaurant.manager).restaurant
-        print(restaurant_voucher_value)
 
     except Restaurant.DoesNotExist:
         restaurant = None
@@ -351,26 +349,3 @@ def customer(request):
                                                             'profile': profile})
 
 
-
-# not sure if we need to add a new Score model in our models.py 
-# because if we want let our chartjs chart change with the new data received 
-# we need a view and a new model factor to link the data in database and chart we wanna show to our tutor
-# first version 
-# def chart_data(request):
-#     scores = Survey.objects.all()
-#     labels = [str(score.date) for score in scores]
-#     values = [score.value for score in scores]
-#     data = {
-#         'labels': labels,
-#         'values': values,
-#     }
-#     return JsonResponse(data)
-
-
-# def my_chart(request):
-#     data = Survey.objects.all().values('name','value')
-#     chart_data = {
-#         'labels':[d['name']for d in data],
-#         'data':[d['value']for d in data],
-#     }
-#     return JsonResponse(json.dumps(chart_data),safe = False)
