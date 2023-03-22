@@ -62,36 +62,35 @@ def manager(request):
                                                 avg_hygiene_score=Avg('hygiene_score'),
                                                 avg_value_for_money_score=Avg('value_for_money_score'),
                                                 avg_menu_variety_score=Avg('menu_variety_score'),
-            
-            context = {'avg_scores': avg_scores}
-                                                )
+            )
+            if avg_scores != None:
+                context = {'avg_scores': avg_scores}
+                                                
+            else:
+                most_frequent_starter = Survey.objects.filter(restaurant=my_restaurant).annotate(
+                    count=Count('starter_order')
+                ).order_by('-count').first().starter_order
+                top_starter = MenuItem.objects.get(id = most_frequent_starter).name
 
-            most_frequent_starter = Survey.objects.filter(restaurant=my_restaurant).annotate(
-                count=Count('starter_order')
-            ).order_by('-count').first().starter_order
-            top_starter = MenuItem.objects.get(id = most_frequent_starter).name
+                most_frequent_main = Survey.objects.filter(restaurant=my_restaurant).annotate(
+                    count=Count('main_order')
+                ).order_by('-count').first().main_order
+                top_main = MenuItem.objects.get(id = most_frequent_main).name
 
-            most_frequent_main = Survey.objects.filter(restaurant=my_restaurant).annotate(
-                count=Count('main_order')
-            ).order_by('-count').first().main_order
-            top_main = MenuItem.objects.get(id = most_frequent_main).name
+                most_frequent_dessert = Survey.objects.filter(restaurant=my_restaurant).annotate(
+                    count=Count('dessert_order')
+                ).order_by('-count').first().dessert_order
+                top_dessert = MenuItem.objects.get(id = most_frequent_dessert).name
 
-            most_frequent_dessert = Survey.objects.filter(restaurant=my_restaurant).annotate(
-                count=Count('dessert_order')
-            ).order_by('-count').first().dessert_order
-            top_dessert = MenuItem.objects.get(id = most_frequent_dessert).name
+                most_frequent_drink = Survey.objects.filter(restaurant=my_restaurant).annotate(
+                    count=Count('drink_order')
+                ).order_by('-count').first().drink_order
+                top_drink = MenuItem.objects.get(id = most_frequent_drink).name
 
-            most_frequent_drink = Survey.objects.filter(restaurant=my_restaurant).annotate(
-                count=Count('drink_order')
-            ).order_by('-count').first().drink_order
-            top_drink = MenuItem.objects.get(id = most_frequent_drink).name
-
-            print(top_starter, top_main, top_dessert, top_drink)
-
-            context['top_starter'] = top_starter
-            context['top_main'] = top_main
-            context['top_dessert'] = top_dessert
-            context['top_drink'] = top_drink
+                context['top_starter'] = top_starter
+                context['top_main'] = top_main
+                context['top_dessert'] = top_dessert
+                context['top_drink'] = top_drink
         context['has_surveys'] = has_surveys
     has_surveys=False
     return render(request, 'survey_server/manager.html', context)
