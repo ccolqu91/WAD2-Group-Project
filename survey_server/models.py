@@ -31,6 +31,7 @@ class Manager(models.Model):
     user = models.OneToOneField(User,on_delete=models.CASCADE, primary_key=True, related_name ='manager')
     profile_picture = models.ImageField(default = 0)
     bio = models.TextField(default=0)
+    
     def __str__(self):
         return self.user.username
     

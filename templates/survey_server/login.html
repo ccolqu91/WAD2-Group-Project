@@ -5,12 +5,13 @@ Survey Server · Login
 {% endblock %}
 {% block index_block %}
 </br>log in
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
 {% endblock %}
 
 {% block form_block %}
-<div class="form">
+<div class="form" >
    <!--    <form>-->
-<form method="post">
+<form method="post" >
    {% csrf_token %}
    <input type="text" id="username" name="username" placeholder="username" style="height: 30px;"></br>
    <h1></h1>
@@ -25,7 +26,7 @@ Survey Server · Login
 
 
 </form>
-
+</div>
 
 {% endblock %}
 

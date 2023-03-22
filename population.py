@@ -5,7 +5,7 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "wad2_group_project.settings")
 import django
 django.setup()
 
-from survey_server.models import User, Customer, Manager, Restaurant, Survey
+from survey_server.models import User, Customer, Manager, Restaurant, Survey, MenuItem
 
 import datetime
 
@@ -90,6 +90,25 @@ restaurant_data = [
     },
 ]
 
+menu_item_data = [
+    {
+        "name": "Burger",
+        "type": "starters",
+    },
+    {
+        "name": "Briyani",
+        "type": "mains",
+    },
+    {
+        "name": "Cake",
+        "type": "desserts",
+    },
+    {
+        "name": "Spirit",
+        "type": "drinks",
+    },
+]
+
 survery_data = [
     {
         "voucher_code": "1234",
@@ -132,6 +151,15 @@ def populate():
         restaurant.manager = User.objects.get(username=f'manager{i+1}')
         restaurant_instances.append(restaurant)
     Restaurant.objects.bulk_create(restaurant_instances)
+
+    print("Populating Menu Items data \n")
+    menu_item_instances = []
+    for restaurant in restaurant_instances:
+        for data in menu_item_data:
+            item = MenuItem(**data)
+            item.restaurant = restaurant
+            menu_item_instances.append(item)
+    MenuItem.objects.bulk_create(menu_item_instances)
 
     print("Populating Survey data \n")
     survey_instances = []

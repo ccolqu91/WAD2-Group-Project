@@ -1,9 +1,11 @@
  body{
 
-
+            height:auto;
+            min-height:1200px;
 
 
 			background-color: #FDF9F1;
+
 			background-repeat: no-repeat;
 
 		}
@@ -26,7 +28,9 @@
           background-color: #BCB7AB;
 
           border-radius: 5px;
-          width: 100%;
+         width:300px;
+         display:block;margin: 0 auto;
+         position:relative;top:100px;
 
           min-height:200px;
           height:auto;
@@ -80,6 +84,8 @@
          }
         footer{
         text-align:center;
+        position:relative;
+        bottom:-100px;
         }
         #title{
         display: flex !important;

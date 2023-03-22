@@ -5,12 +5,13 @@ Survey Server · Register
 {% endblock %}
 {% block index_block %}
 </br>Register Here
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
 {% endblock %}
 
 {% block form_block %}
-<div class="form">
+<div class="form" >
    <!--    <form>-->
-<form method="post" action="{% url 'survey_server:register' %}">
+<form method="post" action="{% url 'survey_server:register' %}"  style="width:300px;display:block;margin:10px auto;">
    {% csrf_token %}
    {{ form.as_p }}
       <!-- <input type="text" id="username" name="username" placeholder="username" style="height: 20px;"></br>
@@ -20,6 +21,7 @@ Survey Server · Register
       <button type="submit" class="btn btn-success"> Register </button>
 
     </form>
+</div>
 {% endblock %}
 
  {% block button_block %}

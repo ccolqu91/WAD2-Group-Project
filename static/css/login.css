@@ -1,0 +1,9 @@
+.form{
+width:300px;
+display:block;margin: 0 auto;
+position:relative;top:100px;
+}
+
+form{
+padding:10px;
+}
