@@ -90,19 +90,35 @@ Survey Server · Manager
     <tbody>
     <tr>
       <td>Starter</td>
+      {% if starter_data_exists %}
       <td>{{ top_starter }}</td>
+      {% else %}
+      <td>No starter data avaiable yet.</td>
+      {% endif %}
     </tr>
     <tr>
       <td>Main</td>
+      {% if main_data_exists %}
       <td>{{ top_main }}</td>
+      {% else %}
+      <td>No main data avaiable yet.</td>
+      {% endif %}
     </tr>
     <tr>
       <td>Dessert</td>
+      {% if dessert_data_exists %}
       <td>{{ top_dessert }}</td>
+      {% else %}
+      <td>No dessert data avaiable yet.</td>
+      {% endif %}
     </tr>
     <tr>
       <td>Drink</td>
+      {% if drink_data_exists %}
       <td>{{ top_drink }}</td>
+      {% else %}
+      <td>No drink data avaiable yet.</td>
+      {% endif %}
     </tr>
 {% else %}
   <tr>

@@ -49,6 +49,7 @@ def index(request):
 @manager_required
 def manager(request):
     has_restaurant = Restaurant.objects.filter(manager=request.user).exists()
+    print(has_restaurant)
     context = {'has_restaurant':has_restaurant}
     if has_restaurant:
         my_restaurant=Restaurant.objects.get(manager=request.user)
@@ -63,36 +64,49 @@ def manager(request):
                                                 avg_value_for_money_score=Avg('value_for_money_score'),
                                                 avg_menu_variety_score=Avg('menu_variety_score'),
             )
+            print(avg_scores)
             if avg_scores != None:
-                context = {'avg_scores': avg_scores}
-                                                
-            else:
-                most_frequent_starter = Survey.objects.filter(restaurant=my_restaurant).annotate(
-                    count=Count('starter_order')
-                ).order_by('-count').first().starter_order
-                top_starter = MenuItem.objects.get(id = most_frequent_starter).name
+                context['avg_scores']= avg_scores
 
-                most_frequent_main = Survey.objects.filter(restaurant=my_restaurant).annotate(
-                    count=Count('main_order')
-                ).order_by('-count').first().main_order
-                top_main = MenuItem.objects.get(id = most_frequent_main).name
+                starter_data_exists = Survey.objects.filter(restaurant=my_restaurant).exclude(starter_order=0).exists()
+                if starter_data_exists:         
+                    most_frequent_starter = Survey.objects.filter(restaurant=my_restaurant).annotate(
+                        count=Count('starter_order')
+                    ).order_by('-count').first().starter_order
+                    top_starter = MenuItem.objects.get(id = most_frequent_starter).name
+                    context['top_starter'] = top_starter
 
-                most_frequent_dessert = Survey.objects.filter(restaurant=my_restaurant).annotate(
-                    count=Count('dessert_order')
-                ).order_by('-count').first().dessert_order
-                top_dessert = MenuItem.objects.get(id = most_frequent_dessert).name
+                main_data_exists = Survey.objects.filter(restaurant=my_restaurant).exclude(main_order=0).exists()
+                if main_data_exists:       
+                    most_frequent_main = Survey.objects.filter(restaurant=my_restaurant).annotate(
+                        count=Count('main_order')
+                    ).order_by('-count').first().main_order
+                    top_main = MenuItem.objects.get(id = most_frequent_main).name
+                    context['top_main'] = top_main
+          
+                dessert_data_exists = Survey.objects.filter(restaurant=my_restaurant).exclude(dessert_order=0).exists()
+                if dessert_data_exists:     
+                    most_frequent_dessert = Survey.objects.filter(restaurant=my_restaurant).annotate(
+                        count=Count('dessert_order')
+                    ).order_by('-count').first().dessert_order
+                    top_dessert = MenuItem.objects.get(id = most_frequent_dessert).name
+                    context['top_dessert'] = top_dessert
 
-                most_frequent_drink = Survey.objects.filter(restaurant=my_restaurant).annotate(
-                    count=Count('drink_order')
-                ).order_by('-count').first().drink_order
-                top_drink = MenuItem.objects.get(id = most_frequent_drink).name
+                drink_data_exists = Survey.objects.filter(restaurant=my_restaurant).exclude(drink_order=0).exists()
+                if drink_data_exists:     
+                    most_frequent_drink = Survey.objects.filter(restaurant=my_restaurant).annotate(
+                        count=Count('drink_order')
+                    ).order_by('-count').first().drink_order
+                    top_drink = MenuItem.objects.get(id = most_frequent_drink).name
+                    context['top_drink'] = top_drink
 
-                context['top_starter'] = top_starter
-                context['top_main'] = top_main
-                context['top_dessert'] = top_dessert
-                context['top_drink'] = top_drink
+                context['starter_data_exists'] = starter_data_exists
+                context['main_data_exists'] = main_data_exists
+                context['dessert_data_exists'] = dessert_data_exists
+                context['drink_data_exists'] = drink_data_exists
+
         context['has_surveys'] = has_surveys
-    has_surveys=False
+        print("context:" +str(context))
     return render(request, 'survey_server/manager.html', context)
 
 @login_required
@@ -319,6 +333,7 @@ def edit_restaurant(request):
             restaurant.voucher_value = new_info.voucher_value
             restaurant.slug = slugify(restaurant.name)
             restaurant.save()
+            return redirect(reverse("survey_server:profile"))
 
     return render(request, 'survey_server/add_restaurant.html',{'form': form,'editing':editing})
 
