@@ -153,6 +153,9 @@ def select_restaurant(request):
         form = SelectRestaurant(request.POST)
         form.fields['restaurant'].choices = get_restaurant_choices()
         restaurant = request.POST.get('restaurant')
+        if form.is_valid():
+            return redirect(reverse('survey_server:survey',kwargs={'restaurant_slug':
+                                                restaurant, 'page_id' : 1}) )
     else:
         form = SelectRestaurant()
         form.fields['restaurant'].choices = get_restaurant_choices()
