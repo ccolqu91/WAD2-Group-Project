@@ -14,7 +14,7 @@ Survey Server · Profile
     <form method = "post" enctype="multipart/form-data">
         {{ form.as_p }}
         {% csrf_token %}
-        <button class="w-10 btn btn-lg btn-primary" type="submit">Save Changes</button>
+        <button class="w-10 btn btn-lg btn-dark" type="submit">Save Changes</button>
     </div>
     </form>
 </div>
@@ -61,7 +61,7 @@ Survey Server · Profile
 </div>
     </div>
     <div>
-            <a href="{% url 'survey_server:edit_restaurant' %}" class="btn btn-lg btn-primary ml-2">Edit Your Restaurant</a>
+            <a href="{% url 'survey_server:edit_restaurant' %}" class="btn btn-lg btn-dark ml-2">Edit Your Restaurant</a>
 
     </div>
     {% else %}
@@ -70,7 +70,7 @@ Survey Server · Profile
   <tr>
   </tr>
   </div>
-  <button type="button" class="btn btn-primary btn-lg"  onclick="window.location.href='/survey_server/add_restaurant'">Add a restaurant</button>
+  <button type="button" class="btn btn-dark btn-lg"  onclick="window.location.href='/survey_server/add_restaurant'">Add a restaurant</button>
 {% endif %}
     {% endif %}
 {% endblock %}

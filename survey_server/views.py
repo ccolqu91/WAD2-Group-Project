@@ -49,7 +49,6 @@ def index(request):
 @manager_required
 def manager(request):
     has_restaurant = Restaurant.objects.filter(manager=request.user).exists()
-    print(has_restaurant)
     context = {'has_restaurant':has_restaurant}
     if has_restaurant:
         my_restaurant=Restaurant.objects.get(manager=request.user)
@@ -64,7 +63,6 @@ def manager(request):
                                                 avg_value_for_money_score=Avg('value_for_money_score'),
                                                 avg_menu_variety_score=Avg('menu_variety_score'),
             )
-            print(avg_scores)
             if avg_scores != None:
                 context['avg_scores']= avg_scores
 
@@ -106,7 +104,6 @@ def manager(request):
                 context['drink_data_exists'] = drink_data_exists
 
         context['has_surveys'] = has_surveys
-        print("context:" +str(context))
     return render(request, 'survey_server/manager.html', context)
 
 @login_required
@@ -150,11 +147,15 @@ def about(request):
 
 @customer_required
 def select_restaurant(request):
+    def get_restaurant_choices():
+        return [(r.slug, r.name) for r in Restaurant.objects.all()]
     if request.POST:
         form = SelectRestaurant(request.POST)
+        form.fields['restaurant'].choices = get_restaurant_choices()
         restaurant = request.POST.get('restaurant')
     else:
         form = SelectRestaurant()
+        form.fields['restaurant'].choices = get_restaurant_choices()
     restaurant = request.POST.get('restaurant')
     return render(request, 'survey_server/select_restaurant.html',{'form':form,'restaurant':restaurant})
 

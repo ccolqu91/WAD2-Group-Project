@@ -13,8 +13,8 @@ Survey Server · Select Restaurant
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-       <button type="submit" class="btn btn-primary btn-lg">
-        <a {% if form.restaurant.value %}onclick="href='{% url 'survey_server:survey' restaurant_slug=restaurant page_id=1 %}'"{% endif %} >Select restaurant</a>
+       <button type="submit" class="btn btn-dark btn-lg">
+        <a style="text-decoration: azure;" {% if form.restaurant.value %}onclick="href='{% url 'survey_server:survey' restaurant_slug=restaurant page_id=1 %}'"{% endif %} >Select restaurant</a>
        </button>
      </form>
     </div>
