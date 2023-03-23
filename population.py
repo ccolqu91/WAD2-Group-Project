@@ -96,7 +96,23 @@ menu_item_data = [
         "type": "starters",
     },
     {
+        "name": "Zinger",
+        "type": "starters",
+    },
+    {
+        "name": "Broast",
+        "type": "starters",
+    },
+    {
         "name": "Briyani",
+        "type": "mains",
+    },
+    {
+        "name": "Palao",
+        "type": "mains",
+    },
+    {
+        "name": "Chinese Rice",
         "type": "mains",
     },
     {
@@ -104,7 +120,23 @@ menu_item_data = [
         "type": "desserts",
     },
     {
+        "name": "Brownies",
+        "type": "desserts",
+    },
+    {
+        "name": "Muffins",
+        "type": "desserts",
+    },
+    {
         "name": "Spirit",
+        "type": "drinks",
+    },
+    {
+        "name": "Cocacola",
+        "type": "drinks",
+    },
+    {
+        "name": "Pepsi",
         "type": "drinks",
     },
 ]
@@ -115,12 +147,68 @@ survery_data = [
         "voucher_value": 100,
         "voucher_issue_date": datetime.datetime.now(),
         "voucher_is_valid": True,
+
+        "ordered_starter": "Burger",
+        "time_starter": str(datetime.datetime.now()),
+        "size_starter": "Medium",
+        "presentation_starter": "",
+        "variety_starter": "",
+        "starter_order": "",
+
+        "ordered_maincourse": "Biryani",
+        "time_maincourse": str(datetime.datetime.now()),
+        "size_maincourse": "Medium",
+        "presentation_maincourse": "",
+        "variety_maincourse": "",
+        "main_order": "",
+
+        "ordered_dessert": "Cake",
+        "time_dessert": str(datetime.datetime.now()),
+        "size_dessert": "Medium",
+        "presentation_dessert": "",
+        "variety_dessert": "",
+        "dessert_order": "",
+
+        "ordered_drink": "Pepsi",
+        "time_drink": str(datetime.datetime.now()),
+        "size_drink": "250ml",
+        "presentation_drink": "",
+        "variety_drink": "",
+        "drink_order": "",
     },
     {
         "voucher_code": "1235",
         "voucher_value": 100,
         "voucher_issue_date": datetime.datetime.now(),
         "voucher_is_valid": False,
+
+        "ordered_starter": "Burger",
+        "time_starter": str(datetime.datetime.now()),
+        "size_starter": "Medium",
+        "presentation_starter": "",
+        "variety_starter": "",
+        "starter_order": "",
+
+        "ordered_maincourse": "Biryani",
+        "time_maincourse": str(datetime.datetime.now()),
+        "size_maincourse": "Medium",
+        "presentation_maincourse": "",
+        "variety_maincourse": "",
+        "main_order": "",
+
+        "ordered_dessert": "Cake",
+        "time_dessert": str(datetime.datetime.now()),
+        "size_dessert": "Medium",
+        "presentation_dessert": "",
+        "variety_dessert": "",
+        "dessert_order": "",
+
+        "ordered_drink": "Pepsi",
+        "time_drink": str(datetime.datetime.now()),
+        "size_drink": "250ml",
+        "presentation_drink": "",
+        "variety_drink": "",
+        "drink_order": "",
     },
 ]
 
