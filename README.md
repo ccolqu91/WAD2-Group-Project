@@ -27,7 +27,7 @@ you can open it in pythonanywhere https://surveyserver.pythonanywhere.com/
 - lucia berecova ([@lucia-berecova](https://github.com/lucia-berecova))
 - 2609436c ([@2609436c](https://github.com/2609436c))
 - 2793891q ([@2793891q](https://github.com/2793891q))
-- JesseWynn ([@2793891q](https://github.com/JesseWynn))
+- JesseWynn ([@JesseWynn](https://github.com/JesseWynn))
 
 ## Version-control
 django 2.2.28<br>
