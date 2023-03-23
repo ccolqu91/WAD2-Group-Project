@@ -1,6 +1,7 @@
 import os
 import csv
 from .models import MenuItem, Restaurant
+from django.conf import settings
 
 
 def populate_menu_items(restaurant_slug):
@@ -9,7 +10,14 @@ def populate_menu_items(restaurant_slug):
     except Restaurant.DoesNotExist:
         return
     
-    directory_path = f'media/menus/{restaurant_slug}'
+    media_path = settings.MEDIA_ROOT
+    media_path= media_path.replace("\\","/")
+    directory_path = os.path.join(media_path, f'menus/{restaurant_slug}')
+
+    directory_path = directory_path.replace("\\","/")
+
+    print(directory_path)
+
     csv_files = [os.path.join(directory_path, f) for f in os.listdir(directory_path) if f.endswith('.csv')]
     
     for csv_file in csv_files:

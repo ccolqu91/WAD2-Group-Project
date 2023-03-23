@@ -30,7 +30,7 @@ ALLOWED_FILE_TYPES = ['jpeg', 'png','jpg', 'csv']
 SECRET_KEY = 'django-insecure-ci%6$38_4#_p*r4vfn_s1(hwh38+k8-hz*6ilgs!d_4g%d+hhw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['surveyserver.pythonanywhere.com', '127.0.0.1']
 

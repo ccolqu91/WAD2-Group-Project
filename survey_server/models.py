@@ -54,25 +54,20 @@ class Restaurant(models.Model):
             if os.path.isfile(self.logo.path):
                 os.remove(self.logo.path)
         # Delete associated menu files
-        menu_dir_path = os.path.join(settings.MEDIA_ROOT, 'menus', self.slug)
+
+        media_path = settings.MEDIA_ROOT
+        media_path= media_path.replace("\\","/")
+        menu_dir_path = os.path.join(media_path, 'menus', self.slug)
+
         if os.path.exists(menu_dir_path):
             for filename in os.listdir(menu_dir_path):
                 file_path = os.path.join(menu_dir_path, filename)
+                file_path = file_path.replace("\\","/")
                 if os.path.isfile(file_path):
                     os.remove(file_path)
             os.rmdir(menu_dir_path)
         super(Restaurant, self).delete(*args, **kwargs)
 
-
-@receiver(pre_delete, sender=Restaurant)
-def delete_restaurant_files(sender, instance, **kwargs):
-    # Delete the menu directory
-    menu_dir_path = os.path.join(settings.MEDIA_ROOT, 'menus', instance.slug)
-    shutil.rmtree(menu_dir_path, ignore_errors=True)
-    
-    # Delete the logo directory
-    logo_dir_path = os.path.join(settings.MEDIA_ROOT, 'logos', instance.slug)
-    shutil.rmtree(logo_dir_path, ignore_errors=True)
 
 class MenuItem(models.Model):
     TYPE_CHOICES = (

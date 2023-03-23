@@ -1,104 +1,119 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
 
-    {% block title %}
-        <title>{% block title_block %}{% endblock %}</title>
-    {% endblock %}
-    <link href="{% static 'bootstrap-5.3.0-alpha1-dist/css/bootstrap.min.css' %}" rel="stylesheet">
-    <script src="{% static 'bootstrap-5.3.0-alpha1-dist/js/bootstrap.bundle.min.js' %}"></script>
+  {% block title %}
+  <title>{% block title_block %}{% endblock %}</title>
+  {% endblock %}
+  <link href="{% static 'bootstrap-5.3.0-alpha1-dist/css/bootstrap.min.css' %}" rel="stylesheet">
+  <script src="{% static 'bootstrap-5.3.0-alpha1-dist/js/bootstrap.bundle.min.js' %}"></script>
 
 
-     <link rel="stylesheet" href="{% static 'css/login&register.css' %}">
-    <script src="{% static 'js/login&register.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'css/login&register.css' %}">
+  <script src="{% static 'js/login&register.js' %}"></script>
 
-    <script>
-        function register(){
-        document.location.href="{% url 'survey_server:register' %}";
+  <script>
+    function register() {
+      document.location.href = "{% url 'survey_server:register' %}";
 
     }
-        function login(){
-          window.location.href="{% url 'survey_server:login' %}";
+    function login() {
+      window.location.href = "{% url 'survey_server:login' %}";
     }
-    </script>
+  </script>
 
 </head>
 
 <body style="width:100%;min-height:800px;">
-<div class="px-3 py-2 bg-secondary text-white"style="position:fixed;z-index:999;top:0px;width:100%;padding: 0px;right:0px;" >
+  <div class="px-3 py-2 bg-secondary text-white"
+    style="position:fixed;z-index:999;top:0px;width:100%;padding: 0px;right:0px;">
 
-      <div class="container">
+    <div class="container">
 
-        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-             <a class="navbar-brand" id="title" href="{% url 'survey_server:index' %}">Survey server</a>
-          <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
-            <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
-          </a>
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <a class="navbar-brand" id="title" href="{% url 'survey_server:index' %}">Survey server</a>
+        <a href="/" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+          <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+            <use xlink:href="#bootstrap" />
+          </svg>
+        </a>
 
-          <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
+        <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
 
 
-              {% block profile_block %}
+          {% block profile_block %}
 
-            <li>
-              <a href="{% url 'survey_server:profile' %}" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="{% url 'survey_server:profile' %}"/></svg>
-                Profile
-              </a>
-            </li>
-              {% endblock %}
+          <li>
+            <a href="{% url 'survey_server:profile' %}" class="nav-link text-white">
+              <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                <use xlink:href="{% url 'survey_server:profile' %}" />
+              </svg>
+              Profile
+            </a>
+          </li>
+          {% endblock %}
 
-              <li>
-              <a href="/survey_server/about/" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="/survey_server/about/"/></svg>
-                About
-              </a>
-            </li>
+          <li>
+            <a href="/survey_server/about/" class="nav-link text-white">
+              <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                <use xlink:href="/survey_server/about/" />
+              </svg>
+              About
+            </a>
+          </li>
 
-            <li>
-              <a href="{% url 'survey_server:index' %}" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="{% url 'survey_server:index' %}"/></svg>
-                Home
-              </a>
-            </li>
+          <li>
+            <a href="{% url 'survey_server:index' %}" class="nav-link text-white">
+              <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                <use xlink:href="{% url 'survey_server:index' %}" />
+              </svg>
+              Home
+            </a>
+          </li>
 
-              <li>
-                {% if request.user.is_authenticated %}
-              <a href="{% url 'survey_server:logout' %}" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="{% url 'survey_server:logout' %}"/></svg>
-                Log out
-              </a>
-              {% else %}
-              <a href="{% url 'survey_server:logout' %}" class="nav-link text-white">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="{% url 'survey_server:login' %}"/></svg>
-                Log in
-                {% endif %}
-              </a>
-            </li>
-               {% block extra_top_block %}
-              {% endblock %}
+          <li>
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'survey_server:logout' %}" class="nav-link text-white">
+              <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                <use xlink:href="{% url 'survey_server:logout' %}" />
+              </svg>
+              Log out
+            </a>
+            {% else %}
+            <a href="{% url 'survey_server:logout' %}" class="nav-link text-white">
+              <svg class="bi d-block mx-auto mb-1" width="24" height="24">
+                <use xlink:href="{% url 'survey_server:login' %}" />
+              </svg>
+              Log in
+              {% endif %}
+            </a>
+          </li>
+          {% block extra_top_block %}
+          {% endblock %}
 
-          </ul>
-        </div>
+        </ul>
       </div>
     </div>
+  </div>
 
-<!--<div id="context" style=" margin-left: 0px;-->
-<!--  margin-right: 0px;padding:0px;">-->
+  <div class="container">
+    <!--<div id="context" style=" margin-left: 0px;-->
+    <!--  margin-right: 0px;padding:0px;">-->
 
 
-<div id="index"style="position:relative;top:100px; z-index: -1;">
-    SURVEY SERVER
-    {% block index_block %}
-    {% endblock %}
-</div>
+    <div id="index" style="position:relative;top:100px; z-index: -1;">
+      SURVEY SERVER
+      {% block index_block %}
+      {% endblock %}
+    </div>
 
-<!--login/log out/profile-->
+    <!--login/log out/profile-->
 
-<!--    <p id="login"><a href="/survey_server/home/">LOG OUT</a><br /></p>-->
-<!--    <p id="profile"><a href="/survey_server/profile/">PROFILE</a><br /></p>-->
+    <!--    <p id="login"><a href="/survey_server/home/">LOG OUT</a><br /></p>-->
+    <!--    <p id="profile"><a href="/survey_server/profile/">PROFILE</a><br /></p>-->
 
     {% block top_block %}
     {% endblock %}
@@ -106,42 +121,43 @@
 
 
     {% block form_block %}
-<!--    <div class="form">-->
-<!--      &lt;!&ndash;    <form>&ndash;&gt;-->
-<!--&lt;!&ndash;    go to different dashboard&ndash;&gt;-->
-<!--    -->
+    <!--    <div class="form">-->
+    <!--      &lt;!&ndash;    <form>&ndash;&gt;-->
+    <!--&lt;!&ndash;    go to different dashboard&ndash;&gt;-->
+    <!--    -->
 
-<!--     <br></br>-->
-<!--      <button onclick="manager()">for manger </button>-->
-<!--      <button onclick="customer()">for customer </button>-->
-<!--    </form>-->
-<!--    -->
+    <!--     <br></br>-->
+    <!--      <button onclick="manager()">for manger </button>-->
+    <!--      <button onclick="customer()">for customer </button>-->
+    <!--    </form>-->
+    <!--    -->
     {% endblock %}
 
-
-
-</div>
-<div class="blank">
-
-</div>
-
-<footer class="bg-dark text-light"style="position:relative;bottom:-200px;right:0px;width:100%;margin:0px;padding:0px;">
-  <div class="container">
-
-
-        <h3>Contact us</h3>
-        <ul class="list-unstyled">
-          <li>Phone: 123-456-7890</li>
-          <li>Email: 123@example.com</li>
-          <li>Address: 123 Main St, Glasgow, UK</li>
-        </ul>
 
 
   </div>
-</footer>
- {% block body_block %}
-    {% endblock %}
+  <div class="blank">
 
+  </div>
+
+  <footer class="bg-dark text-light"
+    style="position:relative;bottom:-200px;right:0px;width:100%;margin:0px;padding:0px;">
+    <div class="container">
+
+
+      <h3>Contact us</h3>
+      <ul class="list-unstyled">
+        <li>Phone: 123-456-7890</li>
+        <li>Email: 123@example.com</li>
+        <li>Address: 123 Main St, Glasgow, UK</li>
+      </ul>
+
+
+    </div>
+  </footer>
+  {% block body_block %}
+  {% endblock %}
+  </div>
 
 </body>
 
