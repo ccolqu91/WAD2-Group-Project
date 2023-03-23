@@ -25,7 +25,12 @@ you can open it in pythonanywhere https://surveyserver.pythonanywhere.com/
 
 ## Contributors<br>
 - lucia berecova ([@lucia-berecova](https://github.com/lucia-berecova))
-- ![lucia berecova](https://github.com/lucia berecova.png)
+
+<a href="https://github.com/lucia-berecova">
+  <svg width="24" height="24" viewBox="0 0 24 24">
+  
+  </svg>
+</a>
 - 2609436c ([@2609436c](https://github.com/2609436c))
 - ![2609436c](https://github.com/2609436c.png)
 - 2793891q ([@2793891q](https://github.com/2793891q))
