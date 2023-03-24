@@ -10,8 +10,7 @@ from survey_server.models import User, Customer, Manager, Restaurant, Survey, Me
 
 import datetime
 
-media_path = settings.MEDIA_ROOT
-default_image_path= media_path.replace("\\","/")
+default_image_path = settings.MEDIA_ROOT
 
 user_data = [
     {
@@ -68,32 +67,32 @@ user_data = [
 
 customer_data = {
     "bio": "This is demo customer bio",
-    "profile_picture": os.path.join(default_image_path, "Restaurant-Customer-Loyalty.jpg").replace("\\","/")
+    "profile_picture": os.path.join(default_image_path, "Restaurant-Customer-Loyalty.jpg")
 }
 
 manager_data = {
     "bio": "This is demo manager bio",
-    "profile_picture": os.path.join(default_image_path, "restaurant-manager.jpg").replace("\\","/")
+    "profile_picture": os.path.join(default_image_path, "restaurant-manager.jpg")
 }
 
 restaurant_data = [
     {
         "name": "Burger King",
-        "logo": os.path.join(default_image_path, "logos", "burger-king.jpg").replace("\\","/"),
+        "logo": os.path.join(default_image_path, "logos", "burger-king.jpg"),
         "cuisine": "American",
         "about": "The most special burger and zingers of all time.",
         "slug": "burger-king",
     },
     {
         "name": "Crown Burger",
-        "logo": os.path.join(default_image_path, "logos","crown-burger.jpg").replace("\\","/"),
+        "logo": os.path.join(default_image_path, "logos","crown-burger.jpg"),
         "cuisine": "Indian",
         "about": "We offer the biggest and the tastiest burger in the town.",
         "slug": "crown-burger",
     },
     {
         "name": "KFC",
-        "logo": os.path.join(default_image_path, "logos", "kfc.png").replace("\\","/"),
+        "logo": os.path.join(default_image_path, "logos", "kfc.png"),
         "cuisine": "American",
         "about": "We have a wide range of chicken fast foods available.",
         "slug": "kfc",
