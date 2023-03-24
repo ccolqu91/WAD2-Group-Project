@@ -67,32 +67,32 @@ user_data = [
 
 customer_data = {
     "bio": "This is demo customer bio",
-    "profile_picture": os.path.join(default_image_path, "Restaurant-Customer-Loyalty.jpg")
+    "profile_picture": os.path.join(default_image_path, "Restaurant-Customer-Loyalty.jpg").replace("\\","/")
 }
 
 manager_data = {
     "bio": "This is demo manager bio",
-    "profile_picture": os.path.join(default_image_path, "restaurant-manager.jpg")
+    "profile_picture": os.path.join(default_image_path, "restaurant-manager.jpg").replace("\\","/")
 }
 
 restaurant_data = [
     {
         "name": "Burger King",
-        "logo": os.path.join(default_image_path, "logos", "burger-king.jpg"),
+        "logo": os.path.join(default_image_path, "logos", "burger-king.jpg").replace("\\","/"),
         "cuisine": "American",
         "about": "The most special burger and zingers of all time.",
         "slug": "burger-king",
     },
     {
         "name": "Crown Burger",
-        "logo": os.path.join(default_image_path, "logos","crown-burger.jpg"),
+        "logo": os.path.join(default_image_path, "logos","crown-burger.jpg").replace("\\","/"),
         "cuisine": "Indian",
         "about": "We offer the biggest and the tastiest burger in the town.",
         "slug": "crown-burger",
     },
     {
         "name": "KFC",
-        "logo": os.path.join(default_image_path, "logos", "\kfc.png"),
+        "logo": os.path.join(default_image_path, "logos", "kfc.png").replace("\\","/"),
         "cuisine": "American",
         "about": "We have a wide range of chicken fast foods available.",
         "slug": "kfc",
