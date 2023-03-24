@@ -231,7 +231,6 @@ def populate():
     for i, data in enumerate(restaurant_data):
         restaurant = Restaurant(**data)
         restaurant.manager = User.objects.get(username=f'manager{i+1}')
-        restaurant.save()
         restaurant_instances.append(restaurant)
     Restaurant.objects.bulk_create(restaurant_instances)
 
@@ -241,7 +240,6 @@ def populate():
         for data in menu_item_data:
             item = MenuItem(**data)
             item.restaurant = restaurant
-            item.save()
             menu_item_instances.append(item)
     MenuItem.objects.bulk_create(menu_item_instances)
 
@@ -255,7 +253,6 @@ def populate():
         survey.main_order = menu_item_instances[5].id
         survey.dessert_order = menu_item_instances[7].id
         survey.drink_order = menu_item_instances[-1].id
-        survey.save()
         survey_instances.append(survey)
     Survey.objects.bulk_create(survey_instances)
 
