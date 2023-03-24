@@ -284,6 +284,7 @@ def survey(request, restaurant_slug, page_id):
 def survey_success(request, restaurant_slug, survey_id):
     current_survey = Survey.objects.get(id=survey_id)
     scores_list = CalculateScore(current_survey)
+    restaurant = Restaurant.objects.get(slug=restaurant_slug)
     
     if not current_survey.voucher_code:
         voucher_code=get_voucher()
@@ -296,6 +297,7 @@ def survey_success(request, restaurant_slug, survey_id):
                                                                 'value_for_money_score' : scores_list[3],
                                                                 'menu_variety_score' : scores_list[4],
                                                                 'voucher_code' : voucher_code,
+                                                                'voucher_value' : restaurant.voucher_value,
                                                                 'voucher_is_valid' : True,
                                                                 'voucher_issue_date' : datetime.date.today()})
     context = {'voucher_code': voucher_code}
