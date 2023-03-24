@@ -32,7 +32,7 @@ you can open it in pythonanywhere https://surveyserver.pythonanywhere.com/
 ## Version-control
 django 2.2.28<br>
 boostrap5.3.0<br>
-python 39.9<br>
+python 3.9<br>
 
 ## Issue Tracker<br>
 - If you encounter any problems or errors while using the tool, please submit an Issue and we will get back to you as soon as possible to address and resolve the issue.
