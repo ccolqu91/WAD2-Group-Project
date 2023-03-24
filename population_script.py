@@ -10,7 +10,8 @@ from survey_server.models import User, Customer, Manager, Restaurant, Survey, Me
 
 import datetime
 
-default_image_path = settings.MEDIA_ROOT
+media_path = settings.MEDIA_ROOT
+default_image_path= media_path.replace("\\","/")
 
 user_data = [
     {
