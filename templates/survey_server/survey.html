@@ -37,7 +37,8 @@ Survey Server · Survey
     <img class="card-img-top" src="{{ restaurant_instance.logo.url }}" alt="user image" style="width:100%">
     <div class="card-body">
   <h2>About {{restaurant}}</h2>
-      <p>{{ about }}</p>
+      <h6>Cuisine: {{ restaurant_instance.cuisine }}</h6>
+      <p>About {{restaurant}}: {{ about }}</p>
   
       </div>
     </div>
