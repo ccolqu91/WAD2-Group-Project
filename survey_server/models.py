@@ -38,11 +38,11 @@ class Manager(models.Model):
 class Restaurant(models.Model):
     manager = models.ForeignKey(User,on_delete=models.CASCADE)
     name = models.CharField(max_length=256)
-    logo = models.ImageField(upload_to=logo_upload_to, default = 0)
+    logo = models.ImageField(upload_to='logos', default = 0)
     cuisine = models.CharField(max_length=128)
     about = models.TextField(null =0,blank = True)
     slug = models.SlugField(unique=True)
-    menu = models.FileField(upload_to=menu_upload_to, validators=[validate_file_extension])
+    menu = models.FileField(upload_to='menus', validators=[validate_file_extension])
     voucher_value = models.IntegerField(default=15)
 
     def __str__(self):

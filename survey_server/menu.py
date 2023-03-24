@@ -12,7 +12,7 @@ def populate_menu_items(restaurant_slug):
     
     media_path = settings.MEDIA_ROOT
     media_path= media_path.replace("\\","/")
-    directory_path = os.path.join(media_path, f'menus/{restaurant_slug}')
+    directory_path = os.path.join(media_path, f'menus/')
 
     directory_path = directory_path.replace("\\","/")
 
