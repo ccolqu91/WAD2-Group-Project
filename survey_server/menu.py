@@ -16,8 +16,6 @@ def populate_menu_items(restaurant_slug):
 
     directory_path = directory_path.replace("\\","/")
 
-    print(directory_path)
-
     csv_files = [os.path.join(directory_path, f) for f in os.listdir(directory_path) if f.endswith('.csv')]
     
     for csv_file in csv_files:

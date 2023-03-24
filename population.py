@@ -153,7 +153,6 @@ survery_data = [
         "size_starter": "Yes",
         "presentation_starter": "Great",
         "variety_starter": "",
-        "starter_order": "Burger",
 
         "greeting_entry": "Excellent",
         "greeting_waiting": "Great",
@@ -185,7 +184,6 @@ survery_data = [
         "size_maincourse": "Yes",
         "presentation_maincourse": "Great",
         "variety_maincourse": "",
-        "main_order": "Biryani",
 
         "greeting_entry": "Excellent",
         "greeting_waiting": "Great",
@@ -251,12 +249,14 @@ def populate():
         survey = Survey(**data)
         survey.customer = User.objects.get(username='customer')
         survey.restaurant = restaurant_instances[0]
+        survey.starter_order = menu_item_instances[0].id
+        survey.main_order = menu_item_instances[5].id
+        survey.dessert_order = menu_item_instances[7].id
+        survey.drink_order = menu_item_instances[-1].id
         survey_instances.append(survey)
     Survey.objects.bulk_create(survey_instances)
 
     print("Done")
-
-
 
 if __name__ == "__main__":
     populate()

@@ -109,15 +109,22 @@
 
 </div>
 <div class="survey">
+  {% if request.user.is_authenticated %}
+
+  {% else %}
   <button type="button" class="btn btn-dark btn-lg" onclick="select() ">
-      <a href="{% url 'survey_server:select' %}" style="color: white;text-decoration: none">Select a Restaurant</a>
+      <a href="{% url 'survey_server:select' %}" style="color: white;text-decoration: none">Get Started - Log in or Register Now!</a>
   </button>
+  {% endif %}
   {% if request.user.is_authenticated %}
       {% if user.user_type == 2 %}
            <button type="button" class="btn btn-primary btn-lg" style="background-color:#653829;">
              <a href="{% url 'survey_server:manager' %}" style="color: white;text-decoration: none">Go to Dashboard</a>
            </button>
       {% else %}
+      <button type="button" class="btn btn-dark btn-lg" onclick="select() ">
+        <a href="{% url 'survey_server:select' %}" style="color: white;text-decoration: none">Select a Restaurant</a>
+    </button>
             <button type="button" class="btn btn-primary btn-lg" style="background-color:#653829; ">
            <a href="{% url 'survey_server:customer' %}" style="color: white;text-decoration: none">Go to Dashboard</a>
             </button>
