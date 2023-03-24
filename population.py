@@ -251,10 +251,10 @@ def populate():
         survey = Survey(**data)
         survey.customer = User.objects.get(username='customer')
         survey.restaurant = Restaurant.objects.get(slug="burger-king")
-        survey.starter_order = menu_item_instances[0].id
-        survey.main_order = menu_item_instances[5].id
-        survey.dessert_order = menu_item_instances[7].id
-        survey.drink_order = menu_item_instances[-1].id
+        survey.starter_order = MenuItem.objects.get(name = menu_item_instances[0].name).id
+        survey.main_order = MenuItem.objects.get(name = menu_item_instances[5].name).id
+        survey.dessert_order = MenuItem.objects.get(name = menu_item_instances[7].name).id
+        survey.drink_order = MenuItem.objects.get(name = menu_item_instances[-1].name).id
         survey_instances.append(survey)
     Survey.objects.bulk_create(survey_instances)
 
