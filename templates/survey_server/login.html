@@ -10,7 +10,7 @@ Survey Server · Login
 
 {% block form_block %}
 <div class="form" >
-   <!--    <form>-->
+
 <form method="post" >
    {% csrf_token %}
    <input type="text" id="username" name="username" placeholder="username" style="height: 30px;"></br>
@@ -19,9 +19,7 @@ Survey Server · Login
    <h1></h1>
    <button type="submit" class="btn btn-success"> Login </button>
 
-<!--   <button>-->
-<!--       <a href="{% url 'survey_server:register' %}" target="_blank">Go to register</a>-->
-<!--   </button>-->
+
    <button type="button" class="btn btn-outline-secondary"><a href="{% url 'survey_server:register' %}" style="text-decoration: none; color: black;" target="_self">Register</a></button>
 
 

@@ -1,8 +1,10 @@
-from django.test import TestCase, Client
-from django.urls import reverse
+from django.test import TestCase, Client,SimpleTestCase
+from django.urls import reverse,resolve
 from survey_server.models import User,Restaurant, Customer, Survey
+from survey_server.views import *
 from .score import CalculateScore
 from .voucher import get_voucher
+
 
 
 
@@ -125,3 +127,121 @@ class GetVoucherTestCase(TestCase):
     def test_voucher_length(self):
         voucher = get_voucher()
         self.assertEqual(len(voucher), 7)
+
+
+class LoginTemplateTest(TestCase):
+
+    def setUp(self):
+        self.client = Client()
+        self.url = reverse('survey_server:login')
+        self.user = User.objects.create_user(username='testuser', password='testpass')
+
+    def test_login_page_loads_successfully(self):
+        response = self.client.get(self.url)
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'survey_server/login.html')
+
+    def test_login_successful(self):
+        data = {'username': 'testuser', 'password': 'testpass'}
+        response = self.client.post(self.url, data=data)
+        self.assertRedirects(response, reverse('survey_server:index'))
+
+    def test_login_unsuccessful(self):
+        data = {'username': 'wronguser', 'password': 'wrongpass'}
+        response = self.client.post(self.url, data=data)
+        self.assertEqual(response.status_code, 200)
+
+
+
+class TestForCustomerTemplate(TestCase):
+    def setUp(self):
+        self.user = User.objects.create_user(
+            username='testuser', password='testpass')
+        self.customer = Customer.objects.create(user=self.user)
+        self.client.login(username='testuser', password='testpass')
+
+    def test_dashboard_view(self):
+        url = reverse('survey_server:customer')
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, 200)
+
+
+
+# Test if index.html show correst navigation bar
+
+class TestForIndex(TestCase):
+    
+    def test_navbar_display(self):
+        client = Client()        
+        response = client.get(reverse('survey_server:index'))        
+        self.assertContains(response, 'Survey server')
+        self.assertContains(response, 'Profile')
+        self.assertContains(response, 'About')
+        self.assertContains(response, 'Log in')
+        self.assertContains(response, 'Register')
+
+
+
+class RegisteTemplateTest(TestCase):
+    
+    def setUp(self):
+        self.client = Client()
+        
+    def test_register_view(self):
+        response = self.client.get(reverse('survey_server:register'))
+        self.assertTemplateUsed(response, 'survey_server/register.html')
+        
+
+
+class URLtest(SimpleTestCase):
+    def test_index_url(self):
+        url = reverse('survey_server:index')
+        self.assertEqual(resolve(url).func, index)
+        
+    def test_customer_url(self):
+        url = reverse('survey_server:customer')
+        self.assertEqual(resolve(url).func, customer)
+        
+    def test_manager_url(self):
+        url = reverse('survey_server:manager')
+        self.assertEqual(resolve(url).func, manager)
+        
+    def test_profile_url(self):
+        url = reverse('survey_server:profile')
+        self.assertEqual(resolve(url).func, profile)
+        
+    def test_survey_url(self):
+        url = reverse('survey_server:survey', args=['test-restaurant', 1])
+        self.assertEqual(resolve(url).func, survey)
+        
+    def test_survey_success_url(self):
+        url = reverse('survey_server:survey_success', args=['test-restaurant', 1])
+        self.assertEqual(resolve(url).func, survey_success)
+        
+    def test_login_url(self):
+        url = reverse('survey_server:login')
+        self.assertEqual(resolve(url).func, user_login)
+        
+    def test_register_url(self):
+        url = reverse('survey_server:register')
+        self.assertEqual(resolve(url).func, register)
+        
+    def test_logout_url(self):
+        url = reverse('survey_server:logout')
+        self.assertEqual(resolve(url).func, user_logout)
+        
+    def test_select_restaurant_url(self):
+        url = reverse('survey_server:select')
+        self.assertEqual(resolve(url).func, select_restaurant)
+        
+    def test_about_url(self):
+        url = reverse('survey_server:about')
+        self.assertEqual(resolve(url).func, about)
+        
+    def test_add_restaurant_url(self):
+        url = reverse('survey_server:add_restaurant')
+        self.assertEqual(resolve(url).func, add_restaurant)
+        
+    def test_edit_restaurant_url(self):
+        url = reverse('survey_server:edit_restaurant')
+        self.assertEqual(resolve(url).func, edit_restaurant)
