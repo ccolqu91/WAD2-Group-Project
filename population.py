@@ -250,7 +250,7 @@ def populate():
     for data in survery_data:
         survey = Survey(**data)
         survey.customer = User.objects.get(username='customer')
-        survey.restaurant = restaurant_instances[0]
+        survey.restaurant = Restaurant.objects.get(slug="burger-king")
         survey.starter_order = menu_item_instances[0].id
         survey.main_order = menu_item_instances[5].id
         survey.dessert_order = menu_item_instances[7].id
