@@ -104,6 +104,7 @@ def manager(request):
                 context['drink_data_exists'] = drink_data_exists
 
         context['has_surveys'] = has_surveys
+        context['my_restaurant'] = my_restaurant
     return render(request, 'survey_server/manager.html', context)
 
 @login_required
