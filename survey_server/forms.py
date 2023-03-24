@@ -58,13 +58,12 @@ class AddRestaurant(forms.ModelForm):
         model = Restaurant
         fields = ('name', 'logo','cuisine','about','menu','voucher_value')
         help_texts = {
-            'logo' : "Please submit a single jpg file called 'logo.jpg'.",
             'menu': "Please submit as a .csv file with four columns headered 'starters','mains', 'desserts' and 'drinks'.",
         }
 
 class EditRestaurant(forms.ModelForm):
     name = forms.CharField(max_length=256,required=False)
-    logo = forms.ImageField(required=False,help_text="Please submit a single jpg file called 'logo.jpg'.")
+    logo = forms.ImageField(required=False)
     cuisine = forms.CharField(max_length=128,required=False)
     about = forms.CharField(required=False, widget=forms.Textarea)
     menu = forms.FileField(required=False, validators=[validate_file_extension],help_text="Please submit as a .csv file with four columns headered 'starters','mains', 'desserts' and 'drinks'.")

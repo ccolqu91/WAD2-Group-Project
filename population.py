@@ -144,7 +144,7 @@ menu_item_data = [
 survery_data = [
     {
         "voucher_code": "1234",
-        "voucher_value": 100,
+        "voucher_value": 15,
         "voucher_issue_date": datetime.datetime.now(),
         "voucher_is_valid": True,
 
@@ -175,7 +175,7 @@ survery_data = [
     },
     {
         "voucher_code": "1235",
-        "voucher_value": 100,
+        "voucher_value": 15,
         "voucher_issue_date": datetime.datetime.now(),
         "voucher_is_valid": False,
 
