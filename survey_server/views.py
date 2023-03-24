@@ -278,7 +278,6 @@ def survey(request, restaurant_slug, page_id):
               'page_id' : page_id,
               'restaurant_slug' : restaurant_slug, 
               'about' : restaurant.about}
-    print(restaurant.__dict__,)
     return render(request, 'survey_server/survey.html', context=context)
 
 @customer_required

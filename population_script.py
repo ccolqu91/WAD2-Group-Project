@@ -3,13 +3,14 @@ import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "wad2_group_project.settings")
 
 import django
+from django.conf import settings
 django.setup()
 
 from survey_server.models import User, Customer, Manager, Restaurant, Survey, MenuItem
 
 import datetime
 
-default_image_path = "default.png"
+default_image_path = settings.MEDIA_ROOT
 
 user_data = [
     {
@@ -17,6 +18,14 @@ user_data = [
         "last_name": "Cena",
         "username": "customer",
         "email": "customer@gmail.com",
+        "user_type": 1,
+        "password": "Weak.123",
+    },
+    {
+        "first_name": "Peter",
+        "last_name": "Jones",
+        "username": "customer1",
+        "email": "customer1@gmail.com",
         "user_type": 1,
         "password": "Weak.123",
     },
@@ -57,34 +66,34 @@ user_data = [
 ]
 
 customer_data = {
-    "bio": "This is demo bio",
-    "profile_picture": default_image_path,
+    "bio": "This is demo customer bio",
+    "profile_picture": os.path.join(default_image_path, "Restaurant-Customer-Loyalty.jpg")
 }
 
 manager_data = {
-    "bio": "This is demo bio",
-    "profile_picture": default_image_path,
+    "bio": "This is demo manager bio",
+    "profile_picture": os.path.join(default_image_path, "restaurant-manager.jpg")
 }
 
 restaurant_data = [
     {
         "name": "Burger King",
-        "logo": default_image_path,
-        "cuisine": "Korean",
+        "logo": os.path.join(default_image_path, "logos", "burger-king.jpg"),
+        "cuisine": "American",
         "about": "The most special burger and zingers of all time.",
         "slug": "burger-king",
     },
     {
         "name": "Crown Burger",
-        "logo": default_image_path,
+        "logo": os.path.join(default_image_path, "logos","crown-burger.jpg"),
         "cuisine": "Indian",
         "about": "We offer the biggest and the tastiest burger in the town.",
         "slug": "crown-burger",
     },
     {
         "name": "KFC",
-        "logo": default_image_path,
-        "cuisine": "German",
+        "logo": os.path.join(default_image_path, "logos", "\kfc.png"),
+        "cuisine": "American",
         "about": "We have a wide range of chicken fast foods available.",
         "slug": "kfc",
     },
@@ -92,27 +101,27 @@ restaurant_data = [
 
 menu_item_data = [
     {
-        "name": "Burger",
+        "name": "Small Fries",
         "type": "starters",
     },
     {
-        "name": "Zinger",
+        "name": "Salad",
         "type": "starters",
     },
     {
-        "name": "Broast",
+        "name": "Cheese Dippers",
         "type": "starters",
     },
     {
-        "name": "Briyani",
+        "name": "Chickenburger",
         "type": "mains",
     },
     {
-        "name": "Palao",
+        "name": "Double Cheeseburger",
         "type": "mains",
     },
     {
-        "name": "Chinese Rice",
+        "name": "Chicken Tenders",
         "type": "mains",
     },
     {
@@ -128,7 +137,7 @@ menu_item_data = [
         "type": "desserts",
     },
     {
-        "name": "Spirit",
+        "name": "Sprite",
         "type": "drinks",
     },
     {
@@ -141,7 +150,7 @@ menu_item_data = [
     },
 ]
 
-survery_data = [
+survey1_data = [
     {
         "voucher_code": "1234",
         "voucher_value": 15,
@@ -172,10 +181,12 @@ survery_data = [
         "hygiene_score": 9,
         "value_for_money_score": 10,
         "menu_variety_score": 10,
-    },
+    },]
+
+survey2_data = [
     {
         "voucher_code": "1235",
-        "voucher_value": 15,
+        "voucher_value": 20,
         "voucher_issue_date": datetime.datetime.now(),
         "voucher_is_valid": False,
 
@@ -216,14 +227,26 @@ def populate():
         user_instances.append(user)
     User.objects.bulk_create(user_instances)
 
-    print("Populating Customer \n")
+    print("Populating Customers \n")
     customer_instance = Customer(**customer_data)
     customer_instance.user = User.objects.get(username='customer')
     customer_instance.save()
 
-    print("Populating Manager \n")
+    customer_instance = Customer(**customer_data)
+    customer_instance.user = User.objects.get(username='customer1')
+    customer_instance.save()
+
+    print("Populating Managers \n")
     manager_instance = Manager(**manager_data)
     manager_instance.user = User.objects.get(username='manager1')
+    manager_instance.save()
+
+    manager_instance = Manager(**manager_data)
+    manager_instance.user = User.objects.get(username='manager2')
+    manager_instance.save()
+
+    manager_instance = Manager(**manager_data)
+    manager_instance.user = User.objects.get(username='manager3')
     manager_instance.save()
 
     print("Populating Restaurant data \n")
@@ -245,9 +268,19 @@ def populate():
 
     print("Populating Survey data \n")
     survey_instances = []
-    for data in survery_data:
+    for data in survey1_data:
         survey = Survey(**data)
         survey.customer = User.objects.get(username='customer')
+        survey.restaurant = Restaurant.objects.get(slug="burger-king")
+        survey.starter_order = MenuItem.objects.filter(name = menu_item_instances[0].name).latest('id').id
+        survey.main_order = MenuItem.objects.filter(name = menu_item_instances[5].name).latest('id').id
+        survey.dessert_order = MenuItem.objects.filter(name = menu_item_instances[7].name).latest('id').id
+        survey.drink_order = MenuItem.objects.filter(name = menu_item_instances[-1].name).latest('id').id
+        survey_instances.append(survey)
+
+    for data in survey2_data:
+        survey = Survey(**data)
+        survey.customer = User.objects.get(username='customer1')
         survey.restaurant = Restaurant.objects.get(slug="burger-king")
         survey.starter_order = MenuItem.objects.filter(name = menu_item_instances[0].name).latest('id').id
         survey.main_order = MenuItem.objects.filter(name = menu_item_instances[5].name).latest('id').id
