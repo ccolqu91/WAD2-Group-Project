@@ -237,6 +237,7 @@ def populate():
     print("Populating Menu Items data \n")
     menu_item_instances = []
     for restaurant in restaurant_instances:
+        print(restaurant)
         for data in menu_item_data:
             item = MenuItem(**data)
             item.restaurant = restaurant
