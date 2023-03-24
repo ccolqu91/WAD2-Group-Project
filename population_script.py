@@ -66,32 +66,32 @@ user_data = [
 
 customer_data = {
     "bio": "This is demo customer bio",
-    "profile_picture": "/media/Restaurant-Customer-Loyalty.jpg/"
+    "profile_picture": "/Restaurant-Customer-Loyalty.jpg/"
 }
 
 manager_data = {
     "bio": "This is demo manager bio",
-    "profile_picture": "/media/restaurant-manager.jpg/"
+    "profile_picture": "/restaurant-manager.jpg/"
 }
 
 restaurant_data = [
     {
         "name": "Burger King",
-        "logo": "/media/logos/burger-king.jpg/",
+        "logo": "/logos/burger-king.jpg/",
         "cuisine": "American",
         "about": "The most special burger and zingers of all time.",
         "slug": "burger-king",
     },
     {
         "name": "Crown Burger",
-        "logo": "/media/logos/crown-burger.jpg/",
+        "logo": "/logos/crown-burger.jpg/",
         "cuisine": "Indian",
         "about": "We offer the biggest and the tastiest burger in the town.",
         "slug": "crown-burger",
     },
     {
         "name": "KFC",
-        "logo": "/media/logos/kfc.png/",
+        "logo": "/logos/kfc.png/",
         "cuisine": "American",
         "about": "We have a wide range of chicken fast foods available.",
         "slug": "kfc",
